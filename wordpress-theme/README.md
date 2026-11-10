@@ -71,7 +71,7 @@ Nothing the team updates regularly is hard-coded:
 
 | Requirement | How |
 |---|---|
-| Student-founded / student-led / nonprofit identity above the fold | Top bar, hero badge, hero intro (all editable) |
+| Student-founded / student-led / nonprofit identity above the fold | Top bar message and hero intro (both editable); the hero pill says "A movement led by young people" |
 | Visual hierarchy matches the preview | Same layout, colors and fonts as the approved design |
 | Navigation on desktop and mobile | WordPress menu, with an accessible hamburger button under 900px |
 | Take the Pledge opens and closes | Header button and any `#pledge` link. Closes with ×, the Esc key or a click outside. Keyboard focus stays inside the pop-up and returns afterwards |
