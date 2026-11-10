@@ -12,7 +12,7 @@ get_header();
 
 get_template_part( 'template-parts/section', 'hero' );
 
-$ava_sections = apply_filters( 'ava_front_sections', array( 'founder', 'mission', 'difference', 'programs', 'curriculum', 'resources', 'involved', 'contact' ) );
+$ava_sections = apply_filters( 'ava_front_sections', array( 'mission', 'difference', 'programs', 'curriculum', 'resources', 'involved', 'contact' ) );
 foreach ( $ava_sections as $ava_section ) {
 	if ( ava_mod( $ava_section . '_show' ) ) {
 		get_template_part( 'template-parts/section', $ava_section );

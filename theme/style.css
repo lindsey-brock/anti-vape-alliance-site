@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.1.2
+Version: 1.2.0
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -47,7 +47,7 @@ html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{margin:0;font-family:var(--ava-body);font-size:17px;color:var(--ava-ink);line-height:1.6;background:#fff;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;height:auto;display:block}
-h1,h2,h3,h4,.ava-brand,.btn,.ava-badge,.eyebrow,.ava-big,.ava-topbar{font-family:var(--ava-head)}
+h1,h2,h3,h4,.ava-brand,.btn,.ava-badge,.eyebrow,.ava-topbar{font-family:var(--ava-head)}
 h1,h2,h3,h4{color:var(--ava-brown);line-height:1.15}
 :focus-visible{outline:3px solid var(--ava-flame);outline-offset:3px}
 .screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute!important;width:1px;word-wrap:normal!important}
@@ -120,13 +120,9 @@ h1,h2,h3,h4{color:var(--ava-brown);line-height:1.15}
 .ava-hero .btn:not(.primary){background:transparent;border-color:#fff;color:#fff}
 .ava-hero .btn:not(.primary):hover{background:rgba(255,255,255,.14)}
 
-/* "By students" band */
-.ava-founder{background:#fff}
-.founder-card{max-width:1180px;margin:auto;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;border-top:6px solid var(--ava-orange)}
-.ava-big{font-size:38px;font-weight:900;color:var(--ava-flame);line-height:1.05;white-space:nowrap}
-.ava-big+.ava-big{color:var(--ava-brown)}
-.founder-card h2{margin:0 0 8px;font-size:26px}
-.founder-card p{margin:0 0 10px}
+div.sub>p{margin:0 0 .7em}
+div.sub>p:last-child{margin-bottom:0}
+div.sub strong{color:var(--ava-brown)}
 
 /* Dark section */
 .ava-dark{background:var(--ava-espresso);color:#fff;position:relative}
@@ -225,7 +221,7 @@ body.ava-modal-open{overflow:hidden}
 html.ava-stack-on .ava-panel{position:sticky;top:var(--ava-hdr,0px);min-height:calc(100vh - var(--ava-hdr,0px));display:flex;flex-direction:column;justify-content:center}
 @supports (height:100svh){html.ava-stack-on .ava-panel{min-height:calc(100svh - var(--ava-hdr,0px))}}
 html.ava-stack-on .ava-hero{justify-content:flex-end}
-html.ava-stack-on .ava-panel>.in,html.ava-stack-on .ava-panel>.hero-in,html.ava-stack-on .ava-panel>.founder-card{width:100%}
+html.ava-stack-on .ava-panel>.in,html.ava-stack-on .ava-panel>.hero-in{width:100%}
 html.ava-stack-on .ava-panel:not(.ava-hero),html.ava-stack-on .ava-last{border-radius:34px 34px 0 0;box-shadow:0 -18px 44px rgba(46,27,20,.16)}
 html.ava-stack-on .ava-dark,html.ava-stack-on .ava-last{box-shadow:0 -24px 52px rgba(46,27,20,.32)}
 html.ava-stack-on .ava-last{position:relative}
@@ -243,20 +239,17 @@ html.ava-stack-on .ava-last{position:relative}
   .ava-nav a{padding:14px 2px}
   .ava-nav .sub-menu{display:block;padding-left:16px}
   .ava-brand .name{display:none}
-  .resources,.founder-card,.contact-grid{grid-template-columns:1fr}
+  .resources,.contact-grid{grid-template-columns:1fr}
   .grid,.post-list{grid-template-columns:1fr}
   .ava-hero{padding:220px 5% 56px;min-height:min(760px,92vh)}
   .hero-bg{object-position:50% 15%}
   .focus-left .hero-bg{object-position:15% 15%}
   .focus-right .hero-bg{object-position:85% 15%}
   .ava-section{padding:58px 5%}
-  .founder-card{gap:16px}
-  .ava-big{font-size:32px}
 }
 @media (max-width:480px){
   .ava-form .row{grid-template-columns:1fr}
   .card{padding:24px}
   .ava-cta{padding:9px 12px;font-size:13px}
-  .ava-big{font-size:28px}
 }
 @media print{.ava-header,.ava-topbar,.ava-stripe,.ava-modal,.menu-toggle{display:none!important}}

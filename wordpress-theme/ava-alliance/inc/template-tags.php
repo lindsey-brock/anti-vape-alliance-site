@@ -74,7 +74,12 @@ function ava_section_head( $prefix, $heading_id = '' ) {
 		printf( '<h2%s>%s</h2>', $heading_id ? ' id="' . esc_attr( $heading_id ) . '"' : '', esc_html( $title ) );
 	}
 	if ( $intro ) {
-		echo '<p class="sub">' . esc_html( $intro ) . '</p>';
+		$index = ava_field_index();
+		if ( isset( $index[ "{$prefix}_intro" ] ) && 'html' === $index[ "{$prefix}_intro" ]['type'] ) {
+			echo '<div class="sub">' . wp_kses_post( wpautop( $intro ) ) . '</div>';
+		} else {
+			echo '<p class="sub">' . esc_html( $intro ) . '</p>';
+		}
 	}
 }
 

@@ -78,24 +78,14 @@ function ava_fields() {
 				'hero_image'      => array( 'type' => 'media', 'label' => __( 'Logo shown in the pledge pop-up (defaults to the AVA logo)', 'ava-alliance' ), 'default' => 0 ),
 			),
 		),
-		'founder'    => array(
-			'title'  => __( '“By Students, For Students” band', 'ava-alliance' ),
-			'fields' => array(
-				'founder_show'  => $show( __( 'By Students band', 'ava-alliance' ) ),
-				'founder_line1' => array( 'type' => 'text', 'label' => __( 'Big line 1', 'ava-alliance' ), 'default' => 'BY STUDENTS.' ),
-				'founder_line2' => array( 'type' => 'text', 'label' => __( 'Big line 2', 'ava-alliance' ), 'default' => 'FOR STUDENTS.' ),
-				'founder_title' => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'A movement created by young people.' ),
-				'founder_text'  => array( 'type' => 'html', 'label' => __( 'Text (basic HTML allowed)', 'ava-alliance' ), 'default' => "AVA began with students who saw a need for honest, age-appropriate vaping education before kids reach middle school. Students help shape our programs, outreach, presentations and resources.\n\n<strong>Our goal:</strong> give students a voice in prevention — and give younger students the tools to make informed choices." ),
-			),
-		),
 		'mission'    => array(
 			'title'       => __( 'Mission', 'ava-alliance' ),
 			'description' => __( 'The three cards are edited in AVA Content > Mission Points.', 'ava-alliance' ),
 			'fields'      => array(
 				'mission_show'     => $show( __( 'Mission', 'ava-alliance' ) ),
 				'mission_eyebrow'  => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Our Mission' ),
-				'mission_title'    => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Peer-led prevention starts with giving students a voice.' ),
-				'mission_intro'    => array( 'type' => 'textarea', 'label' => __( 'Intro', 'ava-alliance' ), 'default' => 'AVA brings high-school students together to educate and mentor younger students through classroom presentations, free curriculum, school clubs and community partnerships.' ),
+				'mission_title'    => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'A movement created by young people.' ),
+				'mission_intro'    => array( 'type' => 'html', 'label' => __( 'Intro (basic HTML allowed, e.g. <strong>bold</strong>; leave a blank line between paragraphs)', 'ava-alliance' ), 'default' => "AVA began with students who saw a need for honest, age-appropriate vaping education before kids reach middle school. Students help shape our programs, outreach, presentations and resources.\n\n<strong>Our goal:</strong> give students a voice in prevention — and give younger students the tools to make informed choices." ),
 				'mission_numbered' => array( 'type' => 'checkbox', 'label' => __( 'Number the cards (01, 02, 03)', 'ava-alliance' ), 'default' => true ),
 			),
 		),
