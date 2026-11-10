@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.4.1 =
+* Square-cornered stacking sections; Mission and its quote now read as one card, joined by an orange line instead of a shadow.
 
 = 1.4.0 =
 * Pledge counter and "just took the pledge" pop-ups (bottom-left) using real pledges; first names shown only for signers who opt in. Settings in Customize > AVA Site Content > Pledge counter.
