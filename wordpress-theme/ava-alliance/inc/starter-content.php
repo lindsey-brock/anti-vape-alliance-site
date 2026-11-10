@@ -81,7 +81,7 @@ function ava_seed_content() {
 				'#programs'   => 'Programs',
 				'#curriculum' => 'Curriculum',
 				'#resources'  => 'Resources',
-				'#programs'   => 'Get Involved',
+				'#contact'    => 'Get Involved',
 			);
 			foreach ( $links as $href => $label ) {
 				wp_update_nav_menu_item(

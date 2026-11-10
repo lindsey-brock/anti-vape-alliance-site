@@ -131,10 +131,10 @@ function ava_fields() {
 			),
 		),
 		'contact'    => array(
-			'title'  => __( 'Contact', 'ava-alliance' ),
+			'title'  => __( 'Get Involved (contact)', 'ava-alliance' ),
 			'fields' => array(
 				'contact_show'      => $show( __( 'Contact', 'ava-alliance' ) ),
-				'contact_eyebrow'   => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Contact' ),
+				'contact_eyebrow'   => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Get Involved' ),
 				'contact_title'     => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => "Let's bring student-led prevention to your community." ),
 				'contact_org'       => array( 'type' => 'text', 'label' => __( 'Organization name', 'ava-alliance' ), 'default' => 'Anti-Vaping Alliance' ),
 				'contact_org_line'  => array( 'type' => 'text', 'label' => __( 'Line under the name', 'ava-alliance' ), 'default' => 'Student-founded and student-led nonprofit organization' ),

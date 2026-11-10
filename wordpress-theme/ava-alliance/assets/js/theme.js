@@ -242,8 +242,8 @@
 			}
 			y += el.offsetHeight;
 		});
-		// Old "#involved" links now point at Programs, where the Get Involved buttons live.
-		if (flowTop.involved === undefined && flowTop.programs !== undefined) { flowTop.involved = flowTop.programs; }
+		// "#involved" links go to the Get Involved (contact) section.
+		if (flowTop.involved === undefined && flowTop.contact !== undefined) { flowTop.involved = flowTop.contact; }
 	}
 
 	function scrollToSection(id, smooth) {
