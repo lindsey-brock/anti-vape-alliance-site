@@ -11,6 +11,7 @@ defined( 'ABSPATH' ) || exit;
 $ava_resources = ava_items( 'ava_resource' );
 ?>
 <section class="ava-section ava-panel" id="resources" aria-labelledby="resources-title">
+	<span id="support" class="ava-anchor" aria-hidden="true"></span>
 	<div class="in">
 		<?php ava_section_head( 'resources', 'resources-title' ); ?>
 		<?php if ( $ava_resources ) : ?>

@@ -25,6 +25,52 @@
 		});
 	}
 
+	/* ---------- Drop-down menus (e.g. Resources) ---------- */
+	var subToggles = Array.prototype.slice.call(document.querySelectorAll('.ava-nav .sub-toggle'));
+	function closeSubs(except) {
+		subToggles.forEach(function (b) {
+			if (b === except) { return; }
+			b.setAttribute('aria-expanded', 'false');
+			b.parentNode.classList.remove('sub-open');
+		});
+	}
+	subToggles.forEach(function (b) {
+		b.addEventListener('click', function () {
+			var open = b.getAttribute('aria-expanded') !== 'true';
+			closeSubs(b);
+			b.setAttribute('aria-expanded', open ? 'true' : 'false');
+			b.parentNode.classList.toggle('sub-open', open);
+		});
+	});
+	if (subToggles.length) {
+		document.addEventListener('click', function (e) {
+			if (!e.target.closest('.ava-nav .menu-item-has-children')) { closeSubs(); }
+		});
+		document.addEventListener('keydown', function (e) {
+			if (e.key !== 'Escape') { return; }
+			var openLi = document.querySelector('.ava-nav .sub-open, .ava-nav .menu-item-has-children:focus-within');
+			if (openLi) {
+				var btn = openLi.querySelector('.sub-toggle');
+				closeSubs();
+				openLi.classList.add('sub-closed');
+				if (btn) { btn.focus(); }
+			}
+		});
+		// After picking a drop-down link, close the drop-down (it stays open while it has focus).
+		document.querySelector('.ava-nav').addEventListener('click', function (e) {
+			var a = e.target.closest('.sub-menu a');
+			if (!a) { return; }
+			closeSubs();
+			var li = a.closest('.menu-item-has-children');
+			if (li) { li.classList.add('sub-closed'); }
+			a.blur();
+		});
+		Array.prototype.forEach.call(document.querySelectorAll('.ava-nav .menu-item-has-children'), function (li) {
+			li.addEventListener('mouseleave', function () { li.classList.remove('sub-closed'); });
+			li.addEventListener('focusout', function (e) { if (!li.contains(e.relatedTarget)) { li.classList.remove('sub-closed'); } });
+		});
+	}
+
 	/* ---------- Pledge pop-up (#pledge) ---------- */
 	var modal = document.getElementById('pledge-modal');
 	var lastFocus = null;
@@ -305,8 +351,14 @@
 				}
 				if (el.id) { flowTop[el.id] = y; }
 				// Sections inside a grouped card: position within the card.
+				// Also in-card jump points such as the blog strip (#blog).
+				var elTop = el.getBoundingClientRect().top;
 				Array.prototype.forEach.call(el.querySelectorAll('section[id]'), function (s) {
-					flowTop[s.id] = y + s.offsetTop;
+					flowTop[s.id] = y + (s.getBoundingClientRect().top - elTop);
+				});
+				// Don't scroll past the point where this card pins, or the next card would cover it.
+				Array.prototype.forEach.call(el.querySelectorAll('.ava-blog[id]'), function (s) {
+					flowTop[s.id] = Math.min(y + (s.getBoundingClientRect().top - elTop), y + el.offsetHeight - vh + hdr);
 				});
 			}
 			if (el === scrubRun) {
@@ -317,6 +369,8 @@
 		});
 		// "#involved" links go to the Get Involved (contact) section.
 		if (flowTop.involved === undefined && flowTop.contact !== undefined) { flowTop.involved = flowTop.contact; }
+		// "#support" (Get Support) is the Resources section.
+		if (flowTop.support === undefined && flowTop.resources !== undefined) { flowTop.support = flowTop.resources; }
 	}
 
 	function scrollToSection(id, smooth) {

@@ -18,7 +18,7 @@ $ava_posts = new WP_Query(
 );
 $ava_blog_url = get_option( 'page_for_posts' ) ? get_permalink( get_option( 'page_for_posts' ) ) : '';
 ?>
-<div class="ava-blog">
+<div class="ava-blog" id="blog">
 	<div class="ava-blog-head">
 		<div>
 			<?php if ( ava_mod( 'blog_eyebrow' ) ) : ?>

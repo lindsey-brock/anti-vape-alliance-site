@@ -122,17 +122,52 @@ function ava_site_name_html() {
  * Menu fallback (before a menu is assigned): homepage section links.
  */
 function ava_menu_fallback() {
-	$links = array(
-		'#mission'    => __( 'Mission', 'ava-alliance' ),
-		'#programs'   => __( 'Programs', 'ava-alliance' ),
-		'#curriculum' => __( 'Curriculum', 'ava-alliance' ),
-		'#resources'  => __( 'Resources', 'ava-alliance' ),
-	);
 	echo '<ul id="primary-menu" class="menu">';
-	foreach ( $links as $href => $label ) {
-		printf( '<li class="menu-item"><a href="%s">%s</a></li>', esc_url( ava_link( $href ) ), esc_html( $label ) );
+	foreach ( ava_default_menu() as $item ) {
+		$kids = ! empty( $item[2] );
+		printf( '<li class="menu-item%s"><a href="%s">%s</a>', $kids ? ' menu-item-has-children' : '', esc_url( ava_link( $item[1] ) ), esc_html( $item[0] ) );
+		if ( $kids ) {
+			echo ava_submenu_toggle( $item[0] ); // phpcs:ignore WordPress.Security.EscapeOutput
+			echo '<ul class="sub-menu">';
+			foreach ( $item[2] as $child ) {
+				printf( '<li class="menu-item"><a href="%s">%s</a></li>', esc_url( ava_link( $child[1] ) ), esc_html( $child[0] ) );
+			}
+			echo '</ul>';
+		}
+		echo '</li>';
 	}
 	echo '</ul>';
+}
+
+/**
+ * Button that opens a drop-down in the main menu (for keyboard and touch).
+ *
+ * @param string $label Parent item label.
+ * @return string HTML.
+ */
+function ava_submenu_toggle( $label ) {
+	return sprintf(
+		'<button type="button" class="sub-toggle" aria-expanded="false" aria-label="%s"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>',
+		/* translators: %s: menu item, e.g. Resources */
+		esc_attr( sprintf( __( 'Show the %s menu', 'ava-alliance' ), wp_strip_all_tags( $label ) ) )
+	);
+}
+
+add_filter( 'walker_nav_menu_start_el', 'ava_menu_add_toggle', 10, 4 );
+/**
+ * Add the drop-down button after main-menu items that have sub-items.
+ *
+ * @param string   $output Item HTML.
+ * @param WP_Post  $item   Menu item.
+ * @param int      $depth  Depth.
+ * @param stdClass $args   Menu args.
+ * @return string
+ */
+function ava_menu_add_toggle( $output, $item, $depth, $args ) {
+	if ( 0 === $depth && isset( $args->theme_location ) && 'primary' === $args->theme_location && in_array( 'menu-item-has-children', (array) $item->classes, true ) ) {
+		$output .= ava_submenu_toggle( $item->title );
+	}
+	return $output;
 }
 
 /**

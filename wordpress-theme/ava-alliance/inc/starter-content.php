@@ -83,25 +83,7 @@ function ava_seed_content() {
 	if ( empty( $locations['primary'] ) && ! wp_get_nav_menu_object( 'AVA Main Menu' ) ) {
 		$menu_id = wp_create_nav_menu( 'AVA Main Menu' );
 		if ( ! is_wp_error( $menu_id ) ) {
-			$links = array(
-				'#mission'    => 'Mission',
-				'#programs'   => 'Programs',
-				'#curriculum' => 'Curriculum',
-				'#resources'  => 'Resources',
-				'#contact'    => 'Get Involved',
-			);
-			foreach ( $links as $href => $label ) {
-				wp_update_nav_menu_item(
-					$menu_id,
-					0,
-					array(
-						'menu-item-title'  => $label,
-						'menu-item-url'    => $href,
-						'menu-item-type'   => 'custom',
-						'menu-item-status' => 'publish',
-					)
-				);
-			}
+			ava_fill_main_menu( $menu_id );
 			$locations['primary'] = $menu_id;
 			set_theme_mod( 'nav_menu_locations', $locations );
 		}
@@ -114,7 +96,97 @@ function ava_seed_content() {
 	}
 
 	update_option( 'ava_seeded', 1, false );
+	update_option( 'ava_menu_v2', 1, false );
 	ava_seed_mission_images();
+}
+
+/**
+ * The default main menu. "Resources" opens a drop-down.
+ *
+ * @return array Items: array( label, link, children ).
+ */
+function ava_default_menu() {
+	return array(
+		array( 'Mission', '#mission' ),
+		array( 'Programs', '#programs' ),
+		array(
+			'Resources',
+			'#curriculum',
+			array(
+				array( 'Curriculum', '#curriculum' ),
+				array( 'Get Support', '#support' ),
+				array( 'Blog', '#blog' ),
+			),
+		),
+		array( 'Get Involved', '#contact' ),
+	);
+}
+
+/**
+ * Add the default items to a menu.
+ *
+ * @param int $menu_id Menu ID.
+ */
+function ava_fill_main_menu( $menu_id ) {
+	foreach ( ava_default_menu() as $item ) {
+		$parent = wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'  => $item[0],
+				'menu-item-url'    => $item[1],
+				'menu-item-type'   => 'custom',
+				'menu-item-status' => 'publish',
+			)
+		);
+		if ( empty( $item[2] ) || is_wp_error( $parent ) ) {
+			continue;
+		}
+		foreach ( $item[2] as $child ) {
+			wp_update_nav_menu_item(
+				$menu_id,
+				0,
+				array(
+					'menu-item-title'     => $child[0],
+					'menu-item-url'       => $child[1],
+					'menu-item-type'      => 'custom',
+					'menu-item-status'    => 'publish',
+					'menu-item-parent-id' => $parent,
+				)
+			);
+		}
+	}
+}
+
+add_action( 'admin_init', 'ava_upgrade_main_menu' );
+/**
+ * Sites that installed an earlier version got a flat menu (Mission, Programs,
+ * Curriculum, Resources, Get Involved). If that menu is still exactly as the
+ * theme made it, switch it to the Resources drop-down once. Menus the team
+ * has changed are left alone.
+ */
+function ava_upgrade_main_menu() {
+	if ( get_option( 'ava_menu_v2' ) || ! current_user_can( 'edit_theme_options' ) ) {
+		return;
+	}
+	update_option( 'ava_menu_v2', 1, false );
+	$menu = wp_get_nav_menu_object( 'AVA Main Menu' );
+	if ( ! $menu ) {
+		return;
+	}
+	$items = wp_get_nav_menu_items( $menu->term_id );
+	$found = array();
+	foreach ( (array) $items as $item ) {
+		$found[] = $item->title . '|' . $item->url . '|' . (int) $item->menu_item_parent;
+	}
+	$old = array( 'Mission|#mission|0', 'Programs|#programs|0', 'Curriculum|#curriculum|0', 'Resources|#resources|0', 'Get Involved|#contact|0' );
+	if ( $found !== $old ) {
+		return;
+	}
+	foreach ( $items as $item ) {
+		wp_delete_post( $item->ID, true );
+	}
+	ava_fill_main_menu( $menu->term_id );
 }
 
 /**
