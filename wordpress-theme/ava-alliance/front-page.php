@@ -12,7 +12,7 @@ get_header();
 
 get_template_part( 'template-parts/section', 'hero' );
 
-$ava_sections = apply_filters( 'ava_front_sections', array( 'mission', 'difference', 'programs', 'curriculum', 'resources', 'involved', 'contact' ) );
+$ava_sections = apply_filters( 'ava_front_sections', array( 'mission', 'difference', 'programs', 'curriculum', 'resources', 'contact' ) );
 // Sections listed together here share one stacking card (e.g. Mission + its quote).
 $ava_groups = apply_filters( 'ava_front_groups', array( array( 'mission', 'difference' ) ) );
 $ava_group_of = array();

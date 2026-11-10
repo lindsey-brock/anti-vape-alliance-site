@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$ava_args  = wp_parse_args( $args, array( 'type' => 'ava_point', 'numbered' => false, 'downloads' => false ) );
+$ava_args  = wp_parse_args( $args, array( 'type' => 'ava_point', 'numbered' => false, 'downloads' => false, 'buttons' => false ) );
 $ava_items = ava_items( $ava_args['type'] );
 
 if ( ! $ava_items ) {
@@ -25,6 +25,15 @@ if ( ! $ava_items ) {
 			<h3><?php echo esc_html( get_the_title( $ava_item ) ); ?></h3>
 			<div class="card-body"><?php echo wp_kses_post( apply_filters( 'the_content', $ava_item->post_content ) ); ?></div>
 			<?php
+			if ( $ava_args['buttons'] ) {
+				$ava_label = get_post_meta( $ava_item->ID, '_ava_btn_label', true );
+				$ava_url   = get_post_meta( $ava_item->ID, '_ava_btn_url', true );
+				if ( $ava_label && $ava_url ) {
+					echo '<div class="card-cta">';
+					ava_button( $ava_label, $ava_url, true );
+					echo '</div>';
+				}
+			}
 			if ( $ava_args['downloads'] ) {
 				$ava_url   = ava_download_url( $ava_item->ID );
 				$ava_label = get_post_meta( $ava_item->ID, '_ava_button_label', true );

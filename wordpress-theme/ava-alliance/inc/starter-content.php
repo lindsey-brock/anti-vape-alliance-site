@@ -26,9 +26,9 @@ function ava_seed_content() {
 			array( 'Nonprofit Mission', 'Our focus is education and prevention — making useful resources available to students, teachers, parents and communities.' ),
 		),
 		'ava_program'    => array(
-			array( 'Peer-Led Classroom Talks', 'Age-appropriate presentations for elementary and middle-school students covering vaping, nicotine, peer pressure, decision-making and healthy alternatives.' ),
-			array( 'School Chapters', 'Students can build AVA clubs that connect high-school mentors with younger students and create ongoing prevention activities.' ),
-			array( 'Community Education', 'AVA works with PTAs, educators, families and community organizations to expand youth-centered vaping education.' ),
+			array( 'Peer-Led Classroom Talks', 'Age-appropriate presentations for elementary and middle-school students covering vaping, nicotine, peer pressure, decision-making and healthy alternatives.', 'Bring AVA to Your School', '#contact' ),
+			array( 'School Chapters', 'Students can build AVA clubs that connect high-school mentors with younger students and create ongoing prevention activities.', 'Start a Chapter', '#contact' ),
+			array( 'Community Education', 'AVA works with PTAs, educators, families and community organizations to expand youth-centered vaping education.', 'Support AVA', '#contact' ),
 		),
 		'ava_curriculum' => array(
 			array( 'Lesson Pack', 'Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.', 'Download PDF', 1 ),
@@ -60,6 +60,10 @@ function ava_seed_content() {
 					'menu_order'   => $order + 1,
 				)
 			);
+			if ( $id && ! is_wp_error( $id ) && 'ava_program' === $type ) {
+				update_post_meta( $id, '_ava_btn_label', $item[2] );
+				update_post_meta( $id, '_ava_btn_url', $item[3] );
+			}
 			if ( $id && ! is_wp_error( $id ) && 'ava_curriculum' === $type ) {
 				update_post_meta( $id, '_ava_button_label', $item[2] );
 				update_post_meta( $id, '_ava_primary', $item[3] );
@@ -77,7 +81,7 @@ function ava_seed_content() {
 				'#programs'   => 'Programs',
 				'#curriculum' => 'Curriculum',
 				'#resources'  => 'Resources',
-				'#involved'   => 'Get Involved',
+				'#programs'   => 'Get Involved',
 			);
 			foreach ( $links as $href => $label ) {
 				wp_update_nav_menu_item(

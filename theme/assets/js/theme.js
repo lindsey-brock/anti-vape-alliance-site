@@ -242,6 +242,8 @@
 			}
 			y += el.offsetHeight;
 		});
+		// Old "#involved" links now point at Programs, where the Get Involved buttons live.
+		if (flowTop.involved === undefined && flowTop.programs !== undefined) { flowTop.involved = flowTop.programs; }
 	}
 
 	function scrollToSection(id, smooth) {

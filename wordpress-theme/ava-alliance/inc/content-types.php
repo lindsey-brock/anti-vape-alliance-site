@@ -177,6 +177,51 @@ JS;
 	wp_add_inline_script( 'jquery-core', 'var AVA_PICK=' . $labels . ';' . $js );
 }
 
+add_action( 'add_meta_boxes_ava_program', 'ava_program_meta_box' );
+/**
+ * Optional button under a program card.
+ */
+function ava_program_meta_box() {
+	add_meta_box( 'ava_program_btn', __( 'Button under this card', 'ava-alliance' ), 'ava_program_meta_box_html', 'ava_program', 'normal', 'high' );
+}
+
+/**
+ * Program button fields.
+ *
+ * @param WP_Post $post Post.
+ */
+function ava_program_meta_box_html( $post ) {
+	wp_nonce_field( 'ava_program_btn_save', 'ava_program_btn_nonce' );
+	?>
+	<p>
+		<label for="ava_btn_label"><strong><?php esc_html_e( 'Button label', 'ava-alliance' ); ?></strong></label><br>
+		<input type="text" class="widefat" id="ava_btn_label" name="ava_btn_label" value="<?php echo esc_attr( get_post_meta( $post->ID, '_ava_btn_label', true ) ); ?>" placeholder="<?php esc_attr_e( 'e.g. Start a Chapter', 'ava-alliance' ); ?>">
+	</p>
+	<p>
+		<label for="ava_btn_url"><strong><?php esc_html_e( 'Button link', 'ava-alliance' ); ?></strong></label><br>
+		<input type="text" class="widefat" id="ava_btn_url" name="ava_btn_url" value="<?php echo esc_attr( get_post_meta( $post->ID, '_ava_btn_url', true ) ); ?>" placeholder="#contact">
+		<span class="description"><?php esc_html_e( '#contact jumps to the contact form; #pledge opens the pledge pop-up; or paste any web address. Leave the label empty for no button.', 'ava-alliance' ); ?></span>
+	</p>
+	<?php
+}
+
+add_action( 'save_post_ava_program', 'ava_program_save' );
+/**
+ * Save program button fields.
+ *
+ * @param int $post_id Post ID.
+ */
+function ava_program_save( $post_id ) {
+	if ( ! isset( $_POST['ava_program_btn_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['ava_program_btn_nonce'] ), 'ava_program_btn_save' ) ) {
+		return;
+	}
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+	update_post_meta( $post_id, '_ava_btn_label', isset( $_POST['ava_btn_label'] ) ? sanitize_text_field( wp_unslash( $_POST['ava_btn_label'] ) ) : '' );
+	update_post_meta( $post_id, '_ava_btn_url', isset( $_POST['ava_btn_url'] ) ? ava_sanitize_link( wp_unslash( $_POST['ava_btn_url'] ) ) : '' );
+}
+
 add_action( 'save_post_ava_curriculum', 'ava_curriculum_save' );
 /**
  * Save download fields.

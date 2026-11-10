@@ -127,7 +127,6 @@ function ava_menu_fallback() {
 		'#programs'   => __( 'Programs', 'ava-alliance' ),
 		'#curriculum' => __( 'Curriculum', 'ava-alliance' ),
 		'#resources'  => __( 'Resources', 'ava-alliance' ),
-		'#involved'   => __( 'Get Involved', 'ava-alliance' ),
 	);
 	echo '<ul id="primary-menu" class="menu">';
 	foreach ( $links as $href => $label ) {

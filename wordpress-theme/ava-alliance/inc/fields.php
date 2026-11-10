@@ -130,21 +130,6 @@ function ava_fields() {
 				'resources_intro'   => array( 'type' => 'textarea', 'label' => __( 'Intro (optional)', 'ava-alliance' ), 'default' => '' ),
 			),
 		),
-		'involved'   => array(
-			'title'  => __( 'Get Involved (orange band)', 'ava-alliance' ),
-			'fields' => array(
-				'involved_show'       => $show( __( 'Get Involved', 'ava-alliance' ) ),
-				'involved_eyebrow'    => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Get Involved' ),
-				'involved_title'      => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Help students lead.' ),
-				'involved_text'       => array( 'type' => 'textarea', 'label' => __( 'Text', 'ava-alliance' ), 'default' => 'Students, educators, parents and community partners can help AVA expand peer-led education and bring resources to more schools.' ),
-				'involved_btn1_label' => array( 'type' => 'text', 'label' => __( 'Button 1 label (main)', 'ava-alliance' ), 'default' => 'Bring AVA to Your School' ),
-				'involved_btn1_url'   => array( 'type' => 'url', 'label' => __( 'Button 1 link', 'ava-alliance' ), 'default' => '#contact' ),
-				'involved_btn2_label' => array( 'type' => 'text', 'label' => __( 'Button 2 label', 'ava-alliance' ), 'default' => 'Start a Chapter' ),
-				'involved_btn2_url'   => array( 'type' => 'url', 'label' => __( 'Button 2 link', 'ava-alliance' ), 'default' => '#contact' ),
-				'involved_btn3_label' => array( 'type' => 'text', 'label' => __( 'Button 3 label', 'ava-alliance' ), 'default' => 'Support AVA' ),
-				'involved_btn3_url'   => array( 'type' => 'url', 'label' => __( 'Button 3 link', 'ava-alliance' ), 'default' => '#contact' ),
-			),
-		),
 		'contact'    => array(
 			'title'  => __( 'Contact', 'ava-alliance' ),
 			'fields' => array(

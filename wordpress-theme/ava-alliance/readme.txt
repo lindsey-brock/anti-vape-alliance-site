@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.4.3
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.5.0 =
+* Removed the orange Get Involved band; each Program card now has its own button (editable per program). The Get Involved menu link jumps to Programs.
 
 = 1.4.3 =
 * The Mission card now pins with the quote block at the bottom of the screen while the quote lights up; no extra dark space under the quote.
