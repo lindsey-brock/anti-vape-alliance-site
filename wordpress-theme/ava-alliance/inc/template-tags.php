@@ -16,7 +16,8 @@ defined( 'ABSPATH' ) || exit;
  */
 function ava_link( $url ) {
 	$url = (string) $url;
-	if ( '' !== $url && '#' === $url[0] && '#pledge' !== $url && ! is_front_page() ) {
+	// Pop-up links (#pledge, #school, #chapter) open on the current page; other #anchors go to the homepage.
+	if ( '' !== $url && '#' === $url[0] && ! in_array( $url, array( '#pledge', '#school', '#chapter' ), true ) && ! is_front_page() ) {
 		return home_url( '/' ) . $url;
 	}
 	return $url;
@@ -136,7 +137,8 @@ function ava_menu_fallback() {
 			echo ava_submenu_toggle( $item[0] ); // phpcs:ignore WordPress.Security.EscapeOutput
 			echo '<ul class="sub-menu">';
 			foreach ( $item[2] as $child ) {
-				printf( '<li class="menu-item"><a href="%s">%s</a></li>', esc_url( ava_link( $child[1] ) ), esc_html( $child[0] ) );
+				$href = ( '#blog' === $child[1] && get_option( 'page_for_posts' ) ) ? get_permalink( get_option( 'page_for_posts' ) ) : ava_link( $child[1] );
+				printf( '<li class="menu-item"><a href="%s">%s</a></li>', esc_url( $href ), esc_html( $child[0] ) );
 			}
 			echo '</ul>';
 		}

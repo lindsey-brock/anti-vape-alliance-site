@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.9.5
+Stable tag: 1.9.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.9.6 =
+* The menu's "Blog" item opens the Blog page (all posts) instead of jumping to the blog strip on the homepage. Earlier installs are updated once.
+* #pledge, #school and #chapter links open their pop-up on the page you're on, also on blog pages.
 
 = 1.9.5 =
 * The families starter post comes with the "Talk early. Talk often." Parent & Community guide and a "Get the Family Guide (PDF)" button. It reuses the PDF already in the Media Library for the curriculum card.

@@ -219,6 +219,49 @@ function ava_upgrade_program_buttons() {
 	}
 }
 
+add_action( 'admin_init', 'ava_upgrade_menu_blog_link' );
+/**
+ * Once: the menu's "Blog" item (from earlier versions, linking to #blog on
+ * the homepage) now opens the Blog page instead.
+ */
+function ava_upgrade_menu_blog_link() {
+	if ( get_option( 'ava_menu_v3' ) || ! current_user_can( 'edit_theme_options' ) || ! get_option( 'page_for_posts' ) ) {
+		return;
+	}
+	update_option( 'ava_menu_v3', 1, false );
+	ava_menu_blog_to_page();
+}
+
+/**
+ * Point "Blog → #blog" items in the AVA Main Menu at the Blog page, so the
+ * link always follows the page (even if its address changes).
+ */
+function ava_menu_blog_to_page() {
+	$blog = (int) get_option( 'page_for_posts' );
+	$menu = wp_get_nav_menu_object( 'AVA Main Menu' );
+	if ( ! $blog || ! $menu ) {
+		return;
+	}
+	foreach ( (array) wp_get_nav_menu_items( $menu->term_id ) as $item ) {
+		if ( 'custom' !== $item->type || '#blog' !== $item->url ) {
+			continue;
+		}
+		wp_update_nav_menu_item(
+			$menu->term_id,
+			$item->ID,
+			array(
+				'menu-item-title'     => $item->title,
+				'menu-item-type'      => 'post_type',
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $blog,
+				'menu-item-parent-id' => (int) $item->menu_item_parent,
+				'menu-item-position'  => (int) $item->menu_order,
+				'menu-item-status'    => 'publish',
+			)
+		);
+	}
+}
+
 add_action( 'admin_init', 'ava_upgrade_main_menu' );
 /**
  * Sites that installed an earlier version got a flat menu (Mission, Programs,

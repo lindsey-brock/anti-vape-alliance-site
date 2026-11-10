@@ -156,6 +156,8 @@ function ava_seed_blog() {
 		}
 	}
 
+	ava_menu_blog_to_page();
+	update_option( 'ava_menu_v3', 1, false );
 	update_option( 'ava_seeded_blog', 1, false );
 	update_option( 'ava_handouts_v3', 1, false );
 }
