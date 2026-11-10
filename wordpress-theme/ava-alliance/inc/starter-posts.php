@@ -77,6 +77,7 @@ function ava_starter_posts() {
 		array(
 			'title'    => 'Talking With Your Child About Vaping: A Starter Guide for Families',
 			'category' => 'For Families',
+			'image'    => array( 'talking-with-your-child.jpg', 'A parent and teen talking together on a couch' ),
 			'excerpt'  => 'You don’t need all the answers to start the conversation. A few simple tips for parents and caregivers.',
 			'content'  =>
 				ava_b_p( 'Conversations about vaping go better when they’re a series of small talks rather than one big lecture. Here are a few ways to get started.' ) .
