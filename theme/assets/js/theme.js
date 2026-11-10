@@ -392,7 +392,13 @@
 
 	function scrollToSection(id, smooth) {
 		if (flowTop[id] === undefined) { return false; }
-		window.scrollTo({ top: Math.max(0, flowTop[id] - headerHeight()), behavior: smooth ? 'smooth' : 'auto' });
+		// Jump straight there (no scrolling through the stacked cards on the way).
+		window.scrollTo({ top: Math.max(0, flowTop[id] - headerHeight()), behavior: 'instant' });
+		if (smooth && !reduce) {
+			root.classList.remove('ava-jumped');
+			void root.offsetWidth;
+			root.classList.add('ava-jumped');
+		}
 		return true;
 	}
 
