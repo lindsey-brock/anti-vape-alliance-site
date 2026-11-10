@@ -56,7 +56,7 @@ function ava_admin_dashboard() {
 
 		<?php if ( $missing ) : ?>
 			<div class="notice notice-warning inline"><p>
-				<strong><?php esc_html_e( 'These curriculum downloads have no file yet, so their button is hidden on the site:', 'ava-alliance' ); ?></strong>
+				<strong><?php esc_html_e( 'These curriculum downloads have no file yet, so their button shows “Coming soon” on the site:', 'ava-alliance' ); ?></strong>
 				<?php
 				echo implode(
 					', ',

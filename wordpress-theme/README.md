@@ -31,7 +31,7 @@ HTTPS is a hosting setting, not part of the theme.
 |---|---|
 | Check the Lesson Pack PDF. *Be the Boss of Your Choices!* (Student Worksheet 1) is included and attached automatically when the theme is activated | **Media** / **AVA Content → Curriculum** |
 | Upload the Teacher Notes and Parent Handout PDFs when they're ready | **Media → Add New** |
-| Attach each PDF to its card (the button stays hidden until a file is chosen) | **AVA Content → Curriculum** → edit item → *Choose file from Media Library* |
+| Attach each PDF to its card (until then its button shows "Coming soon") | **AVA Content → Curriculum** → edit item → *Choose file from Media Library* |
 | Check the contact email and the notification email | **Appearance → Customize → AVA Site Content → Contact / Form notifications** |
 | Install an SMTP plugin so notification emails arrive (recommended on GoDaddy) | **Plugins → Add New → "WP Mail SMTP"** |
 | Create a Privacy Policy page and add it to the footer | **Settings → Privacy**, then **Appearance → Menus** → *Footer links* |
@@ -71,6 +71,7 @@ Nothing the team updates regularly is hard-coded:
   - change the text after the number;
   - **hide the counter until there are at least N pledges** (25 by default), so the site never says "3 pledges signed";
   - **add pledges collected outside the website**, for example paper pledges at school events.
+- In the GitHub Pages / Netlify design preview, curriculum buttons open a **view-only preview** of the PDF: watermarked page images, with no file to download. The real PDF only downloads from the live WordPress site.
 - The GitHub Pages / Netlify design preview has no live data, so it shows **sample** signers and a sample count that ticks up. Every pop-up there is labelled "· sample".
 
 ## 6. SEO and sharing

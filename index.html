@@ -153,15 +153,15 @@ names:['Ava','Noah','Sofia','Marcus','Zoe','Diego','Lena','Kai','Amara','Leo','H
 			<article class="card">
 						<h3>Lesson Pack</h3>
 			<div class="card-body"><p>Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.</p></div>
-			<a class="btn primary" href="files/AVA-Be-the-Boss-of-Your-Choices.pdf" download>Download PDF<span class="screen-reader-text"> – Lesson Pack</span></a>		</article>
+			<a class="btn primary" href="#" data-pdf-preview="ava-be-the-boss-of-your-choices" data-pages="6">Download PDF<span class="screen-reader-text"> – Lesson Pack</span></a>		</article>
 			<article class="card">
 						<h3>Teacher Notes</h3>
 			<div class="card-body"><p>Facilitation guidance, discussion prompts and suggestions for presenting the material in a supportive classroom environment.</p></div>
-					</article>
+			<span class="soon-note">Coming soon</span><span class="btn is-soon" aria-disabled="true">Download Notes</span>		</article>
 			<article class="card">
 						<h3>Parent &amp; Community</h3>
 			<div class="card-body"><p>Conversation resources to help adults support young people with prevention, awareness and healthy decision-making.</p></div>
-					</article>
+			<span class="soon-note">Coming soon</span><span class="btn is-soon" aria-disabled="true">Parent Handout</span>		</article>
 	</div>
 	</div>
 </section>
@@ -183,7 +183,7 @@ names:['Ava','Noah','Sofia','Marcus','Zoe','Diego','Lena','Kai','Amara','Leo','H
 		<div class="eyebrow">Get Involved</div><h2 id="contact-title">Let&#039;s bring student-led prevention to your community.</h2>		<div class="contact-grid">
 			<div class="card contact-card">
 				<p><strong>Anti-Vaping Alliance</strong><br>Student-founded and student-led nonprofit organization</p>
-									<p><strong>Email:</strong> <a href="mailto:&#105;n&#102;o&#064;anti&#118;ap&#101;&#097;lli&#097;nce&#046;org">i&#110;f&#111;&#064;&#097;&#110;ti&#118;a&#112;&#101;allia&#110;ce.or&#103;</a></p>
+									<p><strong>Email:</strong> <a href="mailto:&#105;&#110;&#102;o&#064;a&#110;t&#105;&#118;a&#112;eallianc&#101;&#046;&#111;rg">&#105;n&#102;&#111;&#064;&#097;nti&#118;&#097;&#112;&#101;&#097;llia&#110;c&#101;&#046;org</a></p>
 								<p>Interested in a school presentation, chapter, curriculum partnership or community collaboration? Get in touch.</p>
 			</div>
 							<div class="card">
@@ -194,8 +194,8 @@ names:['Ava','Noah','Sofia','Marcus','Zoe','Diego','Lena','Kai','Amara','Leo','H
 				<form class="ava-form" id="ava-contact-form" method="post" action="#" data-ava-form novalidate>
 			<input type="hidden" name="action" value="ava_submit">
 			<input type="hidden" name="ava_type" value="contact">
-			<input type="hidden" name="ava_ts" value="1794331816">
-			<input type="hidden" name="ava_sig" value="cb308e0cb8ec5b89f61d84a242deb571872a0998095563616d910ccc4468be5b">
+			<input type="hidden" name="ava_ts" value="1794332038">
+			<input type="hidden" name="ava_sig" value="a7c23aab8343962669d6c80d50aedceaa3e0da0d47fe8560fd307d50d560569e">
 			<input type="hidden" name="ava_return" value="/">
 			<div class="hp" aria-hidden="true">
 				<label for="ava-contact-website">Website</label>
@@ -254,8 +254,8 @@ names:['Ava','Noah','Sofia','Marcus','Zoe','Diego','Lena','Kai','Amara','Leo','H
 				<form class="ava-form" id="ava-pledge-form" method="post" action="#" data-ava-form novalidate>
 			<input type="hidden" name="action" value="ava_submit">
 			<input type="hidden" name="ava_type" value="pledge">
-			<input type="hidden" name="ava_ts" value="1794331816">
-			<input type="hidden" name="ava_sig" value="507587305b4093c8c79137e234f9c5c5eb583178b52ce381c4b1d6531d876b60">
+			<input type="hidden" name="ava_ts" value="1794332038">
+			<input type="hidden" name="ava_sig" value="d7d1b50b47f592de12a28c35d5f6247e4153c508d06568994d60a8815043858a">
 			<input type="hidden" name="ava_return" value="/">
 			<div class="hp" aria-hidden="true">
 				<label for="ava-pledge-website">Website</label>
@@ -305,5 +305,38 @@ var AVA = {"ajaxUrl":"","errorMsg":"Sorry, something went wrong. Please try agai
 </script>
 <script src="theme/assets/js/theme.js" id="ava-theme-js" defer data-wp-strategy="defer"></script>
 <div class="ava-preview-pill" aria-hidden="true">Design preview of the AVA WordPress theme</div>
+
+<div class="pdfv" id="pdfv" role="dialog" aria-modal="true" aria-label="Document preview" hidden>
+  <div class="pdfv-bar"><strong>Preview only</strong><span>The full PDF downloads from the live WordPress site.</span><button type="button" class="pdfv-x" aria-label="Close preview">&times;</button></div>
+  <div class="pdfv-pages"></div>
+</div>
+<style>
+.pdfv{position:fixed;inset:0;z-index:2000;background:rgba(31,18,12,.86);display:flex;flex-direction:column}
+.pdfv[hidden]{display:none}
+.pdfv-bar{display:flex;align-items:center;gap:12px;padding:12px 18px;background:#2E1B14;color:#fff;font:600 14px "Nunito Sans",Arial,sans-serif}
+.pdfv-bar strong{font-family:Montserrat,Arial,sans-serif;font-weight:800;color:#FEB228}
+.pdfv-bar span{opacity:.85;flex:1}
+.pdfv-x{background:none;border:0;color:#fff;font-size:30px;line-height:1;width:44px;height:44px;border-radius:10px;cursor:pointer}
+.pdfv-x:hover{background:rgba(255,255,255,.12)}
+.pdfv-pages{overflow:auto;padding:24px 16px 48px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.pdfv-pages img{width:min(100%,820px);height:auto;background:#fff;box-shadow:0 12px 30px rgba(0,0,0,.35);user-select:none;-webkit-user-select:none;-webkit-user-drag:none;pointer-events:none}
+body.pdfv-open{overflow:hidden}
+</style>
+<script>
+(function(){
+  var v=document.getElementById('pdfv'),wrap=v.querySelector('.pdfv-pages'),x=v.querySelector('.pdfv-x'),last=null;
+  function close(){v.hidden=true;document.body.classList.remove('pdfv-open');wrap.innerHTML='';if(last)last.focus();}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-pdf-preview]');if(!a)return;e.preventDefault();last=a;
+    var slug=a.getAttribute('data-pdf-preview'),n=+a.getAttribute('data-pages');wrap.innerHTML='';
+    for(var i=1;i<=n;i++){var img=document.createElement('img');img.src='preview-pdf/'+slug+'/p'+i+'.webp';img.alt='Page '+i+' of '+n;img.loading=i>2?'lazy':'eager';img.draggable=false;wrap.appendChild(img);}
+    v.hidden=false;document.body.classList.add('pdfv-open');wrap.scrollTop=0;x.focus();
+  });
+  x.addEventListener('click',close);
+  v.addEventListener('click',function(e){if(e.target===v||e.target===wrap)close();});
+  v.addEventListener('contextmenu',function(e){e.preventDefault();});
+  document.addEventListener('keydown',function(e){if(!v.hidden&&e.key==='Escape')close();});
+})();
+</script>
 </body>
 </html>

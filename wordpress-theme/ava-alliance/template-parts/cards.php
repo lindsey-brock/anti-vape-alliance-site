@@ -47,7 +47,14 @@ if ( ! $ava_items ) {
 						esc_html( get_the_title( $ava_item ) )
 					);
 				} else {
-					ava_editor_note( __( 'Editor note: choose a PDF for this download – the button is hidden until you do.', 'ava-alliance' ), get_edit_post_link( $ava_item->ID, 'raw' ) );
+					// No file yet: keep the button, shown as "coming soon" (not clickable).
+					printf(
+						'<span class="soon-note">%s</span><span class="btn is-soon%s" aria-disabled="true">%s</span>',
+						esc_html__( 'Coming soon', 'ava-alliance' ),
+						get_post_meta( $ava_item->ID, '_ava_primary', true ) ? ' primary' : '',
+						esc_html( $ava_label ? $ava_label : __( 'Download', 'ava-alliance' ) )
+					);
+					ava_editor_note( __( 'Editor note: choose a PDF for this download – until then the button shows “Coming soon”.', 'ava-alliance' ), get_edit_post_link( $ava_item->ID, 'raw' ) );
 				}
 			}
 			?>
