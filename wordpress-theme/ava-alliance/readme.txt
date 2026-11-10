@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.6
+Stable tag: 1.8.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.8.7 =
+* Footer: the 501(c)(3) line is now empty by default (the field is still in the Customizer), and the logo no longer sits on a white box.
+* Hero zoom is a little stronger: about 20% over 24 seconds.
 
 = 1.8.6 =
 * Hero photo slowly zooms in (about 10% over 30 seconds) for a cinematic effect. Off for visitors with reduced motion; can be turned off under Customize → AVA Site Content → Hero.

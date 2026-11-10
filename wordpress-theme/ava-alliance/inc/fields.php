@@ -221,7 +221,7 @@ function ava_fields() {
 			'description' => __( 'Footer links (e.g. Privacy Policy) come from the Footer menu in Appearance > Menus.', 'ava-alliance' ),
 			'fields' => array(
 				'footer_tagline'   => array( 'type' => 'text', 'label' => __( 'Tagline', 'ava-alliance' ), 'default' => 'Honest, peer-led vaping education for students, schools and families.' ),
-				'footer_nonprofit' => array( 'type' => 'text', 'label' => __( 'Nonprofit line under the tagline (leave empty to hide)', 'ava-alliance' ), 'default' => 'A student-founded, student-led registered 501(c)(3) nonprofit organization.' ),
+				'footer_nonprofit' => array( 'type' => 'text', 'label' => __( 'Nonprofit line under the tagline (leave empty to hide)', 'ava-alliance' ), 'default' => '' ),
 				'footer_ein'       => array( 'type' => 'text', 'label' => __( 'EIN / tax ID shown after it (optional, e.g. 12-3456789)', 'ava-alliance' ), 'default' => '' ),
 				'footer_copyright' => array( 'type' => 'text', 'label' => __( 'Copyright name (year is automatic)', 'ava-alliance' ), 'default' => 'Anti-Vaping Alliance' ),
 			),
