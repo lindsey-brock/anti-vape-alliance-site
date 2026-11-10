@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.5
+Stable tag: 1.8.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.8.6 =
+* Hero photo slowly zooms in (about 10% over 30 seconds) for a cinematic effect. Off for visitors with reduced motion; can be turned off under Customize → AVA Site Content → Hero.
 
 = 1.8.5 =
 * Menu: "Resources" is now a drop-down with Curriculum, Get Support and Blog, each jumping to its part of the homepage (#curriculum, #support, #blog). A menu the theme created earlier is updated once, automatically, if it hasn't been changed.

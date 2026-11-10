@@ -69,6 +69,7 @@ function ava_fields() {
 						'strong' => __( 'Strong', 'ava-alliance' ),
 					),
 				),
+				'hero_zoom'       => array( 'type' => 'checkbox', 'label' => __( 'Slow zoom on the photo (cinematic effect)', 'ava-alliance' ), 'default' => true ),
 				'hero_btn1_label' => array( 'type' => 'text', 'label' => __( 'Button 1 label (main)', 'ava-alliance' ), 'default' => 'Take the Pledge' ),
 				'hero_btn1_url'   => array( 'type' => 'url', 'label' => __( 'Button 1 link', 'ava-alliance' ), 'default' => '#pledge' ),
 				'hero_btn2_label' => array( 'type' => 'text', 'label' => __( 'Button 2 label', 'ava-alliance' ), 'default' => 'Free Resources' ),

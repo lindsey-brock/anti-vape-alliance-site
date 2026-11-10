@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.8.5
+Version: 1.8.6
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -118,6 +118,12 @@ h1,h2,h3,h4{color:var(--ava-brown);line-height:1.15}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%}
 .focus-left .hero-bg{object-position:20% 58%}
 .focus-right .hero-bg{object-position:80% 58%}
+/* Slow "Ken Burns" zoom: 1 → 1.1 over 30 seconds, then it holds. */
+.hero-zoom .hero-bg{transform-origin:50% 45%;animation:ava-hero-zoom 30s cubic-bezier(.25,.1,.25,1) both;will-change:transform}
+.hero-zoom.focus-left .hero-bg{transform-origin:25% 45%}
+.hero-zoom.focus-right .hero-bg{transform-origin:75% 45%}
+@keyframes ava-hero-zoom{from{transform:scale(1)}to{transform:scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.hero-zoom .hero-bg{animation:none}}
 .hero-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(46,27,20,.10) 0%,rgba(46,27,20,.30) 38%,rgba(46,27,20,.82) 72%,rgba(31,18,12,.94) 100%),linear-gradient(90deg,rgba(31,18,12,.72) 0%,rgba(31,18,12,.30) 50%,rgba(31,18,12,0) 78%)}
 .overlay-light .hero-overlay{opacity:.8}
 .overlay-strong .hero-overlay{background:linear-gradient(180deg,rgba(46,27,20,.30) 0%,rgba(46,27,20,.55) 38%,rgba(31,18,12,.90) 70%,rgba(31,18,12,.97) 100%),linear-gradient(90deg,rgba(31,18,12,.80) 0%,rgba(31,18,12,.40) 55%,rgba(31,18,12,.10) 80%)}

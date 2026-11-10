@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$ava_hero_classes = 'ava-hero ava-panel overlay-' . sanitize_html_class( ava_mod( 'hero_overlay' ) ) . ' focus-' . sanitize_html_class( ava_mod( 'hero_focus' ) );
+$ava_hero_classes = 'ava-hero ava-panel overlay-' . sanitize_html_class( ava_mod( 'hero_overlay' ) ) . ' focus-' . sanitize_html_class( ava_mod( 'hero_focus' ) ) . ( ava_mod( 'hero_zoom' ) ? ' hero-zoom' : '' );
 ?>
 <section class="<?php echo esc_attr( $ava_hero_classes ); ?>" id="home">
 	<?php ava_hero_background(); ?>
