@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.9.1 =
+* Teacher Notes and Parent & Community PDFs are included and attached to their curriculum cards (on earlier installs too, once, if the card has no file yet).
 
 = 1.9.0 =
 * "Bring AVA to Your School" and "Start a Chapter" open their own request pop-ups (#school, #chapter) with name, email, school, role, grade and an optional message. Requests are saved in AVA Content → Messages with a Type column, and emailed like contact messages.

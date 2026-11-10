@@ -33,8 +33,8 @@ function ava_seed_content() {
 		),
 		'ava_curriculum' => array(
 			array( 'Lesson Pack', 'Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.', 'Download PDF', 1, 'AVA-Be-the-Boss-of-Your-Choices.pdf', 'Be the Boss of Your Choices! – Student Worksheet 1 (Grades 4–6)' ),
-			array( 'Teacher Notes', 'Facilitation guidance, discussion prompts and suggestions for presenting the material in a supportive classroom environment.', 'Download Notes', 0 ),
-			array( 'Parent & Community', 'Conversation resources to help adults support young people with prevention, awareness and healthy decision-making.', 'Parent Handout', 0 ),
+			array( 'Teacher Notes', 'Facilitation guidance, discussion prompts and suggestions for presenting the material in a supportive classroom environment.', 'Download Notes', 0, 'AVA-Teacher-Notes.pdf', 'Teacher Notes – Talking with students about vaping & tobacco (Grades 4–8)' ),
+			array( 'Parent & Community', 'Conversation resources to help adults support young people with prevention, awareness and healthy decision-making.', 'Parent Handout', 0, 'AVA-Parent-Community-Resources.pdf', 'Parent & Community Conversation Resources – Talk early. Talk often.' ),
 		),
 		'ava_resource'   => array(
 			array( 'For Students', '<p>Youth-focused nicotine education and quitting resources.</p><p><a href="https://teen.smokefree.gov/" target="_blank" rel="noopener">Smokefree Teen</a> · <a href="https://truthinitiative.org/thisisquitting" target="_blank" rel="noopener">This is Quitting</a></p>' ),
@@ -98,6 +98,7 @@ function ava_seed_content() {
 	update_option( 'ava_seeded', 1, false );
 	update_option( 'ava_menu_v2', 1, false );
 	update_option( 'ava_programs_v2', 1, false );
+	update_option( 'ava_curriculum_v2', 1, false );
 	ava_seed_mission_images();
 }
 
@@ -166,6 +167,33 @@ function ava_fill_main_menu( $menu_id ) {
  */
 function ava_zelle_url() {
 	return 'https://enroll.zellepay.com/qr-codes?data=ewogICAgInRva2VuIjogImFudGktdmFwZS1hbGxpYW5jZSIsCiAgICAibmFtZSI6ICJBbnRpIFZhcGluZyBBbGxpYW5jZSBJbmMiLAogICAgImFjdGlvbiI6ICJwYXltZW50Igp9';
+}
+
+add_action( 'admin_init', 'ava_attach_curriculum_files' );
+/**
+ * Sites that installed an earlier version have Teacher Notes and Parent &
+ * Community cards without a file ("Coming soon"). Attach the included PDFs
+ * once, only to those cards and only if no file has been chosen.
+ */
+function ava_attach_curriculum_files() {
+	if ( get_option( 'ava_curriculum_v2' ) || ! current_user_can( 'upload_files' ) ) {
+		return;
+	}
+	update_option( 'ava_curriculum_v2', 1, false );
+	$files = array(
+		'Teacher Notes'      => array( 'AVA-Teacher-Notes.pdf', 'Teacher Notes – Talking with students about vaping & tobacco (Grades 4–8)' ),
+		'Parent & Community' => array( 'AVA-Parent-Community-Resources.pdf', 'Parent & Community Conversation Resources – Talk early. Talk often.' ),
+	);
+	foreach ( get_posts( array( 'post_type' => 'ava_curriculum', 'post_status' => 'any', 'numberposts' => 20 ) ) as $card ) {
+		$title = html_entity_decode( $card->post_title, ENT_QUOTES, 'UTF-8' );
+		if ( ! isset( $files[ $title ] ) || get_post_meta( $card->ID, '_ava_file_id', true ) || get_post_meta( $card->ID, '_ava_url', true ) ) {
+			continue;
+		}
+		$file_id = ava_import_bundled_file( $files[ $title ][0], $files[ $title ][1] );
+		if ( $file_id ) {
+			update_post_meta( $card->ID, '_ava_file_id', $file_id );
+		}
+	}
 }
 
 add_action( 'admin_init', 'ava_upgrade_program_buttons' );
