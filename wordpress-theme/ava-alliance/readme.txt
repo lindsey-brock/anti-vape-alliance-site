@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.7.3
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.8.0 =
+* The three Mission cards are now a carousel: number tabs with a progress bar, a photo and text for each. It moves on by itself (with a Pause button), and can be switched back to three cards in the Customizer.
+* Mission Points can have a Featured image; the three starter photos are added automatically.
 
 = 1.7.3 =
 * Removed the default sentence under the AVA Difference quote (the field is still there if needed).

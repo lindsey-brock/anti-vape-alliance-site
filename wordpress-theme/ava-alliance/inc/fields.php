@@ -87,6 +87,9 @@ function ava_fields() {
 				'mission_title'    => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'A movement created by young people.' ),
 				'mission_intro'    => array( 'type' => 'html', 'label' => __( 'Intro (basic HTML allowed, e.g. <strong>bold</strong>; leave a blank line between paragraphs)', 'ava-alliance' ), 'default' => "AVA began with students who saw a need for honest, age-appropriate vaping education before kids reach middle school. Students help shape our programs, outreach, presentations and resources.\n\n<strong>Our goal:</strong> give students a voice in prevention — and give younger students the tools to make informed choices." ),
 				'mission_numbered' => array( 'type' => 'checkbox', 'label' => __( 'Number the cards (01, 02, 03)', 'ava-alliance' ), 'default' => true ),
+				'mission_layout'   => array( 'type' => 'select', 'label' => __( 'Show the Mission cards as', 'ava-alliance' ), 'default' => 'carousel', 'choices' => array( 'carousel' => __( 'Carousel with photos (number tabs and progress bar)', 'ava-alliance' ), 'cards' => __( 'Three cards side by side', 'ava-alliance' ) ) ),
+				'mission_autoplay' => array( 'type' => 'checkbox', 'label' => __( 'Carousel: move to the next tab automatically', 'ava-alliance' ), 'default' => true ),
+				'mission_interval' => array( 'type' => 'number', 'label' => __( 'Carousel: seconds per tab', 'ava-alliance' ), 'default' => 7 ),
 			),
 		),
 		'difference' => array(

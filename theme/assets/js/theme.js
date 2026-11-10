@@ -148,6 +148,72 @@
 	/* ---------- Stacked sections + fade-in ---------- */
 	var root = document.documentElement;
 	var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	/* ---------- Mission carousel: number tabs + progress bar ---------- */
+	Array.prototype.forEach.call(document.querySelectorAll('.ava-carousel'), function (car) {
+		var tabs = Array.prototype.slice.call(car.querySelectorAll('[role="tab"]'));
+		var cpanels = Array.prototype.slice.call(car.querySelectorAll('[role="tabpanel"]'));
+		if (tabs.length < 2) { return; }
+		var pauseBtn = car.querySelector('.ava-carousel-pause');
+		var auto = car.hasAttribute('data-autoplay') && !reduce;
+		var idx = 0, paused = false, hover = false, focusIn = false, inView = true;
+		car.style.setProperty('--ava-ctabs', tabs.length);
+		car.style.setProperty('--ava-cdur', (parseInt(car.getAttribute('data-interval'), 10) || 7) + 's');
+		car.classList.add('is-ready');
+		if (auto) { car.classList.add('is-auto'); }
+
+		function hold() { car.classList.toggle('is-held', hover || focusIn || !inView); }
+		function select(i, focus) {
+			idx = (i + tabs.length) % tabs.length;
+			tabs.forEach(function (t, n) {
+				var on = n === idx;
+				t.setAttribute('aria-selected', on ? 'true' : 'false');
+				t.tabIndex = on ? 0 : -1;
+				cpanels[n].classList.toggle('is-active', on);
+			});
+			if (focus) { tabs[idx].focus(); }
+			// Restart the active tab's progress bar.
+			var fill = tabs[idx].querySelector('.fill');
+			if (fill && auto) { fill.style.animation = 'none'; void fill.offsetWidth; fill.style.animation = ''; }
+		}
+		tabs.forEach(function (t, n) {
+			t.addEventListener('click', function () { select(n); });
+			t.addEventListener('keydown', function (e) {
+				var k = e.key, to = null;
+				if (k === 'ArrowRight' || k === 'ArrowDown') { to = idx + 1; }
+				else if (k === 'ArrowLeft' || k === 'ArrowUp') { to = idx - 1; }
+				else if (k === 'Home') { to = 0; }
+				else if (k === 'End') { to = tabs.length - 1; }
+				if (to !== null) { e.preventDefault(); select(to, true); }
+			});
+			var fill = t.querySelector('.fill');
+			if (fill) {
+				fill.addEventListener('animationend', function () {
+					if (auto && n === idx) { select(idx + 1); }
+				});
+			}
+		});
+		if (!auto) { return; }
+		// Hovering with a mouse holds the bar (a tap on a phone doesn't).
+		car.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hover = true; hold(); } });
+		car.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hover = false; hold(); } });
+		// Keyboard focus holds the bar; a mouse click on a tab doesn't.
+		car.addEventListener('focusin', function (e) { var fv = true; try { fv = e.target.matches(':focus-visible'); } catch (err) {} focusIn = fv; hold(); });
+		car.addEventListener('focusout', function (e) { if (!car.contains(e.relatedTarget)) { focusIn = false; hold(); } });
+		if ('IntersectionObserver' in window) {
+			new IntersectionObserver(function (en) { inView = en[0].isIntersecting; hold(); }, { threshold: 0.2 }).observe(car);
+		}
+		document.addEventListener('visibilitychange', function () { inView = !document.hidden; hold(); });
+		if (pauseBtn) {
+			var lbl = pauseBtn.querySelector('.lbl');
+			pauseBtn.hidden = false;
+			pauseBtn.addEventListener('click', function () {
+				paused = !paused;
+				car.classList.toggle('is-paused', paused);
+				lbl.textContent = lbl.getAttribute(paused ? 'data-play' : 'data-pause');
+			});
+		}
+	});
 	var header = document.querySelector('.ava-header');
 	var panels = Array.prototype.slice.call(document.querySelectorAll('.ava-panel, .ava-last'));
 	var stackOn = document.body.classList.contains('ava-stack') && !reduce && panels.length > 1 &&

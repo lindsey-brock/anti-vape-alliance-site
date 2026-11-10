@@ -39,7 +39,7 @@ function ava_register_content_types() {
 				'publicly_queryable'  => false,
 				'has_archive'         => false,
 				'rewrite'             => false,
-				'supports'            => array( 'title', 'editor', 'page-attributes', 'revisions' ),
+				'supports'            => 'ava_point' === $type ? array( 'title', 'editor', 'thumbnail', 'page-attributes', 'revisions' ) : array( 'title', 'editor', 'page-attributes', 'revisions' ),
 			)
 		);
 	}

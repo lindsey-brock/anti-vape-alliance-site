@@ -44,6 +44,7 @@ The **AVA Content → Start here** screen in WP Admin lists where every part of 
 Nothing the team updates regularly is hard-coded:
 
 - **Homepage text and buttons** (hero, mission heading and intro, quote, contact details, pledge text), with live preview: *Appearance → Customize → AVA Site Content*. Each section can also be hidden there.
+- **Mission carousel**: the three Mission Points show as a carousel with number tabs (01, 02, 03) and a progress bar. Each tab's photo is that Mission Point's **Featured image** (*AVA Content → Mission Points* → edit → *Featured image*); the three starter photos are added automatically. It moves to the next tab every 7 seconds and stops while a mouse is over it, while it's off screen, and for visitors who have reduced motion turned on. A **Pause** button is on the photo. Change the speed, turn off the automatic moving, or go back to three side-by-side cards under *Customize → AVA Site Content → Mission*.
 - **Cards and lists**: *AVA Content → Mission Points / Programs / Curriculum / Resources*. Each program can have a button under it (e.g. *Bring AVA to Your School*, *Start a Chapter*, *Support AVA*). Set its label and link in the **Button under this card** box when editing the program. Use the **Order** box to sort them, lowest number first.
 - **Menus**: *Appearance → Menus*. Links like `#mission` jump to that homepage section from any page. Any link to `#pledge` opens the pledge pop-up.
 - **Logo and browser icon**: *Customize → Site Identity*.

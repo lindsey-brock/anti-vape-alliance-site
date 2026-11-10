@@ -24,6 +24,7 @@ function ava_seed_content() {
 			array( 'Student Founded', 'AVA was created by students who wanted to address vaping education in a way that feels authentic and relevant to younger students.' ),
 			array( 'Student Led', 'Students are at the center of our outreach, presentations, chapter development, advocacy and ideas for reaching the next generation.' ),
 			array( 'Nonprofit Mission', 'Our focus is education and prevention — making useful resources available to students, teachers, parents and communities.' ),
+			// Photos for these cards are added by ava_seed_mission_images().
 		),
 		'ava_program'    => array(
 			array( 'Peer-Led Classroom Talks', 'Age-appropriate presentations for elementary and middle-school students covering vaping, nicotine, peer pressure, decision-making and healthy alternatives.', 'Bring AVA to Your School', '#contact' ),
@@ -113,6 +114,44 @@ function ava_seed_content() {
 	}
 
 	update_option( 'ava_seeded', 1, false );
+	ava_seed_mission_images();
+}
+
+/**
+ * Photos for the three Mission cards (the tabs in the Mission carousel).
+ *
+ * @return array Card title => array( file in assets/images/mission, alt text ).
+ */
+function ava_mission_images() {
+	return array(
+		'Student Founded'   => array( 'student-founded.jpg', 'A student talks with classmates around a table covered in books' ),
+		'Student Led'       => array( 'student-led.jpg', 'A student points to a whiteboard while a group of classmates listens' ),
+		'Nonprofit Mission' => array( 'nonprofit-mission.jpg', 'A teacher high-fives a student in a classroom' ),
+	);
+}
+
+add_action( 'admin_init', 'ava_seed_mission_images' );
+/**
+ * Give each starter Mission card its photo, once. Also runs on sites that
+ * installed an earlier version of the theme. Cards that already have a
+ * featured image, or were renamed, are left alone.
+ */
+function ava_seed_mission_images() {
+	if ( get_option( 'ava_seeded_mission_img' ) || ( ! current_user_can( 'upload_files' ) && ! doing_action( 'after_switch_theme' ) ) ) {
+		return;
+	}
+	update_option( 'ava_seeded_mission_img', 1, false );
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	foreach ( ava_mission_images() as $title => $image ) {
+		$cards = get_posts( array( 'post_type' => 'ava_point', 'post_status' => 'any', 'title' => $title, 'numberposts' => 1 ) );
+		if ( ! $cards || has_post_thumbnail( $cards[0] ) ) {
+			continue;
+		}
+		$img_id = ava_import_bundled_file( $image[0], $title, 'images/mission', $image[1] );
+		if ( $img_id ) {
+			set_post_thumbnail( $cards[0], $img_id );
+		}
+	}
 }
 
 /**
