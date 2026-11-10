@@ -85,7 +85,7 @@ Nothing the team updates regularly is hard-coded:
 
 | Requirement | How |
 |---|---|
-| Student-founded / student-led / nonprofit identity above the fold | Top bar message and hero intro (both editable); the hero pill says "Join the Movement" |
+| Student-founded / student-led / nonprofit identity above the fold | Hero intro and pill, plus an optional top bar above the menu (all editable in the Customizer). **The top bar is now off by default, so make sure the hero intro mentions "student-founded, student-led nonprofit".** |
 | Visual hierarchy matches the preview | Same layout, colors and fonts as the approved design |
 | Navigation on desktop and mobile | WordPress menu, with an accessible hamburger button under 900px |
 | Take the Pledge opens and closes | Header button and any `#pledge` link. Closes with ×, the Esc key or a click outside. Keyboard focus stays inside the pop-up and returns afterwards |

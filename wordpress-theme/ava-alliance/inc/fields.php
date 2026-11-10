@@ -34,7 +34,7 @@ function ava_fields() {
 			'title'  => __( 'Top Bar, Header & Scrolling', 'ava-alliance' ),
 			'description' => __( 'The header logo is set under Site Identity. Menu links are edited in Appearance > Menus.', 'ava-alliance' ),
 			'fields' => array(
-				'topbar_text'      => array( 'type' => 'text', 'label' => __( 'Top bar message (leave empty to hide)', 'ava-alliance' ), 'default' => 'A student-founded & student-led nonprofit organization • By students, for students' ),
+				'topbar_text'      => array( 'type' => 'text', 'label' => __( 'Top bar message above the menu (leave empty for no top bar)', 'ava-alliance' ), 'default' => '' ),
 				'header_cta_label' => array( 'type' => 'text', 'label' => __( 'Header button label', 'ava-alliance' ), 'default' => 'Take the Pledge' ),
 				'header_cta_url'   => array( 'type' => 'url', 'label' => __( 'Header button link (#pledge opens the pledge pop-up)', 'ava-alliance' ), 'default' => '#pledge' ),
 				'stack_scroll'     => array( 'type' => 'checkbox', 'label' => __( 'Stacked scroll effect on the homepage (each section slides up over the one before). Visitors who turn off animations in their device settings always get a normal page.', 'ava-alliance' ), 'default' => true ),

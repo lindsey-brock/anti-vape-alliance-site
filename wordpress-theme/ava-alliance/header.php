@@ -19,8 +19,8 @@ defined( 'ABSPATH' ) || exit;
 
 <?php if ( ava_mod( 'topbar_text' ) ) : ?>
 	<div class="ava-topbar"><?php echo esc_html( ava_mod( 'topbar_text' ) ); ?></div>
+	<div class="ava-stripe" aria-hidden="true"></div>
 <?php endif; ?>
-<div class="ava-stripe" aria-hidden="true"></div>
 
 <header class="ava-header">
 	<div class="navin">
