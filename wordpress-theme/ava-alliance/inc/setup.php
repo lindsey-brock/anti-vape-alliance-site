@@ -128,6 +128,9 @@ function ava_body_classes( $classes ) {
 	if ( is_front_page() && ava_mod( 'difference_scrub' ) ) {
 		$classes[] = 'ava-has-scrub';
 	}
+	if ( function_exists( 'ava_feed_enabled' ) && ava_feed_enabled() ) {
+		$classes[] = 'ava-has-feed';
+	}
 	if ( ava_mod( 'reveal_motion' ) ) {
 		$classes[] = 'ava-reveal';
 	}

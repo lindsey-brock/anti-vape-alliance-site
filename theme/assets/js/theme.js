@@ -395,8 +395,18 @@
 			away = false;
 			checkAway();
 		}
+		// Pause pop-ups while the footer is on screen so they never cover it.
+		var footerNear = false;
+		var footerEl = document.querySelector('.ava-footer');
+		if (footerEl && 'IntersectionObserver' in window) {
+			new IntersectionObserver(function (entries) {
+				footerNear = entries[0].isIntersecting;
+				box.classList.toggle('footer-near', footerNear);
+				if (!footerNear) { nextToast(); }
+			}, { threshold: 0 }).observe(footerEl);
+		}
 		function nextToast() {
-			if (away || showing || muted || !queue.length || shown >= MAX_TOASTS) { return; }
+			if (footerNear || away || showing || muted || !queue.length || shown >= MAX_TOASTS) { return; }
 			var item = queue.shift();
 			showing = true;
 			shown++;
