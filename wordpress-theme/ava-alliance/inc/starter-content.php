@@ -119,12 +119,14 @@ function ava_seed_content() {
  * Copy a PDF bundled with the theme (assets/files) into the Media Library, so
  * the team can later replace it there like any other upload.
  *
- * @param string $filename File in assets/files.
+ * @param string $filename File in assets/{$dir}.
  * @param string $title    Media Library title.
+ * @param string $dir      Folder under assets/ (files or images/posts).
+ * @param string $alt      Alt text for images.
  * @return int Attachment ID, or 0.
  */
-function ava_import_bundled_file( $filename, $title ) {
-	$src = AVA_DIR . '/assets/files/' . basename( $filename );
+function ava_import_bundled_file( $filename, $title, $dir = 'files', $alt = '' ) {
+	$src = AVA_DIR . '/assets/' . trim( $dir, '/' ) . '/' . basename( $filename );
 	if ( ! is_readable( $src ) ) {
 		return 0;
 	}
@@ -146,6 +148,9 @@ function ava_import_bundled_file( $filename, $title ) {
 	}
 	require_once ABSPATH . 'wp-admin/includes/image.php';
 	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
+	if ( $alt ) {
+		update_post_meta( $id, '_wp_attachment_image_alt', $alt );
+	}
 	return (int) $id;
 }
 

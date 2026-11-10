@@ -51,6 +51,17 @@ Nothing the team updates regularly is hard-coded:
 - **Scrolling effects**: *Customize → AVA Site Content → Top Bar, Header & Scrolling* turns the stacked-section scroll and the fade-in animations on or off. The word-by-word quote effect is switched on or off under *The AVA Difference*.
 - **Extra pages** (for example *Parent & Community*): *Pages → Add New*, built with the normal block editor in the AVA colors and fonts.
 
+## 4b. Blog
+
+- The **"From the Blog"** strip under the Resources links shows the newest posts, 3 by default. A **Blog** page (`/blog/`) lists all of them.
+- **Writing a post:** *Posts → Add New*. Set a **Featured image**, which becomes the card photo; without one the card shows an orange AVA placeholder. Fill in the **Excerpt**, which is the card's summary, and pick a **Category** (Facts, Tips, For Families, …).
+- **Starter posts:** on first activation the theme creates three posts, all fact-based with no statistics. Please have AVA's team read them, then edit or replace them:
+  - *Myth vs. Fact: What's Really in a Vape?*
+  - *5 Ways to Say No to Vaping (Without Making It Awkward)*, with a photo
+  - *Talking With Your Child About Vaping: A Starter Guide for Families*
+- On a fresh install it also sets **Settings → Reading** to a static homepage ("Home") with "Blog" as the posts page, and removes WordPress's untouched sample "Hello world!" post.
+- Change the heading, the number of posts or the "See all posts" text, or hide the strip, under *Customize → AVA Site Content → Resources*.
+
 ## 5. Forms (pledge and contact)
 
 - The built-in forms work out of the box. Spam protection uses a hidden honeypot field, a signed timestamp that rejects instant bot posts, and a limit of 5 submissions per visitor every 10 minutes. All input is cleaned and length-limited, and redirects are restricted to the site.

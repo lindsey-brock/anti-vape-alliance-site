@@ -16,6 +16,12 @@ if ( is_singular() ) :
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<header class="page-hero">
 				<div class="in">
+					<?php if ( 'post' === get_post_type() ) : ?>
+						<?php $ava_cat = get_the_category(); ?>
+						<?php if ( $ava_cat && 'uncategorized' !== $ava_cat[0]->slug ) : ?>
+							<div class="eyebrow"><?php echo esc_html( $ava_cat[0]->name ); ?></div>
+						<?php endif; ?>
+					<?php endif; ?>
 					<h1><?php the_title(); ?></h1>
 					<?php if ( 'post' === get_post_type() ) : ?>
 						<p class="meta"><time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time></p>
@@ -25,12 +31,19 @@ if ( is_singular() ) :
 			<div class="entry">
 				<div class="entry-content">
 					<?php if ( has_post_thumbnail() ) : ?>
-						<figure class="alignwide"><?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?></figure>
+						<figure class="post-hero-img"><?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?></figure>
 					<?php endif; ?>
 					<?php
 					the_content();
 					wp_link_pages();
 					?>
+					<?php if ( 'post' === get_post_type() ) : ?>
+						<p class="post-back">
+							<?php $ava_blog = get_option( 'page_for_posts' ) ? get_permalink( get_option( 'page_for_posts' ) ) : home_url( '/' ); ?>
+							<a class="btn" href="<?php echo esc_url( $ava_blog ); ?>">&larr; <?php esc_html_e( 'Back to the blog', 'ava-alliance' ); ?></a>
+							<a class="btn primary" href="#pledge"><?php echo esc_html( ava_mod( 'header_cta_label' ) ); ?></a>
+						</p>
+					<?php endif; ?>
 				</div>
 			</div>
 		</article>
@@ -58,20 +71,13 @@ else :
 	</header>
 	<div class="entry">
 		<?php if ( have_posts() ) : ?>
-			<div class="post-list">
+			<div class="grid post-list">
 				<?php
 				while ( have_posts() ) :
 					the_post();
-					?>
-					<article <?php post_class( 'card' ); ?>>
-						<?php if ( has_post_thumbnail() ) : ?>
-							<a href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true"><?php the_post_thumbnail( 'ava-card' ); ?></a>
-						<?php endif; ?>
-						<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-						<p class="meta"><?php echo esc_html( get_the_date() ); ?></p>
-						<?php the_excerpt(); ?>
-					</article>
-				<?php endwhile; ?>
+					get_template_part( 'template-parts/post-card' );
+				endwhile;
+				?>
 			</div>
 			<div class="pagination"><?php echo wp_kses_post( paginate_links() ); ?></div>
 		<?php else : ?>

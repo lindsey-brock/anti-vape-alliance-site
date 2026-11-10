@@ -222,3 +222,4 @@ function ava_hero_background() {
 		esc_url( $base . '2000.webp' )
 	);
 }
+

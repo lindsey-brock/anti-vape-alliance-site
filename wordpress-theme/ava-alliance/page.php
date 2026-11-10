@@ -27,7 +27,7 @@ while ( have_posts() ) :
 		<div class="entry">
 			<div class="entry-content">
 				<?php if ( has_post_thumbnail() ) : ?>
-					<figure class="alignwide"><?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?></figure>
+					<figure class="post-hero-img"><?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?></figure>
 				<?php endif; ?>
 				<?php
 				the_content();

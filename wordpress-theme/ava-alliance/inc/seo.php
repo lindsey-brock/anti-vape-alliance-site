@@ -71,7 +71,8 @@ function ava_seo_tags() {
 	}
 	$desc  = ava_meta_description();
 	$title = wp_get_document_title();
-	$url   = is_singular() ? get_permalink() : ( is_front_page() || is_home() ? home_url( '/' ) : '' );
+	$blog  = ( is_home() && ! is_front_page() && get_option( 'page_for_posts' ) ) ? get_permalink( get_option( 'page_for_posts' ) ) : '';
+	$url   = is_singular() ? get_permalink() : ( $blog ? $blog : ( is_front_page() || is_home() ? home_url( '/' ) : '' ) );
 	$img   = ava_meta_image();
 	$type  = is_singular( 'post' ) ? 'article' : 'website';
 
@@ -79,8 +80,8 @@ function ava_seo_tags() {
 		printf( '<meta name="description" content="%s">' . "\n", esc_attr( $desc ) );
 	}
 	// WordPress prints a canonical for singular views; add one for the blog/home view.
-	if ( ! is_singular() && ( is_front_page() || is_home() ) ) {
-		printf( '<link rel="canonical" href="%s">' . "\n", esc_url( home_url( '/' ) ) );
+	if ( ! is_singular() && ( is_front_page() || is_home() ) && ! is_paged() ) {
+		printf( '<link rel="canonical" href="%s">' . "\n", esc_url( $blog ? $blog : home_url( '/' ) ) );
 	}
 
 	$og = array(

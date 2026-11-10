@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.6.2
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.7.0 =
+* "From the Blog" cards under the Resources links (latest posts), a Blog page, and three starter posts created on first activation (one with a photo).
+* Featured images on posts and pages now show as a 16:9 banner; posts show their category and "Back to the blog".
+* Fix: the Blog page canonical link pointed to the homepage.
 
 = 1.6.2 =
 * The brown top bar above the menu is off by default (type a message in Customize > Top Bar, Header & Scrolling to bring it back).

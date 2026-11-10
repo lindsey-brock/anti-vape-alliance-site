@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AVA_VERSION', '1.6.2' );
+define( 'AVA_VERSION', '1.7.0' );
 define( 'AVA_DIR', get_template_directory() );
 define( 'AVA_URI', get_template_directory_uri() );
 
@@ -20,4 +20,5 @@ require AVA_DIR . '/inc/pledge-feed.php';
 require AVA_DIR . '/inc/seo.php';
 require AVA_DIR . '/inc/template-tags.php';
 require AVA_DIR . '/inc/starter-content.php';
+require AVA_DIR . '/inc/starter-posts.php';
 require AVA_DIR . '/inc/admin.php';

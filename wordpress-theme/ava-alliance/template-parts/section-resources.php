@@ -1,6 +1,7 @@
 <?php
 /**
- * Resources: boxes from AVA Content > Resources (links are edited in each box).
+ * Resources: resource boxes (AVA Content > Resources) and the latest blog
+ * posts underneath.
  *
  * @package AVA_Alliance
  */
@@ -23,6 +24,10 @@ $ava_resources = ava_items( 'ava_resource' );
 			</div>
 		<?php else : ?>
 			<?php ava_editor_note( __( 'Editor note: add resource boxes in AVA Content > Resources.', 'ava-alliance' ), admin_url( 'edit.php?post_type=ava_resource' ) ); ?>
+		<?php endif; ?>
+
+		<?php if ( ava_mod( 'blog_show' ) ) : ?>
+			<?php get_template_part( 'template-parts/blog-cards' ); ?>
 		<?php endif; ?>
 	</div>
 </section>

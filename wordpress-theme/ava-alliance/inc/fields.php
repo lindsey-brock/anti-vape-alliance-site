@@ -122,12 +122,17 @@ function ava_fields() {
 		),
 		'resources'  => array(
 			'title'       => __( 'Resources', 'ava-alliance' ),
-			'description' => __( 'Resource boxes and their links are edited in AVA Content > Resources.', 'ava-alliance' ),
+			'description' => __( 'Resource boxes and their links are edited in AVA Content > Resources. Blog posts are regular WordPress Posts (Posts > Add New).', 'ava-alliance' ),
 			'fields'      => array(
 				'resources_show'    => $show( __( 'Resources', 'ava-alliance' ) ),
 				'resources_eyebrow' => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Resources' ),
 				'resources_title'   => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Reliable information and support' ),
 				'resources_intro'   => array( 'type' => 'textarea', 'label' => __( 'Intro (optional)', 'ava-alliance' ), 'default' => '' ),
+				'blog_show'         => array( 'type' => 'checkbox', 'label' => __( 'Show the latest blog posts under the resource links', 'ava-alliance' ), 'default' => true ),
+				'blog_eyebrow'      => array( 'type' => 'text', 'label' => __( 'Blog – small label', 'ava-alliance' ), 'default' => 'From the Blog' ),
+				'blog_title'        => array( 'type' => 'text', 'label' => __( 'Blog – heading', 'ava-alliance' ), 'default' => 'Tips, facts and student voices' ),
+				'blog_count'        => array( 'type' => 'number', 'label' => __( 'How many posts to show', 'ava-alliance' ), 'default' => 3 ),
+				'blog_link_label'   => array( 'type' => 'text', 'label' => __( 'Link to the full blog', 'ava-alliance' ), 'default' => 'See all posts' ),
 			),
 		),
 		'contact'    => array(
