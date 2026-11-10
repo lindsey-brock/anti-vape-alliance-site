@@ -1,0 +1,56 @@
+name: Build WordPress theme
+
+# Every push that touches the theme checks it and builds an installable zip.
+# On the main branch the zip is also published as a GitHub Release
+# ("AVA WordPress theme vX.Y.Z") so it can be downloaded with one click.
+
+on:
+  push:
+    paths:
+      - "wordpress-theme/**"
+      - ".github/workflows/build-theme.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check PHP syntax
+        run: |
+          find wordpress-theme/ava-alliance -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Read theme version
+        id: version
+        run: |
+          v=$(grep -m1 -E '^Version:' wordpress-theme/ava-alliance/style.css | awk '{print $2}')
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Build zip
+        run: |
+          cd wordpress-theme
+          zip -r -X ../ava-alliance.zip ava-alliance -x '*.DS_Store' -x '*/.git*'
+          cd ..
+          unzip -l ava-alliance.zip | tail -1
+
+      - name: Upload build (download from the Actions run page)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ava-alliance-theme-${{ steps.version.outputs.version }}
+          path: ava-alliance.zip
+
+      - name: Publish release (main branch only)
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: theme-v${{ steps.version.outputs.version }}
+          name: AVA WordPress theme v${{ steps.version.outputs.version }}
+          body: |
+            Install: WordPress admin → Appearance → Themes → Add New → Upload Theme → choose **ava-alliance.zip** → Activate.
+            Setup guide: wordpress-theme/README.md
+          files: ava-alliance.zip
+          make_latest: true

@@ -1,0 +1,10 @@
+/* Block editor: match the front-end fonts and colors. */
+@font-face{font-family:"Montserrat";font-weight:800;font-display:swap;src:url(../fonts/montserrat-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:900;font-display:swap;src:url(../fonts/montserrat-latin-900-normal.woff2) format("woff2")}
+@font-face{font-family:"Nunito Sans";font-weight:400;font-display:swap;src:url(../fonts/nunito-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Nunito Sans";font-weight:700;font-display:swap;src:url(../fonts/nunito-sans-latin-700-normal.woff2) format("woff2")}
+body{font-family:"Nunito Sans",Arial,sans-serif;font-size:17px;line-height:1.6;color:#3A2419}
+h1,h2,h3,h4,.editor-post-title__input{font-family:"Montserrat",Arial,sans-serif;color:#58362B;font-weight:900;line-height:1.15}
+a{color:#B5470C}
+.wp-block-button__link{background:#FE9910;color:#2E1B14;border-radius:11px;font-family:"Montserrat",Arial,sans-serif;font-weight:800}
+blockquote{border-left:6px solid #FE9910;padding-left:22px;font-family:"Montserrat",Arial,sans-serif;font-weight:800;color:#58362B}
