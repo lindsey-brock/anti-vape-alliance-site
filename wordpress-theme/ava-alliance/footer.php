@@ -59,6 +59,20 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 </div>
 
+<?php foreach ( array( 'school', 'chapter' ) as $ava_pop ) : ?>
+<div class="ava-modal" id="<?php echo esc_attr( $ava_pop ); ?>-modal" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $ava_pop ); ?>-title" hidden>
+	<div class="modalbox">
+		<button class="close" type="button" data-ava-close aria-label="<?php esc_attr_e( 'Close', 'ava-alliance' ); ?>">&times;</button>
+		<?php if ( ava_mod( $ava_pop . '_eyebrow' ) ) : ?>
+			<div class="eyebrow"><?php echo esc_html( ava_mod( $ava_pop . '_eyebrow' ) ); ?></div>
+		<?php endif; ?>
+		<h2 id="<?php echo esc_attr( $ava_pop ); ?>-title"><?php echo esc_html( ava_mod( $ava_pop . '_title' ) ); ?></h2>
+		<?php echo ava_paragraphs( ava_mod( $ava_pop . '_text' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php ava_form( $ava_pop ); ?>
+	</div>
+</div>
+<?php endforeach; ?>
+
 <?php ava_feed_markup(); ?>
 
 <?php wp_footer(); ?>

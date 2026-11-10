@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.7
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.9.0 =
+* "Bring AVA to Your School" and "Start a Chapter" open their own request pop-ups (#school, #chapter) with name, email, school, role, grade and an optional message. Requests are saved in AVA Content → Messages with a Type column, and emailed like contact messages.
+* "Support AVA" goes straight to AVA's Zelle payment link (opens in a new tab).
+* Program buttons on earlier installs are updated once if they still point to #contact.
 
 = 1.8.7 =
 * Footer: the 501(c)(3) line is now empty by default (the field is still in the Customizer), and the logo no longer sits on a white box.

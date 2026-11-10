@@ -71,59 +71,76 @@
 		});
 	}
 
-	/* ---------- Pledge pop-up (#pledge) ---------- */
-	var modal = document.getElementById('pledge-modal');
+	/* ---------- Pop-ups: #pledge, #school, #chapter ---------- */
+	var modals = {};
+	['pledge', 'school', 'chapter'].forEach(function (name) {
+		var el = document.getElementById(name + '-modal');
+		if (el) { modals[name] = el; }
+	});
+	var modal = null; // the open one
 	var lastFocus = null;
 	var focusable = 'a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select,textarea,[tabindex]:not([tabindex="-1"])';
 
-	function isPledgeLink(a) {
+	function modalFor(a) {
 		var href = a.getAttribute('href') || '';
-		if (href === '#pledge') { return true; }
-		try {
-			var u = new URL(a.href, location.href);
-			return u.hash === '#pledge' && u.origin === location.origin && u.pathname === location.pathname;
-		} catch (err) { return false; }
+		var name = null;
+		if (href.charAt(0) === '#') { name = href.slice(1); }
+		else {
+			try {
+				var u = new URL(a.href, location.href);
+				if (u.origin === location.origin && u.pathname === location.pathname) { name = u.hash.slice(1); }
+			} catch (err) { return null; }
+		}
+		return name && modals[name] ? name : null;
 	}
 
-	function openPledge(push) {
-		if (!modal) { return; }
-		lastFocus = document.activeElement;
-		modal.hidden = false;
-		modal.classList.add('show');
+	function openModal(name, push) {
+		var el = modals[name];
+		if (!el) { return; }
+		if (modal && modal !== el) { closeModal(true); }
+		if (!modal) { lastFocus = document.activeElement; }
+		modal = el;
+		el.hidden = false;
+		el.classList.add('show');
 		document.body.classList.add('ava-modal-open');
-		if (push !== false && location.hash !== '#pledge') {
-			history.pushState(null, '', '#pledge');
+		if (push !== false && location.hash !== '#' + name) {
+			history.pushState(null, '', '#' + name);
 		}
-		var first = modal.querySelector('input:not([type=hidden]):not([tabindex="-1"])') || modal.querySelector('.close');
+		var first = el.querySelector('input:not([type=hidden]):not([tabindex="-1"])') || el.querySelector('.close');
 		setTimeout(function () { if (first) { first.focus(); } }, 30);
 	}
 
-	function closePledge() {
-		if (!modal || !modal.classList.contains('show')) { return; }
+	function closeModal(keepFocus) {
+		if (!modal) { return; }
+		var name = modal.id.replace(/-modal$/, '');
 		modal.classList.remove('show');
 		modal.hidden = true;
+		modal = null;
 		document.body.classList.remove('ava-modal-open');
-		if (location.hash === '#pledge') {
+		if (location.hash === '#' + name) {
 			history.replaceState(null, '', location.pathname + location.search);
 		}
-		if (lastFocus && lastFocus.focus) { lastFocus.focus(); }
+		if (!keepFocus && lastFocus && lastFocus.focus) { lastFocus.focus(); }
 	}
 
-	if (modal) {
+	if (Object.keys(modals).length) {
 		document.addEventListener('click', function (e) {
 			var a = e.target.closest('a');
-			if (a && isPledgeLink(a)) {
+			var name = a && modalFor(a);
+			if (name) {
 				e.preventDefault();
 				setMenu(false);
-				openPledge();
+				openModal(name);
 			}
 		});
-		modal.addEventListener('click', function (e) {
-			if (e.target === modal || e.target.closest('[data-ava-close]')) { closePledge(); }
+		Object.keys(modals).forEach(function (name) {
+			modals[name].addEventListener('click', function (e) {
+				if (e.target === modals[name] || e.target.closest('[data-ava-close]')) { closeModal(); }
+			});
 		});
 		document.addEventListener('keydown', function (e) {
-			if (!modal.classList.contains('show')) { return; }
-			if (e.key === 'Escape') { closePledge(); return; }
+			if (!modal) { return; }
+			if (e.key === 'Escape') { closeModal(); return; }
 			if (e.key === 'Tab') {
 				var items = Array.prototype.filter.call(modal.querySelectorAll(focusable), function (el) {
 					return el.offsetParent !== null;
@@ -134,13 +151,13 @@
 				else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 			}
 		});
-		window.addEventListener('hashchange', function () {
-			if (location.hash === '#pledge') { openPledge(false); } else { closePledge(); }
-		});
-		window.addEventListener('popstate', function () {
-			if (location.hash !== '#pledge') { closePledge(); }
-		});
-		if (location.hash === '#pledge') { openPledge(false); }
+		var fromHash = function () {
+			var name = location.hash.slice(1);
+			if (modals[name]) { openModal(name, false); } else { closeModal(); }
+		};
+		window.addEventListener('hashchange', fromHash);
+		window.addEventListener('popstate', fromHash);
+		if (modals[location.hash.slice(1)]) { openModal(location.hash.slice(1), false); }
 	}
 
 	/* ---------- Forms: submit without reloading (falls back to normal post) ---------- */
@@ -392,7 +409,7 @@
 		window.addEventListener('load', function () {
 			layoutStack();
 			var id = location.hash.slice(1);
-			if (id && id !== 'pledge') { scrollToSection(id, false); }
+			if (id && !modals[id]) { scrollToSection(id, false); }
 		});
 		if (window.ResizeObserver) {
 			var ro = new ResizeObserver(relayout);
@@ -408,7 +425,7 @@
 			try { u = new URL(a.href, location.href); } catch (err) { return; }
 			if (u.origin !== location.origin || u.pathname !== location.pathname) { return; }
 			var id = u.hash.slice(1);
-			if (!id || id === 'pledge' || id === 'main') { return; }
+			if (!id || modals[id] || id === 'main') { return; }
 			if (scrollToSection(id, true)) {
 				e.preventDefault();
 				history.pushState(null, '', '#' + id);

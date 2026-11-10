@@ -33,11 +33,17 @@ function ava_button( $label, $url, $primary = false ) {
 	if ( '' === trim( (string) $label ) || '' === trim( (string) $url ) ) {
 		return;
 	}
+	$href = ava_link( $url );
+	// Links to other websites (e.g. the Zelle payment page) open in a new tab.
+	$host     = wp_parse_url( $href, PHP_URL_HOST );
+	$external = $host && strtolower( $host ) !== strtolower( (string) wp_parse_url( home_url(), PHP_URL_HOST ) );
 	printf(
-		'<a class="btn%s" href="%s">%s</a>',
+		'<a class="btn%s" href="%s"%s>%s%s</a>',
 		$primary ? ' primary' : '',
-		esc_url( ava_link( $url ) ),
-		esc_html( $label )
+		esc_url( $href ),
+		$external ? ' target="_blank" rel="noopener"' : '',
+		esc_html( $label ),
+		$external ? '<span class="screen-reader-text"> ' . esc_html__( '(opens in a new tab)', 'ava-alliance' ) . '</span>' : ''
 	);
 }
 

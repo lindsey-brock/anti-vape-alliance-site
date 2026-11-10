@@ -27,9 +27,9 @@ function ava_seed_content() {
 			// Photos for these cards are added by ava_seed_mission_images().
 		),
 		'ava_program'    => array(
-			array( 'Peer-Led Classroom Talks', 'Age-appropriate presentations for elementary and middle-school students covering vaping, nicotine, peer pressure, decision-making and healthy alternatives.', 'Bring AVA to Your School', '#contact' ),
-			array( 'School Chapters', 'Students can build AVA clubs that connect high-school mentors with younger students and create ongoing prevention activities.', 'Start a Chapter', '#contact' ),
-			array( 'Community Education', 'AVA works with PTAs, educators, families and community organizations to expand youth-centered vaping education.', 'Support AVA', '#contact' ),
+			array( 'Peer-Led Classroom Talks', 'Age-appropriate presentations for elementary and middle-school students covering vaping, nicotine, peer pressure, decision-making and healthy alternatives.', 'Bring AVA to Your School', '#school' ),
+			array( 'School Chapters', 'Students can build AVA clubs that connect high-school mentors with younger students and create ongoing prevention activities.', 'Start a Chapter', '#chapter' ),
+			array( 'Community Education', 'AVA works with PTAs, educators, families and community organizations to expand youth-centered vaping education.', 'Support AVA', ava_zelle_url() ),
 		),
 		'ava_curriculum' => array(
 			array( 'Lesson Pack', 'Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.', 'Download PDF', 1, 'AVA-Be-the-Boss-of-Your-Choices.pdf', 'Be the Boss of Your Choices! – Student Worksheet 1 (Grades 4–6)' ),
@@ -97,6 +97,7 @@ function ava_seed_content() {
 
 	update_option( 'ava_seeded', 1, false );
 	update_option( 'ava_menu_v2', 1, false );
+	update_option( 'ava_programs_v2', 1, false );
 	ava_seed_mission_images();
 }
 
@@ -154,6 +155,38 @@ function ava_fill_main_menu( $menu_id ) {
 					'menu-item-parent-id' => $parent,
 				)
 			);
+		}
+	}
+}
+
+/**
+ * AVA's Zelle payment link (from the QR code on AVA's Zelle sign).
+ *
+ * @return string
+ */
+function ava_zelle_url() {
+	return 'https://enroll.zellepay.com/qr-codes?data=ewogICAgInRva2VuIjogImFudGktdmFwZS1hbGxpYW5jZSIsCiAgICAibmFtZSI6ICJBbnRpIFZhcGluZyBBbGxpYW5jZSBJbmMiLAogICAgImFjdGlvbiI6ICJwYXltZW50Igp9';
+}
+
+add_action( 'admin_init', 'ava_upgrade_program_buttons' );
+/**
+ * Point the starter Program buttons at their pop-ups / payment link, once,
+ * on sites that installed an earlier version (when they still say #contact).
+ */
+function ava_upgrade_program_buttons() {
+	if ( get_option( 'ava_programs_v2' ) || ! current_user_can( 'edit_posts' ) ) {
+		return;
+	}
+	update_option( 'ava_programs_v2', 1, false );
+	$targets = array(
+		'Bring AVA to Your School' => '#school',
+		'Start a Chapter'          => '#chapter',
+		'Support AVA'              => ava_zelle_url(),
+	);
+	foreach ( get_posts( array( 'post_type' => 'ava_program', 'post_status' => 'any', 'numberposts' => 20 ) ) as $program ) {
+		$label = get_post_meta( $program->ID, '_ava_btn_label', true );
+		if ( isset( $targets[ $label ] ) && '#contact' === get_post_meta( $program->ID, '_ava_btn_url', true ) ) {
+			update_post_meta( $program->ID, '_ava_btn_url', $targets[ $label ] );
 		}
 	}
 }

@@ -200,7 +200,7 @@ function ava_program_meta_box_html( $post ) {
 	<p>
 		<label for="ava_btn_url"><strong><?php esc_html_e( 'Button link', 'ava-alliance' ); ?></strong></label><br>
 		<input type="text" class="widefat" id="ava_btn_url" name="ava_btn_url" value="<?php echo esc_attr( get_post_meta( $post->ID, '_ava_btn_url', true ) ); ?>" placeholder="#contact">
-		<span class="description"><?php esc_html_e( '#contact jumps to the contact form; #pledge opens the pledge pop-up; or paste any web address. Leave the label empty for no button.', 'ava-alliance' ); ?></span>
+		<span class="description"><?php esc_html_e( '#contact jumps to the contact form; #pledge, #school and #chapter open those pop-ups; or paste any web address (it opens in a new tab). Leave the label empty for no button.', 'ava-alliance' ); ?></span>
 	</p>
 	<?php
 }

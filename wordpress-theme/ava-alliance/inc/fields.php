@@ -195,6 +195,28 @@ function ava_fields() {
 				'pledge_thanks'    => array( 'type' => 'text', 'label' => __( 'Thank-you message', 'ava-alliance' ), 'default' => 'Thank you for standing with the Anti-Vaping Alliance!' ),
 			),
 		),
+		'school'     => array(
+			'title'       => __( 'Pop-up: Bring AVA to Your School', 'ava-alliance' ),
+			'description' => __( 'Any link to #school opens this pop-up (the button under "Peer-Led Classroom Talks" uses it). Requests appear in AVA Content > Messages.', 'ava-alliance' ),
+			'fields'      => array(
+				'school_eyebrow' => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Peer-Led Classroom Talks' ),
+				'school_title'   => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Bring AVA to your school' ),
+				'school_text'    => array( 'type' => 'textarea', 'label' => __( 'Text', 'ava-alliance' ), 'default' => 'Tell us a little about your school and we’ll get in touch to plan an age-appropriate, student-led presentation.' ),
+				'school_button'  => array( 'type' => 'text', 'label' => __( 'Button label', 'ava-alliance' ), 'default' => 'Send Request' ),
+				'school_thanks'  => array( 'type' => 'text', 'label' => __( 'Thank-you message', 'ava-alliance' ), 'default' => 'Thanks! We’ve received your request and will be in touch soon.' ),
+			),
+		),
+		'chapter'    => array(
+			'title'       => __( 'Pop-up: Start a Chapter', 'ava-alliance' ),
+			'description' => __( 'Any link to #chapter opens this pop-up (the button under "School Chapters" uses it). Requests appear in AVA Content > Messages.', 'ava-alliance' ),
+			'fields'      => array(
+				'chapter_eyebrow' => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'School Chapters' ),
+				'chapter_title'   => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Start an AVA chapter' ),
+				'chapter_text'    => array( 'type' => 'textarea', 'label' => __( 'Text', 'ava-alliance' ), 'default' => 'Want to bring AVA to your school? Tell us who you are and we’ll help you get your chapter started.' ),
+				'chapter_button'  => array( 'type' => 'text', 'label' => __( 'Button label', 'ava-alliance' ), 'default' => 'Send Request' ),
+				'chapter_thanks'  => array( 'type' => 'text', 'label' => __( 'Thank-you message', 'ava-alliance' ), 'default' => 'Thanks for wanting to lead! We’ll reach out with next steps soon.' ),
+			),
+		),
 		'feed'       => array(
 			'title'       => __( 'Pledge counter & “just signed” pop-ups', 'ava-alliance' ),
 			'description' => __( 'Shown in the bottom-left corner of every page, using real pledges from AVA Content > Pledges. Pop-ups only show the first name of signers who ticked “Show my first name”.', 'ava-alliance' ),

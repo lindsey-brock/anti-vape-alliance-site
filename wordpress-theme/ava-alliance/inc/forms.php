@@ -30,6 +30,19 @@ function ava_form_config( $type ) {
 			'post_type' => 'ava_message',
 			'thanks'    => ava_mod( 'contact_thanks' ),
 			'anchor'    => 'contact',
+			'request'   => __( 'General message', 'ava-alliance' ),
+		),
+		'school'  => array(
+			'post_type' => 'ava_message',
+			'thanks'    => ava_mod( 'school_thanks' ),
+			'anchor'    => 'school',
+			'request'   => __( 'School visit request', 'ava-alliance' ),
+		),
+		'chapter' => array(
+			'post_type' => 'ava_message',
+			'thanks'    => ava_mod( 'chapter_thanks' ),
+			'anchor'    => 'chapter',
+			'request'   => __( 'Chapter request', 'ava-alliance' ),
 		),
 	);
 	return isset( $forms[ $type ] ) ? $forms[ $type ] : null;
@@ -51,6 +64,16 @@ function ava_contact_roles() {
 			'other'     => __( 'Other', 'ava-alliance' ),
 		)
 	);
+}
+
+/**
+ * Is this one of the request forms (school visit / chapter)?
+ *
+ * @param string $type Form type.
+ * @return bool
+ */
+function ava_is_request_form( $type ) {
+	return in_array( $type, array( 'school', 'chapter' ), true );
 }
 
 /**
@@ -143,6 +166,42 @@ function ava_builtin_form( $type ) {
 					<p class="note"><?php echo esc_html( ava_mod( 'pledge_note' ) ); ?></p>
 				<?php endif; ?>
 				<button type="submit"><?php echo esc_html( ava_mod( 'pledge_button' ) ); ?></button>
+
+			<?php elseif ( ava_is_request_form( $type ) ) : ?>
+				<div class="row">
+					<div>
+						<label for="<?php echo esc_attr( $id ); ?>-name"><?php esc_html_e( 'Name', 'ava-alliance' ); ?></label>
+						<input type="text" id="<?php echo esc_attr( $id ); ?>-name" name="name" required maxlength="100" autocomplete="name">
+					</div>
+					<div>
+						<label for="<?php echo esc_attr( $id ); ?>-email"><?php esc_html_e( 'Email', 'ava-alliance' ); ?></label>
+						<input type="email" id="<?php echo esc_attr( $id ); ?>-email" name="email" required maxlength="120" autocomplete="email">
+					</div>
+				</div>
+				<div class="row">
+					<div>
+						<label for="<?php echo esc_attr( $id ); ?>-school"><?php echo 'school' === $type ? esc_html__( 'School or organization', 'ava-alliance' ) : esc_html__( 'Your school', 'ava-alliance' ); ?></label>
+						<input type="text" id="<?php echo esc_attr( $id ); ?>-school" name="school" required maxlength="150" autocomplete="organization">
+					</div>
+					<div>
+						<label for="<?php echo esc_attr( $id ); ?>-role"><?php esc_html_e( 'I am a…', 'ava-alliance' ); ?></label>
+						<select id="<?php echo esc_attr( $id ); ?>-role" name="role">
+							<?php
+							$ava_roles = ava_contact_roles();
+							$ava_first = 'school' === $type ? 'educator' : 'student';
+							$ava_roles = array( $ava_first => $ava_roles[ $ava_first ] ) + $ava_roles;
+							foreach ( $ava_roles as $value => $label ) :
+								?>
+								<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $label ); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+				<label for="<?php echo esc_attr( $id ); ?>-grade"><?php echo 'school' === $type ? esc_html__( 'Grade levels you’d like us to visit', 'ava-alliance' ) : esc_html__( 'Your grade', 'ava-alliance' ); ?> <span class="opt"><?php esc_html_e( '(optional)', 'ava-alliance' ); ?></span></label>
+				<input type="text" id="<?php echo esc_attr( $id ); ?>-grade" name="grade" maxlength="60">
+				<label for="<?php echo esc_attr( $id ); ?>-message"><?php echo 'school' === $type ? esc_html__( 'Anything else we should know? (dates, class size…)', 'ava-alliance' ) : esc_html__( 'Tell us a bit about your idea', 'ava-alliance' ); ?> <span class="opt"><?php esc_html_e( '(optional)', 'ava-alliance' ); ?></span></label>
+				<textarea id="<?php echo esc_attr( $id ); ?>-message" name="message" maxlength="5000" rows="4"></textarea>
+				<button type="submit"><?php echo esc_html( ava_mod( $type . '_button' ) ); ?></button>
 
 			<?php else : ?>
 				<div class="row">
@@ -259,7 +318,7 @@ function ava_handle_submit() {
 		$role            = isset( $_POST['role'] ) ? sanitize_key( $_POST['role'] ) : 'other';
 		$meta['role']    = isset( $roles[ $role ] ) ? $roles[ $role ] : $roles['other'];
 		$meta['message'] = isset( $_POST['message'] ) ? mb_substr( sanitize_textarea_field( wp_unslash( $_POST['message'] ) ), 0, 5000 ) : '';
-		if ( '' === $meta['name'] || '' === $meta['email'] || '' === $meta['message'] ) {
+		if ( '' === $meta['name'] || '' === $meta['email'] || ( '' === $meta['message'] && ! ava_is_request_form( $type ) ) ) {
 			$fail( 'missing' );
 		}
 		if ( ! is_email( $meta['email'] ) ) {
@@ -270,6 +329,15 @@ function ava_handle_submit() {
 			$fail( 'spam' );
 		}
 		$title = $meta['name'] . ' – ' . $meta['role'];
+		$meta['request'] = $config['request'];
+		if ( ava_is_request_form( $type ) ) {
+			$meta['school'] = $text( 'school', 150 );
+			$meta['grade']  = $text( 'grade', 60 );
+			if ( '' === $meta['school'] ) {
+				$fail( 'missing' );
+			}
+			$title = $config['request'] . ': ' . $meta['name'] . ' – ' . $meta['school'];
+		}
 	}
 	// phpcs:enable
 
@@ -317,7 +385,8 @@ function ava_handle_submit() {
  * @param int    $post_id Stored submission.
  */
 function ava_notify( $type, $meta, $post_id ) {
-	if ( ! ava_mod( 'notify_' . $type ) ) {
+	// School visit and chapter requests follow the contact-message setting.
+	if ( ! ava_mod( 'notify_' . ( ava_is_request_form( $type ) ? 'contact' : $type ) ) ) {
 		return;
 	}
 	$to = ava_mod( 'notify_email' );
@@ -331,14 +400,19 @@ function ava_notify( $type, $meta, $post_id ) {
 	$lines[] = __( 'View in WordPress:', 'ava-alliance' ) . ' ' . admin_url( 'post.php?post=' . (int) $post_id . '&action=edit' );
 
 	$headers = array();
-	if ( 'contact' === $type && is_email( $meta['email'] ) ) {
+	if ( 'pledge' !== $type && is_email( $meta['email'] ) ) {
 		$headers[] = 'Reply-To: ' . str_replace( array( "\r", "\n", '<', '>' ), '', $meta['name'] ) . ' <' . $meta['email'] . '>';
 	}
-	$subject = 'pledge' === $type
+	if ( 'pledge' === $type ) {
 		/* translators: %s site name */
-		? sprintf( __( '[%s] New pledge signed', 'ava-alliance' ), get_bloginfo( 'name' ) )
+		$subject = sprintf( __( '[%s] New pledge signed', 'ava-alliance' ), get_bloginfo( 'name' ) );
+	} elseif ( ava_is_request_form( $type ) ) {
+		/* translators: 1: site name, 2: request type, 3: school */
+		$subject = sprintf( __( '[%1$s] %2$s – %3$s', 'ava-alliance' ), get_bloginfo( 'name' ), $meta['request'], $meta['school'] );
+	} else {
 		/* translators: %s site name */
-		: sprintf( __( '[%s] New contact message', 'ava-alliance' ), get_bloginfo( 'name' ) );
+		$subject = sprintf( __( '[%s] New contact message', 'ava-alliance' ), get_bloginfo( 'name' ) );
+	}
 
 	wp_mail( $to, $subject, implode( "\n", $lines ), $headers );
 }
@@ -387,9 +461,12 @@ function ava_submission_fields( $post_type ) {
 		);
 	}
 	return array(
+		'request' => __( 'Type', 'ava-alliance' ),
 		'name'    => __( 'Name', 'ava-alliance' ),
 		'email'   => __( 'Email', 'ava-alliance' ),
 		'role'    => __( 'Role', 'ava-alliance' ),
+		'school'  => __( 'School', 'ava-alliance' ),
+		'grade'   => __( 'Grade(s)', 'ava-alliance' ),
 		'message' => __( 'Message', 'ava-alliance' ),
 	);
 }
@@ -404,6 +481,7 @@ foreach ( array( 'ava_pledge', 'ava_message' ) as $ava_store ) {
 			);
 			$new['ava_email'] = __( 'Email', 'ava-alliance' );
 			if ( 'ava_message' === $ava_store ) {
+				$new['ava_request'] = __( 'Type', 'ava-alliance' );
 				$new['ava_role']    = __( 'Role', 'ava-alliance' );
 				$new['ava_message'] = __( 'Message', 'ava-alliance' );
 			}
@@ -416,6 +494,7 @@ foreach ( array( 'ava_pledge', 'ava_message' ) as $ava_store ) {
 		function ( $col, $id ) {
 			$map = array(
 				'ava_email'   => '_ava_email',
+				'ava_request' => '_ava_request',
 				'ava_role'    => '_ava_role',
 				'ava_message' => '_ava_message',
 			);
@@ -512,7 +591,7 @@ add_action(
 		if ( function_exists( 'wp_add_privacy_policy_content' ) ) {
 			wp_add_privacy_policy_content(
 				__( 'Anti-Vaping Alliance theme', 'ava-alliance' ),
-				wp_kses_post( wpautop( __( 'When you sign the pledge we store the name you enter and, if you choose to give it, your email address. When you use the contact form we store your name, email address, role and message. This information is only visible to site administrators, is used only to respond to you or count pledges, and is never sold or shared. You can ask us to export or delete your information at any time.', 'ava-alliance' ) ) )
+				wp_kses_post( wpautop( __( 'When you sign the pledge we store the name you enter and, if you choose to give it, your email address. When you use the contact form, or ask for a school visit or a chapter, we store your name, email address, role, school, grade and message. This information is only visible to site administrators, is used only to respond to you or count pledges, and is never sold or shared. You can ask us to export or delete your information at any time.', 'ava-alliance' ) ) )
 			);
 		}
 	}
