@@ -31,7 +31,7 @@ function ava_seed_content() {
 			array( 'Community Education', 'AVA works with PTAs, educators, families and community organizations to expand youth-centered vaping education.', 'Support AVA', '#contact' ),
 		),
 		'ava_curriculum' => array(
-			array( 'Lesson Pack', 'Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.', 'Download PDF', 1 ),
+			array( 'Lesson Pack', 'Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.', 'Download PDF', 1, 'AVA-Be-the-Boss-of-Your-Choices.pdf', 'Be the Boss of Your Choices! – Student Worksheet 1 (Grades 4–6)' ),
 			array( 'Teacher Notes', 'Facilitation guidance, discussion prompts and suggestions for presenting the material in a supportive classroom environment.', 'Download Notes', 0 ),
 			array( 'Parent & Community', 'Conversation resources to help adults support young people with prevention, awareness and healthy decision-making.', 'Parent Handout', 0 ),
 		),
@@ -67,6 +67,12 @@ function ava_seed_content() {
 			if ( $id && ! is_wp_error( $id ) && 'ava_curriculum' === $type ) {
 				update_post_meta( $id, '_ava_button_label', $item[2] );
 				update_post_meta( $id, '_ava_primary', $item[3] );
+				if ( ! empty( $item[4] ) ) {
+					$file_id = ava_import_bundled_file( $item[4], $item[5] );
+					if ( $file_id ) {
+						update_post_meta( $id, '_ava_file_id', $file_id );
+					}
+				}
 			}
 		}
 	}
@@ -107,6 +113,40 @@ function ava_seed_content() {
 	}
 
 	update_option( 'ava_seeded', 1, false );
+}
+
+/**
+ * Copy a PDF bundled with the theme (assets/files) into the Media Library, so
+ * the team can later replace it there like any other upload.
+ *
+ * @param string $filename File in assets/files.
+ * @param string $title    Media Library title.
+ * @return int Attachment ID, or 0.
+ */
+function ava_import_bundled_file( $filename, $title ) {
+	$src = AVA_DIR . '/assets/files/' . basename( $filename );
+	if ( ! is_readable( $src ) ) {
+		return 0;
+	}
+	$upload = wp_upload_bits( basename( $filename ), null, file_get_contents( $src ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( ! empty( $upload['error'] ) ) {
+		return 0;
+	}
+	$type = wp_check_filetype( $upload['file'] );
+	$id   = wp_insert_attachment(
+		array(
+			'post_mime_type' => $type['type'] ? $type['type'] : 'application/pdf',
+			'post_title'     => $title,
+			'post_status'    => 'inherit',
+		),
+		$upload['file']
+	);
+	if ( ! $id || is_wp_error( $id ) ) {
+		return 0;
+	}
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
+	return (int) $id;
 }
 
 add_filter( 'nav_menu_link_attributes', 'ava_menu_anchor_links' );

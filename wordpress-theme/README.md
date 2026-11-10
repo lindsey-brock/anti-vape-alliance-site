@@ -29,7 +29,8 @@ HTTPS is a hosting setting, not part of the theme.
 
 | Do this | Where |
 |---|---|
-| Upload the three curriculum PDFs | **Media → Add New** |
+| Check the Lesson Pack PDF. *Be the Boss of Your Choices!* (Student Worksheet 1) is included and attached automatically when the theme is activated | **Media** / **AVA Content → Curriculum** |
+| Upload the Teacher Notes and Parent Handout PDFs when they're ready | **Media → Add New** |
 | Attach each PDF to its card (the button stays hidden until a file is chosen) | **AVA Content → Curriculum** → edit item → *Choose file from Media Library* |
 | Check the contact email and the notification email | **Appearance → Customize → AVA Site Content → Contact / Form notifications** |
 | Install an SMTP plugin so notification emails arrive (recommended on GoDaddy) | **Plugins → Add New → "WP Mail SMTP"** |

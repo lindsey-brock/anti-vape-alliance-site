@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.5.2
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.6.0 =
+* Includes the Lesson Pack PDF ("Be the Boss of Your Choices!", Student Worksheet 1). On first activation it is added to the Media Library and attached to the Lesson Pack card.
 
 = 1.5.2 =
 * Extra space under the footer text so the pledge counter never covers it; pop-ups pause while the footer is on screen.

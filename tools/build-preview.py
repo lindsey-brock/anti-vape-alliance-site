@@ -45,6 +45,8 @@ html = html.replace(f'"logo":"{origin}/wp-content/themes/ava-alliance/', f'"logo
 # Local paths.
 html = html.replace(f"{origin}/wp-content/themes/ava-alliance/", "theme/")
 html = html.replace(f"{origin}/files/", "files/")
+# Media Library PDFs (wp-content/uploads/YYYY/MM/name.pdf) are served from files/ in the preview.
+html = re.sub(re.escape(origin) + r"/wp-content/uploads/\d{4}/\d{2}/([^\"'<>]+\.pdf)", r"files/\1", html)
 html = html.replace(f'href="{origin}/"', 'href="./"')
 
 # Forms: no server here, so show a preview message instead of sending.
