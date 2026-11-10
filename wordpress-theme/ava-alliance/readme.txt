@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.3
+Stable tag: 1.8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.8.4 =
+* Footer: a line under the tagline says AVA is a registered 501(c)(3) nonprofit, with an optional EIN (Customize → AVA Site Content → Footer).
 
 = 1.8.3 =
 * The third Mission card is now called "Education and Advocacy" (was "Nonprofit Mission").

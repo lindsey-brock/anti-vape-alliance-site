@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.8.3
+Version: 1.8.4
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -203,6 +203,9 @@ body.ava-modal-open{overflow:hidden}
 .ava-footer .fbrand{display:flex;align-items:center;gap:16px}
 .ava-footer .fbrand img{height:52px;width:auto;background:#fff;border-radius:12px;padding:6px 8px}
 .ava-footer strong{color:#fff;font-family:var(--ava-head)}
+.ava-footer .fnonprofit{margin:6px 0 0;font-size:14px;color:#BFA899}
+.ava-footer .fein{white-space:nowrap}
+.ava-footer .fein::before{content:"· "}
 .ava-footer ul{list-style:none;margin:8px 0 0;padding:0;display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
 .ava-footer a{text-decoration:underline;text-underline-offset:3px}
 

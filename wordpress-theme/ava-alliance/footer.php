@@ -16,6 +16,17 @@ defined( 'ABSPATH' ) || exit;
 			<div>
 				<strong><?php bloginfo( 'name' ); ?></strong><br>
 				<?php echo esc_html( ava_mod( 'footer_tagline' ) ); ?>
+				<?php if ( ava_mod( 'footer_nonprofit' ) || ava_mod( 'footer_ein' ) ) : ?>
+					<p class="fnonprofit">
+						<?php
+						echo esc_html( ava_mod( 'footer_nonprofit' ) );
+						if ( ava_mod( 'footer_ein' ) ) {
+							/* translators: %s: EIN / tax ID number */
+							echo ' <span class="fein">' . esc_html( sprintf( __( 'EIN %s', 'ava-alliance' ), ava_mod( 'footer_ein' ) ) ) . '</span>';
+						}
+						?>
+					</p>
+				<?php endif; ?>
 				<?php
 				if ( has_nav_menu( 'footer' ) ) {
 					wp_nav_menu(
