@@ -73,6 +73,7 @@ function ava_assets() {
 		array(
 			'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
 			'errorMsg' => __( 'Sorry, something went wrong. Please try again.', 'ava-alliance' ),
+			'feed'     => ava_feed_config(),
 		)
 	);
 

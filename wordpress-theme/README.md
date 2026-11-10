@@ -60,6 +60,18 @@ Nothing the team updates regularly is hard-coded:
 
 > **Children's privacy:** The pledge is aimed at students in grades 4–6, many of them under 13. In the US, COPPA restricts collecting personal information (such as full names and email addresses) online from children under 13 without verifiable parental consent. The pledge form can collect less: under *Customize → Pledge pop-up*, set **Last name field** to *Last initial only* (or *Do not ask*) and untick **Ask for an email address**. Have AVA's leadership or advisor decide on this.
 
+## 5b. Pledge counter and "just took the pledge" pop-ups
+
+- A small counter ("312 pledges signed") and occasional pop-ups ("Maya just took the pledge · 2 min ago") appear in the bottom-left corner. On the homepage they wait until visitors scroll past the hero buttons.
+- **Everything shown is real.** The count is the number of pledges in *AVA Content → Pledges*, and it updates about once a minute.
+- **Pop-ups show first names only, and only for signers who tick** "Show my first name in the 'just took the pledge' pop-up" on the pledge form. That box is unticked by default. Last names and emails are never shown. Only signers from the last 30 days appear, and each visitor sees at most 5 pop-ups per visit. The × closes them for the rest of the visit.
+- Settings are in *Customize → AVA Site Content → Pledge counter & "just signed" pop-ups*:
+  - turn the counter or the pop-ups on or off;
+  - change the text after the number;
+  - **hide the counter until there are at least N pledges** (25 by default), so the site never says "3 pledges signed";
+  - **add pledges collected outside the website**, for example paper pledges at school events.
+- The GitHub Pages / Netlify design preview has no live data, so it shows **sample** signers and a sample count that ticks up. Every pop-up there is labelled "· sample".
+
 ## 6. SEO and sharing
 
 - The browser title is the page name followed by the site name. The homepage uses the site name and the tagline.

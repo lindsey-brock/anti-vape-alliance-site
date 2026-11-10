@@ -201,6 +201,17 @@ function ava_fields() {
 				'pledge_thanks'    => array( 'type' => 'text', 'label' => __( 'Thank-you message', 'ava-alliance' ), 'default' => 'Thank you for standing with the Anti-Vaping Alliance!' ),
 			),
 		),
+		'feed'       => array(
+			'title'       => __( 'Pledge counter & “just signed” pop-ups', 'ava-alliance' ),
+			'description' => __( 'Shown in the bottom-left corner of every page, using real pledges from AVA Content > Pledges. Pop-ups only show the first name of signers who ticked “Show my first name”.', 'ava-alliance' ),
+			'fields'      => array(
+				'feed_counter' => array( 'type' => 'checkbox', 'label' => __( 'Show the pledge counter', 'ava-alliance' ), 'default' => true ),
+				'feed_label'   => array( 'type' => 'text', 'label' => __( 'Counter text after the number', 'ava-alliance' ), 'default' => 'pledges signed' ),
+				'feed_min'     => array( 'type' => 'number', 'label' => __( 'Keep the counter hidden until there are at least this many pledges', 'ava-alliance' ), 'default' => 25 ),
+				'feed_offset'  => array( 'type' => 'number', 'label' => __( 'Pledges collected outside the website (e.g. paper pledges at school events), added to the count', 'ava-alliance' ), 'default' => 0 ),
+				'feed_toasts'  => array( 'type' => 'checkbox', 'label' => __( 'Show “… just took the pledge” pop-ups', 'ava-alliance' ), 'default' => true ),
+			),
+		),
 		'forms'      => array(
 			'title'  => __( 'Form notifications', 'ava-alliance' ),
 			'description' => __( 'Every submission is saved in AVA Content even if email fails. On GoDaddy, an SMTP plugin (e.g. WP Mail SMTP) makes notification emails reliable.', 'ava-alliance' ),

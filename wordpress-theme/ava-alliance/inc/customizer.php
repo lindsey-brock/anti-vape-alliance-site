@@ -91,6 +91,7 @@ function ava_sanitizer( $field ) {
 		case 'checkbox':
 			return 'ava_sanitize_checkbox';
 		case 'media':
+		case 'number':
 			return 'absint';
 		case 'url':
 			return 'ava_sanitize_link';

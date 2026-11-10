@@ -51,6 +51,20 @@ html = html.replace(f'href="{origin}/"', 'href="./"')
 html = html.replace(f"{origin}/wp-admin/admin-post.php", "#")
 html = html.replace(f'"ajaxUrl":"{origin}/wp-admin/admin-ajax.php"', '"ajaxUrl":""')
 
+# Pledge counter: no live data here, so the preview uses clearly labelled
+# sample signers and a count that ticks up ("· sample" on every pop-up).
+esc_origin = origin.replace("/", "\\/")
+for o in (origin, esc_origin):
+    sep = "\\/" if o is esc_origin else "/"
+    html = html.replace('"url":"' + o + sep.join(["", "wp-json", "ava", "v1", "pledges"]) + '"', '"url":""')
+demo_feed = """<script>
+(function(){var now=Math.round(Date.now()/1000);
+window.AVA_DEMO_FEED={count:312,
+recent:[{name:'Maya',ts:now-140},{name:'Jordan',ts:now-960},{name:'Priya',ts:now-2500},{name:'Eli',ts:now-5600}],
+names:['Ava','Noah','Sofia','Marcus','Zoe','Diego','Lena','Kai','Amara','Leo','Hana','Mateo']};})();
+</script>
+"""
+
 preview = """<meta name="robots" content="noindex">
 <style>.ava-preview-pill{position:fixed;right:12px;bottom:12px;opacity:.85;z-index:900;background:#2E1B14;color:#fff;font:700 12px/1.3 "Nunito Sans",Arial,sans-serif;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.2)}</style>
 <script>
@@ -63,14 +77,15 @@ document.addEventListener('submit',function(e){
 },true);
 </script>
 """
-html = html.replace("</head>", preview + "</head>", 1)
+html = html.replace("</head>", preview + demo_feed + "</head>", 1)
 html = html.replace(
     "</body>",
     '<div class="ava-preview-pill" aria-hidden="true">Design preview of the AVA WordPress theme</div>\n</body>',
     1,
 )
 
-leftover = re.findall(re.escape(origin) + r"[^\"' )]*", html)
+host = origin.split("//", 1)[-1]
+leftover = re.findall(re.escape(host) + r"[^\"' )]*", html)
 if leftover:
     sys.exit("Unconverted local URLs: " + ", ".join(sorted(set(leftover))))
 

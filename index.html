@@ -52,6 +52,12 @@ document.addEventListener('submit',function(e){
   bad.hidden=true;ok.textContent=ok.textContent.replace(/ \(Preview.*$/,'')+' (Preview only: nothing was sent. On the WordPress site this is saved for the team.)';ok.hidden=false;f.remove();
 },true);
 </script>
+<script>
+(function(){var now=Math.round(Date.now()/1000);
+window.AVA_DEMO_FEED={count:312,
+recent:[{name:'Maya',ts:now-140},{name:'Jordan',ts:now-960},{name:'Priya',ts:now-2500},{name:'Eli',ts:now-5600}],
+names:['Ava','Noah','Sofia','Marcus','Zoe','Diego','Lena','Kai','Amara','Leo','Hana','Mateo']};})();
+</script>
 </head>
 <body class="home blog wp-embed-responsive wp-theme-ava-alliance ava-stack ava-has-scrub ava-reveal">
 <a class="skip-link screen-reader-text" href="#main">Skip to content</a>
@@ -181,7 +187,7 @@ document.addEventListener('submit',function(e){
 		<div class="eyebrow">Contact</div><h2 id="contact-title">Let&#039;s bring student-led prevention to your community.</h2>		<div class="contact-grid">
 			<div class="card contact-card">
 				<p><strong>Anti-Vaping Alliance</strong><br>Student-founded and student-led nonprofit organization</p>
-									<p><strong>Email:</strong> <a href="mailto:&#105;n&#102;o&#064;an&#116;i&#118;a&#112;eall&#105;&#097;n&#099;e.&#111;rg">&#105;nf&#111;&#064;a&#110;&#116;&#105;&#118;ape&#097;lli&#097;n&#099;&#101;&#046;&#111;&#114;g</a></p>
+									<p><strong>Email:</strong> <a href="mailto:&#105;nf&#111;&#064;&#097;&#110;tiva&#112;&#101;al&#108;&#105;&#097;&#110;&#099;&#101;&#046;&#111;&#114;g">&#105;n&#102;&#111;&#064;&#097;&#110;&#116;&#105;va&#112;e&#097;&#108;l&#105;anc&#101;&#046;or&#103;</a></p>
 								<p>Interested in a school presentation, chapter, curriculum partnership or community collaboration? Get in touch.</p>
 			</div>
 							<div class="card">
@@ -192,8 +198,8 @@ document.addEventListener('submit',function(e){
 				<form class="ava-form" id="ava-contact-form" method="post" action="#" data-ava-form novalidate>
 			<input type="hidden" name="action" value="ava_submit">
 			<input type="hidden" name="ava_type" value="contact">
-			<input type="hidden" name="ava_ts" value="1794326829">
-			<input type="hidden" name="ava_sig" value="f079ff233275b8590c061d09de122c1c1539c4bcbac15aa261660066d6399310">
+			<input type="hidden" name="ava_ts" value="1794327849">
+			<input type="hidden" name="ava_sig" value="2d8e58a2547facf199a0a7c64880ac76ed823e7194a9f6bf248a5194e487c1a6">
 			<input type="hidden" name="ava_return" value="/">
 			<div class="hp" aria-hidden="true">
 				<label for="ava-contact-website">Website</label>
@@ -252,8 +258,8 @@ document.addEventListener('submit',function(e){
 				<form class="ava-form" id="ava-pledge-form" method="post" action="#" data-ava-form novalidate>
 			<input type="hidden" name="action" value="ava_submit">
 			<input type="hidden" name="ava_type" value="pledge">
-			<input type="hidden" name="ava_ts" value="1794326829">
-			<input type="hidden" name="ava_sig" value="e72822b7c6274634b34533060ae8075c8f0a4fa35b2445f1a697956c04cc445a">
+			<input type="hidden" name="ava_ts" value="1794327849">
+			<input type="hidden" name="ava_sig" value="2fd685cebc67ad1d4d2e9bcc23079269dd5b6626b754f36c6c4d373799cff144">
 			<input type="hidden" name="ava_return" value="/">
 			<div class="hp" aria-hidden="true">
 				<label for="ava-pledge-website">Website</label>
@@ -272,6 +278,7 @@ document.addEventListener('submit',function(e){
 									</div>
 									<label for="ava-pledge-email">Email <span class="opt">(optional)</span></label>
 					<input type="email" id="ava-pledge-email" name="email" maxlength="120" autocomplete="email">
+													<label class="check"><input type="checkbox" name="show_name" value="1"> Show my first name in the “just took the pledge” pop-up</label>
 												<button type="submit">Sign the Pledge</button>
 
 					</form>
@@ -279,11 +286,25 @@ document.addEventListener('submit',function(e){
 		</div>
 </div>
 
+	<div class="ava-proof" id="ava-proof">
+		<div class="ava-toast" aria-hidden="true" hidden>
+			<span class="t-ic"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+			<span class="t-body"><span class="t-msg"></span><span class="t-ago"></span></span>
+			<button type="button" class="t-close" tabindex="-1">&times;</button>
+		</div>
+		<a class="ava-counter" href="#pledge" hidden>
+			<span class="dot" aria-hidden="true"></span>
+			<span class="ava-counter-num">0</span>
+			<span class="lbl">pledges signed</span>
+			<span class="screen-reader-text"> – take the pledge</span>
+		</a>
+	</div>
+	
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/ava-alliance/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
 <script id="ava-theme-js-extra">
-var AVA = {"ajaxUrl":"","errorMsg":"Sorry, something went wrong. Please try again."};
+var AVA = {"ajaxUrl":"","errorMsg":"Sorry, something went wrong. Please try again.","feed":{"url":"","counter":true,"toasts":true,"min":0,"label":"pledges signed","i18n":{"signed":"just took the pledge","justNow":"just now","min":"%d min ago","hr":"%d hr ago","day":"%d days ago","yday":"yesterday","dismiss":"Dismiss","cta":"Take the pledge"}}};
 //# sourceURL=ava-theme-js-extra
 </script>
 <script src="theme/assets/js/theme.js" id="ava-theme-js" defer data-wp-strategy="defer"></script>

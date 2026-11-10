@@ -136,6 +136,9 @@ function ava_builtin_form( $type ) {
 					<label for="<?php echo esc_attr( $id ); ?>-email"><?php esc_html_e( 'Email', 'ava-alliance' ); ?> <span class="opt"><?php esc_html_e( '(optional)', 'ava-alliance' ); ?></span></label>
 					<input type="email" id="<?php echo esc_attr( $id ); ?>-email" name="email" maxlength="120" autocomplete="email">
 				<?php endif; ?>
+				<?php if ( ava_mod( 'feed_toasts' ) ) : ?>
+					<label class="check"><input type="checkbox" name="show_name" value="1"> <?php esc_html_e( 'Show my first name in the “just took the pledge” pop-up', 'ava-alliance' ); ?></label>
+				<?php endif; ?>
 				<?php if ( ava_mod( 'pledge_note' ) ) : ?>
 					<p class="note"><?php echo esc_html( ava_mod( 'pledge_note' ) ); ?></p>
 				<?php endif; ?>
@@ -241,6 +244,7 @@ function ava_handle_submit() {
 		$meta['first_name'] = $text( 'first_name', 60 );
 		$meta['last_name']  = 'none' === $last_mode ? '' : $text( 'last_name', 'initial' === $last_mode ? 1 : 60 );
 		$meta['email']      = ava_mod( 'pledge_ask_email' ) ? $text( 'email', 120 ) : '';
+		$meta['show_name']  = ( ava_mod( 'feed_toasts' ) && ! empty( $_POST['show_name'] ) ) ? 'yes' : 'no';
 		if ( '' === $meta['first_name'] || ( 'none' !== $last_mode && '' === $meta['last_name'] ) ) {
 			$fail( 'missing' );
 		}
@@ -292,6 +296,9 @@ function ava_handle_submit() {
 		$fail( 'server' );
 	}
 
+	if ( 'pledge' === $type ) {
+		delete_transient( 'ava_pledge_feed' );
+	}
 	ava_notify( $type, $meta, $post_id );
 
 	if ( wp_doing_ajax() ) {
@@ -376,6 +383,7 @@ function ava_submission_fields( $post_type ) {
 			'first_name' => __( 'First name', 'ava-alliance' ),
 			'last_name'  => __( 'Last name', 'ava-alliance' ),
 			'email'      => __( 'Email', 'ava-alliance' ),
+			'show_name'  => __( 'First name shown publicly', 'ava-alliance' ),
 		);
 	}
 	return array(

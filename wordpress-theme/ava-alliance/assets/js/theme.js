@@ -123,6 +123,9 @@
 				.then(function (r) { return r.json().catch(function () { return { success: false }; }); })
 				.then(function (res) {
 					if (res && res.success) {
+						if (form.querySelector('[name="ava_type"]').value === 'pledge') {
+							document.dispatchEvent(new CustomEvent('ava:pledged'));
+						}
 						ok.textContent = res.data && res.data.message ? res.data.message : ok.textContent;
 						ok.hidden = false;
 						form.remove();
@@ -294,4 +297,168 @@
 			});
 		}
 	}
+
+	/* ---------- Pledge counter + "just took the pledge" pop-ups ---------- */
+	(function () {
+		var feedCfg = (window.AVA && window.AVA.feed) || {};
+		var demo = window.AVA_DEMO_FEED || null; // design preview only
+		var box = document.getElementById('ava-proof');
+		if (!box || (!feedCfg.url && !demo)) { return; }
+		var t = feedCfg.i18n || {};
+		var counterEl = box.querySelector('.ava-counter');
+		var numEl = box.querySelector('.ava-counter-num');
+		var toast = box.querySelector('.ava-toast');
+		var msgEl = toast.querySelector('.t-msg');
+		var agoEl = toast.querySelector('.t-ago');
+		var closeBtn = toast.querySelector('.t-close');
+		closeBtn.setAttribute('aria-label', t.dismiss || 'Dismiss');
+		var shown = 0, current = 0, seen = {}, queue = [], showing = false, serverSkew = 0;
+		var MAX_TOASTS = demo ? 12 : 5;
+		var muted = false;
+		try { muted = sessionStorage.getItem('avaToastsOff') === '1'; } catch (e) {}
+
+		function fmt(n) { return n.toLocaleString(); }
+		function ago(ts) {
+			var s = Math.max(0, Math.round(Date.now() / 1000 - serverSkew - ts));
+			if (s < 60) { return t.justNow || 'just now'; }
+			if (s < 3600) { return (t.min || '%d min ago').replace('%d', Math.round(s / 60)); }
+			if (s < 86400) { return (t.hr || '%d hr ago').replace('%d', Math.round(s / 3600)); }
+			if (s < 172800) { return t.yday || 'yesterday'; }
+			return (t.day || '%d days ago').replace('%d', Math.round(s / 86400));
+		}
+		function animateTo(target) {
+			if (!counterEl) { return; }
+			var from = current;
+			current = target;
+			if (reduce || from === 0) {
+				numEl.textContent = fmt(target);
+				if (from === 0 && !reduce) {
+					// first appearance: quick count-up
+					var start = performance.now(), dur = 1100;
+					var step = function (now) {
+						var k = Math.min(1, (now - start) / dur);
+						numEl.textContent = fmt(Math.round(target * (1 - Math.pow(1 - k, 3))));
+						if (k < 1) { requestAnimationFrame(step); }
+					};
+					requestAnimationFrame(step);
+				}
+				return;
+			}
+			numEl.textContent = fmt(target);
+			counterEl.classList.remove('bump');
+			void counterEl.offsetWidth;
+			counterEl.classList.add('bump');
+		}
+		function setCount(n) {
+			if (!feedCfg.counter && !demo) { return; }
+			if (n < (feedCfg.min || 0) && !demo) { return; }
+			counterEl.hidden = false;
+			if (n !== current) { animateTo(n); }
+		}
+		// Keep the corner clear while the hero's buttons are on screen.
+		var away = false;
+		var heroBtns = document.querySelector('.ava-hero .buttons');
+		if (heroBtns) {
+			var hero = heroBtns.closest('.ava-hero');
+			var nextEl = hero ? hero.nextElementSibling : null;
+			var checkAway = function () {
+				var br = heroBtns.getBoundingClientRect();
+				var onScreen = br.bottom > 0 && br.top < window.innerHeight;
+				// With stacked sections the hero stays pinned; it's hidden once the next card covers the buttons.
+				var covered = nextEl && nextEl.getBoundingClientRect().top < br.bottom;
+				var now = onScreen && !covered;
+				if (now !== away) {
+					away = now;
+					box.classList.toggle('away', away);
+					if (!away) { nextToast(); }
+				}
+			};
+			var awayTick = false;
+			window.addEventListener('scroll', function () {
+				if (!awayTick) { awayTick = true; requestAnimationFrame(function () { awayTick = false; checkAway(); }); }
+			}, { passive: true });
+			window.addEventListener('resize', checkAway);
+			away = false;
+			checkAway();
+		}
+		function nextToast() {
+			if (away || showing || muted || !queue.length || shown >= MAX_TOASTS) { return; }
+			var item = queue.shift();
+			showing = true;
+			shown++;
+			msgEl.innerHTML = '';
+			var strong = document.createElement('strong');
+			strong.textContent = item.name;
+			msgEl.appendChild(strong);
+			msgEl.appendChild(document.createTextNode(' ' + (t.signed || 'just took the pledge')));
+			agoEl.textContent = ago(item.ts) + (demo ? ' · sample' : '');
+			toast.hidden = false;
+			requestAnimationFrame(function () { toast.classList.add('show'); });
+			setTimeout(function () {
+				toast.classList.remove('show');
+				setTimeout(function () {
+					toast.hidden = true;
+					showing = false;
+					setTimeout(nextToast, 4000 + Math.random() * 4000);
+				}, reduce ? 0 : 400);
+			}, 5200);
+		}
+		function addRecent(list) {
+			if (!(feedCfg.toasts || demo)) { return; }
+			list.slice().reverse().forEach(function (r) {
+				var key = r.name + '|' + r.ts;
+				if (seen[key]) { return; }
+				seen[key] = true;
+				queue.push(r);
+			});
+			queue.sort(function (a, b) { return b.ts - a.ts; });
+			nextToast();
+		}
+		closeBtn.addEventListener('click', function () {
+			muted = true;
+			queue = [];
+			toast.classList.remove('show');
+			toast.hidden = true;
+			try { sessionStorage.setItem('avaToastsOff', '1'); } catch (e) {}
+		});
+
+		function load() {
+			if (demo) {
+				setCount(demo.count);
+				addRecent(demo.recent);
+				return;
+			}
+			fetch(feedCfg.url, { credentials: 'omit', cache: 'no-store' })
+				.then(function (r) { return r.ok ? r.json() : null; })
+				.then(function (d) {
+					if (!d) { return; }
+					serverSkew = Math.round(Date.now() / 1000) - (d.now || Math.round(Date.now() / 1000));
+					setCount(d.count || 0);
+					addRecent(d.recent || []);
+				})
+				.catch(function () {});
+		}
+
+		setTimeout(load, 2500);
+		if (demo) {
+			// Preview only: a sample signer every 12–22 seconds.
+			var names = demo.names || [];
+			var tick = function () {
+				demo.count += 1 + Math.floor(Math.random() * 2);
+				setCount(demo.count);
+				if (names.length) {
+					addRecent([{ name: names[Math.floor(Math.random() * names.length)], ts: Math.round(Date.now() / 1000) - serverSkew + Math.random() }]);
+				}
+				setTimeout(tick, 12000 + Math.random() * 10000);
+			};
+			setTimeout(tick, 14000);
+		} else {
+			setInterval(function () { if (!document.hidden) { load(); } }, 60000);
+		}
+
+		// Your own pledge counts right away.
+		document.addEventListener('ava:pledged', function () {
+			if (current) { setCount(current + 1); }
+		});
+	})();
 })();

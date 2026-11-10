@@ -48,6 +48,8 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 </div>
 
+<?php ava_feed_markup(); ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>
