@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.9.6
+Stable tag: 1.9.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.9.7 =
+* Programs section: school-lockers photo background with a dark brand overlay. The photo can be changed or turned off under Customize → AVA Site Content → Programs.
 
 = 1.9.6 =
 * The menu's "Blog" item opens the Blog page (all posts) instead of jumping to the blog strip on the homepage. Earlier installs are updated once.

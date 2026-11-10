@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.9.6
+Version: 1.9.7
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -104,6 +104,15 @@ h1,h2,h3,h4{color:var(--ava-brown);line-height:1.15}
 .eyebrow::before{content:"";width:28px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--ava-flame),var(--ava-orange))}
 .ava-section h2,.ava-modal h2{font-size:clamp(30px,3.6vw,40px);margin:10px 0 12px;font-weight:900;letter-spacing:-.6px}
 .sub{font-size:18px;color:var(--ava-muted);max-width:780px}
+/* Section with a photo background + dark brand overlay (Programs). */
+.ava-section.has-photo{position:relative;overflow:hidden;background:var(--ava-espresso);color:#fff}
+.has-photo .section-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+.has-photo .section-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(31,18,12,.78) 0%,rgba(46,27,20,.55) 45%,rgba(31,18,12,.86) 100%),linear-gradient(90deg,rgba(31,18,12,.55) 0%,rgba(31,18,12,.15) 70%)}
+.has-photo>.in{position:relative;z-index:1}
+.has-photo .eyebrow{color:var(--ava-amber)}
+.has-photo h2{color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.has-photo .sub{color:rgba(255,255,255,.85)}
+.has-photo .card{color:var(--ava-ink)}
 .card{background:#fff;border:1px solid var(--ava-line);border-radius:var(--ava-radius);box-shadow:var(--ava-shadow);padding:30px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
 .grid .card{display:flex;flex-direction:column;border-bottom:4px solid transparent;transition:border-color .2s,transform .2s}

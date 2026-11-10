@@ -48,6 +48,7 @@ Nothing the team updates regularly is hard-coded:
 - **Menus**: *Appearance → Menus*. Links like `#mission` jump to that homepage section from any page. Any link to `#pledge` opens the pledge pop-up. The default menu is Mission · Programs · **Resources** (a drop-down with Curriculum `#curriculum`, Get Support `#support` and **Blog**, which opens the Blog page) · Get Involved. To add a drop-down item, drag it slightly to the right under its parent in *Appearance → Menus*. On phones the drop-down items are listed under their parent.
 - **Logo and browser icon**: *Customize → Site Identity*.
 - **Hero background photo**: *Customize → AVA Site Content → Hero*. Choose any photo from the Media Library, set which side stays in view on phones, and make the dark overlay lighter or stronger if the text gets hard to read. The photo slowly zooms in (about 20% over 24 seconds); untick **Slow zoom on the photo** to turn it off.
+- **Programs background photo**: *Customize → AVA Site Content → Programs*. Choose another photo from the Media Library, or untick **Photo background** for a plain white section.
 - **Scrolling effects**: *Customize → AVA Site Content → Top Bar, Header & Scrolling* turns the stacked-section scroll and the fade-in animations on or off. The word-by-word quote effect is switched on or off under *The AVA Difference*.
 - **Extra pages** (for example *Parent & Community*): *Pages → Add New*, built with the normal block editor in the AVA colors and fonts.
 

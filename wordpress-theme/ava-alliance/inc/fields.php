@@ -112,6 +112,8 @@ function ava_fields() {
 				'programs_eyebrow' => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Programs' ),
 				'programs_title'   => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Built by students. Designed to help schools.' ),
 				'programs_intro'   => array( 'type' => 'textarea', 'label' => __( 'Intro (optional)', 'ava-alliance' ), 'default' => '' ),
+				'programs_photo'   => array( 'type' => 'checkbox', 'label' => __( 'Photo background with a dark overlay', 'ava-alliance' ), 'default' => true ),
+				'programs_bg'      => array( 'type' => 'media', 'label' => __( 'Background photo (empty = the included school lockers photo)', 'ava-alliance' ), 'default' => 0 ),
 			),
 		),
 		'curriculum' => array(

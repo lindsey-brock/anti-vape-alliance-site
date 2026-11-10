@@ -264,6 +264,35 @@ function ava_brand_image( $context = 'hero' ) {
 }
 
 /**
+ * Section background photo: Customizer photo from the Media Library, else a
+ * bundled photo (assets/images/{$bundled}-900/1600/1920.webp). Lazy-loaded.
+ *
+ * @param string $field   Customizer media field.
+ * @param string $bundled Bundled image name prefix.
+ */
+function ava_section_background( $field, $bundled ) {
+	$id    = (int) ava_mod( $field );
+	$attrs = array(
+		'class'    => 'section-bg',
+		'alt'      => '',
+		'sizes'    => '100vw',
+		'loading'  => 'lazy',
+		'decoding' => 'async',
+	);
+	if ( $id && wp_attachment_is_image( $id ) ) {
+		echo wp_get_attachment_image( $id, 'full', false, $attrs );
+		return;
+	}
+	$base = AVA_URI . '/assets/images/' . $bundled . '-';
+	printf(
+		'<img class="section-bg" src="%1$s" srcset="%2$s 900w, %1$s 1600w, %3$s 1920w" sizes="100vw" width="1600" height="900" alt="" loading="lazy" decoding="async">',
+		esc_url( $base . '1600.webp' ),
+		esc_url( $base . '900.webp' ),
+		esc_url( $base . '1920.webp' )
+	);
+}
+
+/**
  * Hero background photo: Customizer photo from the Media Library, else the
  * bundled students photo. Responsive (srcset) and loaded first.
  */
