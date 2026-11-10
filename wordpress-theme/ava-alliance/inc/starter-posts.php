@@ -80,6 +80,7 @@ function ava_starter_posts() {
 			'title'    => 'Talking With Your Child About Vaping: A Starter Guide for Families',
 			'category' => 'For Families',
 			'image'    => array( 'talking-with-your-child.jpg', 'A parent and teen talking together on a couch' ),
+			'handout'  => ava_starter_handout( 'families' ),
 			'excerpt'  => 'You don’t need all the answers to start the conversation. A few simple tips for parents and caregivers.',
 			'content'  =>
 				ava_b_p( 'Conversations about vaping go better when they’re a series of small talks rather than one big lecture. Here are a few ways to get started.' ) .
@@ -156,7 +157,7 @@ function ava_seed_blog() {
 	}
 
 	update_option( 'ava_seeded_blog', 1, false );
-	update_option( 'ava_handouts_v2', 1, false );
+	update_option( 'ava_handouts_v3', 1, false );
 }
 
 /**
@@ -183,6 +184,14 @@ function ava_starter_handout( $key = '' ) {
 			'text'  => 'Match what’s really inside a vape, decode a vape ad and design your own vape-free poster. For grades 6–8.',
 			'label' => 'Get the Worksheet (PDF)',
 		),
+		'families'    => array(
+			'post'  => 'talking-with-your-child-about-vaping-a-starter-guide-for-families',
+			'file'  => 'AVA-Parent-Community-Resources.pdf',
+			'name'  => 'Parent & Community Conversation Resources – Talk early. Talk often.',
+			'title' => 'Keep it handy: “Talk early. Talk often.” family guide',
+			'text'  => 'The facts, signs worth noticing, conversation starters and free quit support, on two printable pages.',
+			'label' => 'Get the Family Guide (PDF)',
+		),
 	);
 	if ( '' === $key ) {
 		return $all;
@@ -197,7 +206,11 @@ function ava_starter_handout( $key = '' ) {
  * @param array   $handout From ava_starter_handout().
  */
 function ava_attach_handout( $post_id, $handout ) {
-	$file_id = ava_import_bundled_file( $handout['file'], $handout['name'] );
+	// Reuse the copy already in the Media Library (e.g. the curriculum card's PDF).
+	$file_id = ava_find_bundled_attachment( $handout['file'] );
+	if ( ! $file_id ) {
+		$file_id = ava_import_bundled_file( $handout['file'], $handout['name'] );
+	}
 	if ( ! $file_id ) {
 		return;
 	}
@@ -207,16 +220,41 @@ function ava_attach_handout( $post_id, $handout ) {
 	update_post_meta( $post_id, '_ava_handout_label', $handout['label'] );
 }
 
+/**
+ * Find a Media Library item imported from one of the theme's bundled files.
+ *
+ * @param string $filename File name, e.g. AVA-Parent-Community-Resources.pdf.
+ * @return int Attachment ID, or 0.
+ */
+function ava_find_bundled_attachment( $filename ) {
+	$found = get_posts(
+		array(
+			'post_type'   => 'attachment',
+			'post_status' => 'inherit',
+			'numberposts' => 1,
+			'fields'      => 'ids',
+			'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+				array(
+					'key'     => '_wp_attached_file',
+					'value'   => '/' . basename( $filename ),
+					'compare' => 'LIKE',
+				),
+			),
+		)
+	);
+	return $found ? (int) $found[0] : 0;
+}
+
 add_action( 'admin_init', 'ava_upgrade_post_handout' );
 /**
  * Earlier installs: add the worksheets to the starter posts once, if those
  * posts exist and have no handout yet.
  */
 function ava_upgrade_post_handout() {
-	if ( get_option( 'ava_handouts_v2' ) || ! current_user_can( 'upload_files' ) ) {
+	if ( get_option( 'ava_handouts_v3' ) || ! current_user_can( 'upload_files' ) ) {
 		return;
 	}
-	update_option( 'ava_handouts_v2', 1, false );
+	update_option( 'ava_handouts_v3', 1, false );
 	foreach ( ava_starter_handout() as $handout ) {
 		$posts = get_posts( array( 'post_type' => 'post', 'post_status' => 'any', 'name' => $handout['post'], 'numberposts' => 1 ) );
 		if ( $posts && ! get_post_meta( $posts[0]->ID, '_ava_handout_id', true ) ) {

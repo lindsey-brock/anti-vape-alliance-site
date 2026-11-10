@@ -130,7 +130,13 @@ ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:
 <p>For more conversation ideas and facts, visit <a href="https://www.cdc.gov/tobacco/youth/index.htm" target="_blank" rel="noopener">CDC Youth &amp; Tobacco</a> and <a href="https://teen.smokefree.gov/" target="_blank" rel="noopener">Smokefree Teen</a>.</p>
 
 
-											<p class="post-back">
+	<aside class="post-handout" aria-label="Printable handout">
+		<span class="ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" focusable="false"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V8h4.5M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+		<div class="ph-txt">
+			<strong>Keep it handy: “Talk early. Talk often.” family guide</strong>			<span>The facts, signs worth noticing, conversation starters and free quit support, on two printable pages.</span>		</div>
+		<a class="btn primary" href="#" data-pdf-preview="ava-parent-community-resources" data-pages="2">Get the Family Guide (PDF)</a>
+	</aside>
+												<p class="post-back">
 														<a class="btn" href="blog.html">&larr; Back to the blog</a>
 							<a class="btn primary" href="#pledge">Take the Pledge</a>
 						</p>
@@ -162,8 +168,8 @@ ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:
 				<form class="ava-form" id="ava-pledge-form" method="post" action="#" data-ava-form novalidate>
 			<input type="hidden" name="action" value="ava_submit">
 			<input type="hidden" name="ava_type" value="pledge">
-			<input type="hidden" name="ava_ts" value="1794345535">
-			<input type="hidden" name="ava_sig" value="4f25b40f215cb6feab6c9f71e47d5424ac2e17713b99c7082bada6ae266cc30b">
+			<input type="hidden" name="ava_ts" value="1794346025">
+			<input type="hidden" name="ava_sig" value="5dcf455159c6c741feaaf0166bd7fe27e7252ebf54cae34ffa0cbf3157b17d33">
 			<input type="hidden" name="ava_return" value="/talking-with-your-child-about-vaping-a-starter-guide-for-families/">
 			<div class="hp" aria-hidden="true">
 				<label for="ava-pledge-website">Website</label>
@@ -202,8 +208,8 @@ ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:
 				<form class="ava-form" id="ava-school-form" method="post" action="#" data-ava-form novalidate>
 			<input type="hidden" name="action" value="ava_submit">
 			<input type="hidden" name="ava_type" value="school">
-			<input type="hidden" name="ava_ts" value="1794345535">
-			<input type="hidden" name="ava_sig" value="a7af5f510610e9278036c8d51bc4fa3ab452b5319ea31a884cf26bdedb25a5c9">
+			<input type="hidden" name="ava_ts" value="1794346025">
+			<input type="hidden" name="ava_sig" value="c703a1e04c85ce38642333703cb80401a78cc35b77696ac6017572c2221fc0e4">
 			<input type="hidden" name="ava_return" value="/talking-with-your-child-about-vaping-a-starter-guide-for-families/">
 			<div class="hp" aria-hidden="true">
 				<label for="ava-school-website">Website</label>
@@ -258,8 +264,8 @@ ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:
 				<form class="ava-form" id="ava-chapter-form" method="post" action="#" data-ava-form novalidate>
 			<input type="hidden" name="action" value="ava_submit">
 			<input type="hidden" name="ava_type" value="chapter">
-			<input type="hidden" name="ava_ts" value="1794345535">
-			<input type="hidden" name="ava_sig" value="beddcd01795a6d9bfe492999f068be5afc639d943d24c50191d329d3f737a989">
+			<input type="hidden" name="ava_ts" value="1794346025">
+			<input type="hidden" name="ava_sig" value="73f6e0419432dc650a2af5a772227b4d30d5ebf990230164362745ae3bbf41aa">
 			<input type="hidden" name="ava_return" value="/talking-with-your-child-about-vaping-a-starter-guide-for-families/">
 			<div class="hp" aria-hidden="true">
 				<label for="ava-chapter-website">Website</label>
@@ -326,5 +332,38 @@ var AVA = {"ajaxUrl":"","errorMsg":"Sorry, something went wrong. Please try agai
 </script>
 <script src="theme/assets/js/theme.js" id="ava-theme-js" defer data-wp-strategy="defer"></script>
 <div class="ava-preview-pill" aria-hidden="true">Design preview of the AVA WordPress theme</div>
+
+<div class="pdfv" id="pdfv" role="dialog" aria-modal="true" aria-label="Document preview" hidden>
+  <div class="pdfv-bar"><strong>Preview only</strong><span>The full PDF downloads from the live WordPress site.</span><button type="button" class="pdfv-x" aria-label="Close preview">&times;</button></div>
+  <div class="pdfv-pages"></div>
+</div>
+<style>
+.pdfv{position:fixed;inset:0;z-index:2000;background:rgba(31,18,12,.86);display:flex;flex-direction:column}
+.pdfv[hidden]{display:none}
+.pdfv-bar{display:flex;align-items:center;gap:12px;padding:12px 18px;background:#2E1B14;color:#fff;font:600 14px "Nunito Sans",Arial,sans-serif}
+.pdfv-bar strong{font-family:Montserrat,Arial,sans-serif;font-weight:800;color:#FEB228}
+.pdfv-bar span{opacity:.85;flex:1}
+.pdfv-x{background:none;border:0;color:#fff;font-size:30px;line-height:1;width:44px;height:44px;border-radius:10px;cursor:pointer}
+.pdfv-x:hover{background:rgba(255,255,255,.12)}
+.pdfv-pages{overflow:auto;padding:24px 16px 48px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.pdfv-pages img{width:min(100%,820px);height:auto;background:#fff;box-shadow:0 12px 30px rgba(0,0,0,.35);user-select:none;-webkit-user-select:none;-webkit-user-drag:none;pointer-events:none}
+body.pdfv-open{overflow:hidden}
+</style>
+<script>
+(function(){
+  var v=document.getElementById('pdfv'),wrap=v.querySelector('.pdfv-pages'),x=v.querySelector('.pdfv-x'),last=null;
+  function close(){v.hidden=true;document.body.classList.remove('pdfv-open');wrap.innerHTML='';if(last)last.focus();}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-pdf-preview]');if(!a)return;e.preventDefault();last=a;
+    var slug=a.getAttribute('data-pdf-preview'),n=+a.getAttribute('data-pages');wrap.innerHTML='';
+    for(var i=1;i<=n;i++){var img=document.createElement('img');img.src='preview-pdf/'+slug+'/p'+i+'.webp';img.alt='Page '+i+' of '+n;img.loading=i>2?'lazy':'eager';img.draggable=false;wrap.appendChild(img);}
+    v.hidden=false;document.body.classList.add('pdfv-open');wrap.scrollTop=0;x.focus();
+  });
+  x.addEventListener('click',close);
+  v.addEventListener('click',function(e){if(e.target===v||e.target===wrap)close();});
+  v.addEventListener('contextmenu',function(e){e.preventDefault();});
+  document.addEventListener('keydown',function(e){if(!v.hidden&&e.key==='Escape')close();});
+})();
+</script>
 </body>
 </html>

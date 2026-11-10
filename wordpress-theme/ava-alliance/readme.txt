@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.9.4
+Stable tag: 1.9.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.9.5 =
+* The families starter post comes with the "Talk early. Talk often." Parent & Community guide and a "Get the Family Guide (PDF)" button. It reuses the PDF already in the Media Library for the curriculum card.
 
 = 1.9.4 =
 * Menu links (and other in-page links) jump straight to their section instead of scrolling through the stacked sections, with a quick fade-in.

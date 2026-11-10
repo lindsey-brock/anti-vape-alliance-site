@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AVA_VERSION', '1.9.4' );
+define( 'AVA_VERSION', '1.9.5' );
 define( 'AVA_DIR', get_template_directory() );
 define( 'AVA_URI', get_template_directory_uri() );
 
