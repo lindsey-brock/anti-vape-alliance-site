@@ -162,7 +162,10 @@
 		car.classList.add('is-ready');
 		if (auto) { car.classList.add('is-auto'); }
 
-		function hold() { car.classList.toggle('is-held', hover || focusIn || !inView); }
+		function hold() {
+			car.classList.toggle('is-held', hover || focusIn || !inView);
+			car.classList.toggle('is-hover', hover);
+		}
 		function select(i, focus) {
 			idx = (i + tabs.length) % tabs.length;
 			tabs.forEach(function (t, n) {
@@ -189,7 +192,11 @@
 			var fill = t.querySelector('.fill');
 			if (fill) {
 				fill.addEventListener('animationend', function () {
-					if (auto && n === idx) { select(idx + 1); }
+					if (auto && n === idx) {
+						// A tab clicked earlier keeps focus; drop it so its focus ring doesn't stay on an old tab.
+						if (tabs.indexOf(document.activeElement) > -1) { document.activeElement.blur(); }
+						select(idx + 1);
+					}
 				});
 			}
 		});

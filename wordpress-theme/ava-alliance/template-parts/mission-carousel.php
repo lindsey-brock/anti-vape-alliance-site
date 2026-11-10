@@ -57,6 +57,8 @@ $ava_autoplay = ava_mod( 'mission_autoplay' ) && count( $ava_items ) > 1;
 			</div>
 		<?php endforeach; ?>
 		<?php if ( $ava_autoplay ) : ?>
+			<span class="ava-carousel-status" aria-hidden="true"><span class="ic"></span><?php esc_html_e( 'Paused', 'ava-alliance' ); ?></span>
+			<?php // Keyboard users: this button only appears when it has focus (or the carousel is paused). ?>
 			<button type="button" class="ava-carousel-pause" hidden>
 				<span class="ic" aria-hidden="true"></span><span class="lbl" data-play="<?php esc_attr_e( 'Play', 'ava-alliance' ); ?>" data-pause="<?php esc_attr_e( 'Pause', 'ava-alliance' ); ?>"><?php esc_html_e( 'Pause', 'ava-alliance' ); ?></span>
 			</button>

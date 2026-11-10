@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.8.1
+Version: 1.8.2
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -327,8 +327,13 @@ body.ava-modal-open .ava-proof{display:none}
 .ava-carousel.is-ready .ava-cpanel.is-active{opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s}
 .ava-carousel.is-ready .ava-cpanel img{transform:scale(1.04);transition:transform 1.2s ease}
 .ava-carousel.is-ready .ava-cpanel.is-active img{transform:none}
-.ava-carousel-pause{position:absolute;left:16px;top:16px;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 11px;border:0;border-radius:999px;background:rgba(46,27,20,.72);color:#fff;font:800 13px/1 var(--ava-body);cursor:pointer}
+.ava-carousel-pause{position:absolute;left:16px;top:16px;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 11px;border:0;border-radius:999px;background:rgba(46,27,20,.72);color:#fff;font:800 13px/1 var(--ava-body);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s}
 .ava-carousel-pause:hover{background:rgba(46,27,20,.9)}
+.ava-carousel-pause:focus-visible,.ava-carousel.is-paused .ava-carousel-pause{opacity:1;pointer-events:auto}
+/* Shown while the mouse is over the carousel (the progress bar is held). */
+.ava-carousel-status{position:absolute;left:16px;top:16px;z-index:1;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 11px;border-radius:999px;background:rgba(46,27,20,.72);color:#fff;font:800 13px/1 var(--ava-body);pointer-events:none;opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .2s}
+.ava-carousel-status .ic{width:10px;height:11px;border-left:3px solid #fff;border-right:3px solid #fff}
+.ava-carousel.is-hover:not(.is-paused) .ava-carousel-status{opacity:1;transform:none}
 .ava-carousel-pause:focus-visible{outline:3px solid var(--ava-orange);outline-offset:3px}
 .ava-carousel-pause .ic{width:10px;height:11px;border-left:3px solid #fff;border-right:3px solid #fff}
 .ava-carousel.is-paused .ava-carousel-pause .ic{border:0;width:0;height:0;border-left:10px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent}
@@ -339,7 +344,7 @@ body.ava-modal-open .ava-proof{display:none}
   .ava-cpanel-txt{padding:28px 26px 30px}
   .ava-carousel-tabs{gap:14px}
   .ava-ctab .t{font-size:14px}
-  .ava-carousel-pause{top:12px;left:12px}
+  .ava-carousel-pause,.ava-carousel-status{top:12px;left:12px}
 }
 @media (max-width:560px){.ava-cpanel-txt .num{display:none}.ava-ctab{grid-template-columns:1fr}.ava-ctab .t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.ava-ctab .n{font-size:16px}}
 
