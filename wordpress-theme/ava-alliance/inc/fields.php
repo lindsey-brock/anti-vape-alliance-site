@@ -93,7 +93,7 @@ function ava_fields() {
 			'title'  => __( 'The AVA Difference (dark band)', 'ava-alliance' ),
 			'fields' => array(
 				'difference_show'    => $show( __( 'AVA Difference', 'ava-alliance' ) ),
-				'difference_scrub'   => array( 'type' => 'checkbox', 'label' => __( 'Brighten the quote word by word as visitors scroll (the next section waits until it finishes)', 'ava-alliance' ), 'default' => true ),
+				'difference_scrub'   => array( 'type' => 'checkbox', 'label' => __( 'Brighten the quote word by word as visitors scroll (the Mission card pauses until it finishes; needs the stacked scroll effect)', 'ava-alliance' ), 'default' => true ),
 				'difference_eyebrow' => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'The AVA Difference' ),
 				'difference_title'   => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Peer-to-peer education can make prevention personal.' ),
 				'difference_quote'   => array( 'type' => 'textarea', 'label' => __( 'Quote', 'ava-alliance' ), 'default' => '“We want younger students to hear about vaping from people they can relate to — students who understand what middle school is really like.”' ),

@@ -157,8 +157,10 @@
 	// Quote scrub: split the quote into words that brighten with scroll progress.
 	var scrubSection = document.querySelector('section.ava-scrub');
 	var scrubText = scrubSection && scrubSection.querySelector('[data-scrub]');
-	var scrubOn = !!(scrubText && document.body.classList.contains('ava-has-scrub') && !reduce &&
-		window.CSS && CSS.supports && CSS.supports('position', 'sticky'));
+	var scrubGroup = scrubSection && scrubSection.closest('.ava-group');
+	// Needs the stacked layout: the card has to pin for the quote to play out.
+	var scrubOn = !!(scrubText && scrubGroup && stackOn && document.body.classList.contains('ava-has-scrub'));
+	var scrubRun = null;
 	var scrubWords = [];
 	if (scrubOn) {
 		var words = scrubText.textContent.trim().split(/\s+/);
@@ -178,15 +180,17 @@
 			scrubWords.push(span);
 		});
 		root.classList.add('ava-scrub-on');
-		var stage = scrubSection.querySelector('.scrub-stage');
+		// Invisible runway right after the card: while it scrolls past, the card
+		// stays pinned (dark block at the bottom of the screen) and the quote lights up.
+		scrubRun = document.createElement('div');
+		scrubRun.className = 'ava-scrub-run';
+		scrubRun.setAttribute('aria-hidden', 'true');
+		scrubGroup.parentNode.insertBefore(scrubRun, scrubGroup.nextSibling);
 		var scrubTick = false;
 		var updateScrub = function () {
 			scrubTick = false;
-			var r = scrubSection.getBoundingClientRect();
-			var hdr = header ? header.getBoundingClientRect().bottom : 0;
-			var lead = stage.offsetHeight * 0.5;
-			var run = Math.max(1, r.height - stage.offsetHeight);
-			var p = (hdr + lead - r.top) / (run + lead);
+			var r = scrubRun.getBoundingClientRect();
+			var p = (window.innerHeight - r.top) / Math.max(1, r.height);
 			p = Math.min(1, Math.max(0, p / 0.85));
 			var n = scrubWords.length;
 			for (var i = 0; i < n; i++) {
@@ -218,16 +222,24 @@
 		root.style.setProperty('--ava-hdr', hdr + 'px');
 		var main = document.getElementById('main');
 		var y = main ? main.getBoundingClientRect().top + window.pageYOffset : 0;
-		panels.forEach(function (el, i) {
-			el.style.zIndex = i + 1;
-			if (el.classList.contains('ava-panel')) {
-				el.style.top = Math.min(hdr, vh - el.offsetHeight) + 'px';
+		var z = 0;
+		// Walk everything in <main> (panels and the quote runway) to rebuild flow positions.
+		Array.prototype.forEach.call(main ? main.children : [], function (el) {
+			if (panels.indexOf(el) !== -1) {
+				el.style.zIndex = ++z;
+				if (el.classList.contains('ava-panel')) {
+					el.style.top = Math.min(hdr, vh - el.offsetHeight) + 'px';
+				}
+				if (el.id) { flowTop[el.id] = y; }
+				// Sections inside a grouped card: position within the card.
+				Array.prototype.forEach.call(el.querySelectorAll('section[id]'), function (s) {
+					flowTop[s.id] = y + s.offsetTop;
+				});
 			}
-			if (el.id) { flowTop[el.id] = y; }
-			// Sections inside a grouped card: position within the card.
-			Array.prototype.forEach.call(el.querySelectorAll('section[id]'), function (s) {
-				flowTop[s.id] = y + s.offsetTop;
-			});
+			if (el === scrubRun) {
+				// "#difference" lands where the card pins, with the quote ready to play.
+				flowTop.difference = y - vh + hdr;
+			}
 			y += el.offsetHeight;
 		});
 	}

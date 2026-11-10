@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.4.2
+Version: 1.4.3
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -235,15 +235,13 @@ html.ava-stack-on .ava-group{display:block;background:var(--ava-cream)}
 .ava-group>.ava-dark::after{display:none}
 .ava-group>.ava-dark{border-top:6px solid transparent;border-image:var(--ava-stripe) 1}
 
-/* Quote scrub: the dark block pins while the quote brightens */
+/* Quote scrub: the Mission card pins with the dark block at the bottom of the
+   screen; scrolling through the invisible runway after it lights the quote
+   word by word, then the next card slides up. */
 .scrub-word{opacity:.2;transition:opacity .12s linear}
-html.ava-scrub-on .ava-scrub{height:calc(100vh - var(--ava-hdr,0px) + var(--ava-scrub-run,110vh));padding:0}
-html.ava-scrub-on .scrub-stage{position:sticky;top:var(--ava-hdr,0px);height:calc(100vh - var(--ava-hdr,0px));display:flex;align-items:flex-start;padding:clamp(48px,8vh,88px) 5% 40px;overflow:hidden}
-@supports (height:100svh){
-  html.ava-scrub-on .ava-scrub{height:calc(100svh - var(--ava-hdr,0px) + var(--ava-scrub-run,110svh))}
-  html.ava-scrub-on .scrub-stage{height:calc(100svh - var(--ava-hdr,0px))}
-}
-html.ava-scrub-on .scrub-stage>.in{width:100%;margin:0 auto}
+.ava-group>.ava-scrub{padding:clamp(56px,8vh,88px) 5% clamp(48px,7vh,72px)}
+.ava-scrub-run{height:var(--ava-scrub-run,100vh);pointer-events:none}
+@supports (height:100svh){.ava-scrub-run{height:var(--ava-scrub-run,100svh)}}
 
 /* ---------- Pledge counter + "just signed" pop-ups (bottom-left) ---------- */
 .ava-proof{position:fixed;left:16px;bottom:16px;z-index:800;display:flex;flex-direction:column;align-items:flex-start;gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
