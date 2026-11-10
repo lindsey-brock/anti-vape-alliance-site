@@ -97,7 +97,7 @@ function ava_fields() {
 				'difference_eyebrow' => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'The AVA Difference' ),
 				'difference_title'   => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => 'Peer-to-peer education can make prevention personal.' ),
 				'difference_quote'   => array( 'type' => 'textarea', 'label' => __( 'Quote', 'ava-alliance' ), 'default' => '“We want younger students to hear about vaping from people they can relate to — students who understand what middle school is really like.”' ),
-				'difference_text'    => array( 'type' => 'textarea', 'label' => __( 'Text under the quote', 'ava-alliance' ), 'default' => "AVA's student-led approach is designed to complement educators, parents, school counselors and community health professionals — not replace them." ),
+				'difference_text'    => array( 'type' => 'textarea', 'label' => __( 'Text under the quote (optional)', 'ava-alliance' ), 'default' => '' ),
 			),
 		),
 		'programs'   => array(

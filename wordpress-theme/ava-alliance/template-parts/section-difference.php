@@ -17,7 +17,9 @@ $ava_panel = get_query_var( 'ava_in_group' ) ? '' : ' ava-panel';
 			<?php if ( ava_mod( 'difference_quote' ) ) : ?>
 				<blockquote class="quote"><p data-scrub><?php echo esc_html( ava_mod( 'difference_quote' ) ); ?></p></blockquote>
 			<?php endif; ?>
-			<?php echo ava_paragraphs( ava_mod( 'difference_text' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			<?php if ( ava_mod( 'difference_text' ) ) : ?>
+				<?php echo ava_paragraphs( ava_mod( 'difference_text' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
