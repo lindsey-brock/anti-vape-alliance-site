@@ -145,7 +145,7 @@ function ava_fields() {
 				'contact_eyebrow'   => array( 'type' => 'text', 'label' => __( 'Small label', 'ava-alliance' ), 'default' => 'Get Involved' ),
 				'contact_title'     => array( 'type' => 'text', 'label' => __( 'Heading', 'ava-alliance' ), 'default' => "Let's bring student-led prevention to your community." ),
 				'contact_org'       => array( 'type' => 'text', 'label' => __( 'Organization name', 'ava-alliance' ), 'default' => 'Anti-Vaping Alliance' ),
-				'contact_org_line'  => array( 'type' => 'text', 'label' => __( 'Line under the name', 'ava-alliance' ), 'default' => 'Student-founded and student-led nonprofit organization' ),
+				'contact_org_line'  => array( 'type' => 'text', 'label' => __( 'Line under the name', 'ava-alliance' ), 'default' => 'A student-founded, student-led registered 501(c)(3) nonprofit organization' ),
 				'contact_email'     => array( 'type' => 'email', 'label' => __( 'Public email address', 'ava-alliance' ), 'default' => 'info@antivapealliance.org' ),
 				'contact_text'      => array( 'type' => 'textarea', 'label' => __( 'Text', 'ava-alliance' ), 'default' => 'Interested in a school presentation, chapter, curriculum partnership or community collaboration? Get in touch.' ),
 				'contact_form'      => array(
@@ -219,7 +219,7 @@ function ava_fields() {
 			'title'  => __( 'Footer', 'ava-alliance' ),
 			'description' => __( 'Footer links (e.g. Privacy Policy) come from the Footer menu in Appearance > Menus.', 'ava-alliance' ),
 			'fields' => array(
-				'footer_tagline'   => array( 'type' => 'text', 'label' => __( 'Tagline', 'ava-alliance' ), 'default' => 'Student Founded • Student Led • Nonprofit' ),
+				'footer_tagline'   => array( 'type' => 'text', 'label' => __( 'Tagline', 'ava-alliance' ), 'default' => 'Honest, peer-led vaping education for students, schools and families.' ),
 				'footer_copyright' => array( 'type' => 'text', 'label' => __( 'Copyright name (year is automatic)', 'ava-alliance' ), 'default' => 'Anti-Vaping Alliance' ),
 			),
 		),

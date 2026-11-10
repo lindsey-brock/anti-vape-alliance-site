@@ -117,6 +117,7 @@ function ava_seo_tags() {
 			'url'         => home_url( '/' ),
 			'logo'        => $logo,
 			'description' => $desc,
+			'nonprofitStatus' => 'Nonprofit501c3',
 		);
 		$email = ava_mod( 'contact_email' );
 		if ( is_email( $email ) ) {

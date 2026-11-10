@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.8.1 =
+* New footer tagline: "Honest, peer-led vaping education for students, schools and families."
+* The contact card now says AVA is a registered 501(c)(3) nonprofit, and the homepage structured data marks it as a 501(c)(3).
 
 = 1.8.0 =
 * The three Mission cards are now a carousel: number tabs with a progress bar, a photo and text for each. It moves on by itself (with a Pause button), and can be switched back to three cards in the Customizer.

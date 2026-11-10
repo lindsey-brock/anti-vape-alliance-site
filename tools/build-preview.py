@@ -166,7 +166,7 @@ def convert(html, this_file):
     """
 
     preview = """<meta name="robots" content="noindex">
-    <style>.ava-preview-pill{position:fixed;right:12px;bottom:12px;opacity:.85;z-index:900;background:#2E1B14;color:#fff;font:700 12px/1.3 "Nunito Sans",Arial,sans-serif;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.2)}</style>
+    <style>.ava-preview-pill{position:fixed;right:12px;bottom:12px;opacity:.85;z-index:900;background:#2E1B14;color:#fff;font:700 12px/1.3 "Nunito Sans",Arial,sans-serif;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.2)}@media (max-width:600px){.ava-preview-pill{font-size:10px;padding:6px 9px;right:8px;bottom:auto;top:calc(var(--ava-hdr,64px) + 8px)}}</style>
     <script>
     document.addEventListener('submit',function(e){
       var f=e.target.closest('form[data-ava-form]');if(!f)return;
