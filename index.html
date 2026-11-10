@@ -1,248 +1,304 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anti-Vape Alliance | Student Founded & Led</title>
-<meta name="description" content="The Anti-Vape Alliance (AVA) is a student-founded and student-led nonprofit empowering young people with the facts, confidence and peer support to make healthy choices about vaping.">
+<title>Anti-Vape Alliance | Student Founded &amp; Led</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel="preload" href="theme/assets/fonts/montserrat-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="theme/assets/fonts/nunito-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/png" href="theme/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="theme/assets/images/apple-touch-icon.png">
 <meta name="theme-color" content="#FE9910">
-<link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  /* Brand palette — sampled from the AVA logo */
-  --orange:#FE9910;      /* primary letter orange */
-  --amber:#FEB228;       /* letter highlight */
-  --flame:#EA5606;       /* "ANTI" / prohibition red-orange */
-  --rust:#914A24;        /* letter outline */
-  --brown:#58362B;       /* "VAPING" / ALLIANCE bar */
-  --espresso:#2E1B14;    /* deep brown for dark sections */
-  --orange-text:#B5470C; /* accessible orange for small text on white */
-  --cream:#FFF6EC;
-  --cream-2:#FFEBD3;
-  --ink:#3A2419;
-  --muted:#7A6255;
-  --line:#F0DFCC;
-  --head:'Montserrat',Arial,Helvetica,sans-serif;
-  --body:'Nunito Sans',Arial,Helvetica,sans-serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;font-family:var(--body);color:var(--ink);line-height:1.6;background:#fff}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
-h1,h2,h3,.brand,.btn,.badge,.eyebrow,.big,.top{font-family:var(--head)}
-
-/* Top bar + stripe motif from the logo's ALLIANCE bar */
-.top{background:var(--brown);color:#fff;text-align:center;padding:10px 18px;font-weight:800;font-size:12px;letter-spacing:1.2px}
-.stripe{height:6px;background:linear-gradient(90deg,var(--flame),var(--orange) 50%,var(--amber))}
-
-nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:10px 5%}
-.navin{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:900;color:var(--brown);letter-spacing:-.3px}
-.brand img{height:44px;width:auto}
-.brand span b{color:var(--flame)}
-.links{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:700;color:var(--brown)}
-.links a:not(.pledge):hover{color:var(--flame)}
-.pledge{background:var(--orange);color:var(--espresso);padding:10px 16px;border-radius:10px;font-family:var(--head);font-weight:800;box-shadow:0 3px 0 var(--rust)}
-.pledge:hover{background:var(--amber)}
-
-/* Hero */
-.hero{background:radial-gradient(circle at 85% 40%,#fff 0,#fff 22%,transparent 60%),linear-gradient(135deg,var(--cream-2),var(--cream) 55%,#fff);padding:72px 5% 90px;position:relative;overflow:hidden}
-.hero-in{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
-.badge{display:inline-block;background:var(--brown);color:#fff;border-radius:999px;padding:8px 15px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px}
-h1{font-size:clamp(40px,5.6vw,66px);line-height:1.04;color:var(--brown);margin:18px 0;letter-spacing:-1.5px;font-weight:900}
-h1 span{color:var(--flame)}
-.lead{font-size:19px;color:#5B4335;max-width:640px}
-.hero-logo{position:relative;display:flex;justify-content:center}
-.hero-logo img{width:min(100%,560px);filter:drop-shadow(0 18px 28px rgba(88,54,43,.18))}
-
-.buttons{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.btn{display:inline-block;padding:13px 20px;border-radius:11px;font-weight:800;font-size:15px;border:2px solid var(--brown);color:var(--brown);background:#fff;transition:transform .15s,background .15s;cursor:pointer}
-.btn:hover{transform:translateY(-2px);background:var(--cream)}
-.primary{background:var(--orange);color:var(--espresso);border-color:var(--orange);box-shadow:0 4px 0 var(--rust)}
-.primary:hover{background:var(--amber);border-color:var(--amber)}
-.btn:focus-visible,.links a:focus-visible{outline:3px solid var(--flame);outline-offset:3px}
-
-/* Founder band */
-.founder-wrap{padding:0 5%;margin-top:-50px;position:relative;z-index:2}
-.founder-card{max-width:1180px;margin:auto;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;border-top:6px solid var(--orange)}
-.big{font-size:38px;font-weight:900;color:var(--flame);line-height:1.05;white-space:nowrap}
-.big + .big{color:var(--brown)}
-.founder-card h2{margin:0 0 8px;font-size:26px}
-.founder-card p{margin:0 0 10px}
-
-.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 45px rgba(88,54,43,.09);padding:30px}
-section{padding:80px 5%}
-.in{max-width:1180px;margin:auto}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:800;color:var(--orange-text)}
-.eyebrow::before{content:"";width:28px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--flame),var(--orange))}
-h2{font-size:clamp(30px,3.6vw,40px);line-height:1.12;color:var(--brown);margin:10px 0 12px;font-weight:900;letter-spacing:-.6px}
-.sub{font-size:18px;color:var(--muted);max-width:780px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
-.grid .card{display:flex;flex-direction:column;border-bottom:4px solid transparent;transition:border-color .2s,transform .2s}
-.grid .card:hover{border-bottom-color:var(--orange);transform:translateY(-3px)}
-.grid .card h3{color:var(--brown);margin:0 0 6px;font-size:20px;font-weight:800}
-.grid .card p{margin:0 0 18px;flex:1}
-.grid .card .btn{align-self:flex-start}
-.num{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--cream-2);color:var(--flame);font-family:var(--head);font-weight:900;font-size:18px;margin-bottom:16px}
-
-.tint{background:var(--cream)}
-
-/* Dark brand section */
-.student{background:var(--espresso);color:#fff;position:relative;overflow:hidden}
-.student::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:linear-gradient(90deg,var(--flame),var(--orange) 50%,var(--amber))}
-.student h2{color:#fff}
-.student .eyebrow{color:var(--amber)}
-.student p{color:#EADBD0}
-.quote{font-family:var(--head);font-size:clamp(22px,2.8vw,30px);line-height:1.3;font-weight:800;max-width:880px;margin:26px 0;padding-left:24px;border-left:6px solid var(--orange);color:#fff!important}
-
-.resources{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
-.resource{border:1px solid var(--line);border-left:6px solid var(--orange);border-radius:18px;padding:24px;background:#fff}
-.resource h3{margin:0 0 6px;color:var(--brown);font-family:var(--head)}
-.resource a{color:var(--orange-text);font-weight:800;text-decoration:underline;text-underline-offset:3px}
-.resource a:hover{color:var(--flame)}
-
-.involved{background:linear-gradient(135deg,var(--orange),var(--flame));color:var(--espresso)}
-.involved .in{text-align:center}
-.involved h2{color:var(--espresso)}
-.involved .eyebrow{color:var(--espresso)}
-.involved .eyebrow::before{background:var(--espresso)}
-.involved .sub{color:#3A1E10;margin:0 auto}
-.involved .buttons{justify-content:center}
-.involved .btn{background:#fff;border-color:#fff}
-.involved .primary{background:var(--brown);border-color:var(--brown);color:#fff;box-shadow:0 4px 0 var(--espresso)}
-.involved .primary:hover{background:var(--espresso)}
-
-.contact-card{max-width:760px;margin-top:25px;border-top:6px solid var(--orange)}
-.contact-card a{color:var(--orange-text);font-weight:800}
-
-footer{background:#1F120C;color:#E8D8CC;padding:46px 5%}
-footer .in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
-footer .fbrand{display:flex;align-items:center;gap:16px}
-footer .fbrand img{height:52px;width:auto;background:#fff;border-radius:12px;padding:6px 8px}
-footer strong{color:#fff;font-family:var(--head)}
-
-/* Pledge modal */
-.modal{display:none;position:fixed;inset:0;background:rgba(31,18,12,.6);z-index:30;padding:25px;align-items:center;justify-content:center}
-.modal.show{display:flex}
-.modalbox{background:#fff;max-width:560px;width:100%;border-radius:22px;padding:30px;position:relative;border-top:8px solid var(--orange);max-height:calc(100vh - 50px);overflow:auto}
-.modalbox .mlogo{width:150px;margin-bottom:10px}
-.close{position:absolute;right:18px;top:14px;border:0;background:none;font-size:28px;cursor:pointer;color:var(--brown)}
-input{width:100%;padding:13px;border:1px solid #E2CDB8;border-radius:10px;margin:7px 0 12px;font-size:16px;font-family:var(--body)}
-input:focus{outline:3px solid var(--amber);border-color:var(--orange)}
-#pledgeThanks{display:none;font-weight:800;color:var(--orange-text)}
-
-@media(max-width:900px){
-  .links a:not(.pledge){display:none}
-  .hero-in,.resources,.founder-card{grid-template-columns:1fr}
-  .hero-logo{order:-1}
-  .hero-logo img{width:min(100%,380px)}
-  .grid{grid-template-columns:1fr}
-  .hero{padding:40px 5% 80px}
-  section{padding:58px 5%}
-  .founder-card{gap:16px}
-  .big{font-size:32px}
-  .brand span{display:none}
-}
+<meta name="description" content="The Anti-Vape Alliance is a student-founded, student-led nonprofit offering peer-led vaping prevention, free curriculum for grades 4–6 and resources for families.">
+<link rel="canonical" href="https://lindsey-brock.github.io/anti-vape-alliance-site/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Anti-Vape Alliance">
+<meta property="og:title" content="Anti-Vape Alliance | Student Founded &amp; Led">
+<meta property="og:description" content="The Anti-Vape Alliance is a student-founded, student-led nonprofit offering peer-led vaping prevention, free curriculum for grades 4–6 and resources for families.">
+<meta property="og:url" content="https://lindsey-brock.github.io/anti-vape-alliance-site/">
+<meta property="og:image" content="https://lindsey-brock.github.io/anti-vape-alliance-site/theme/assets/images/social-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anti-Vape Alliance | Student Founded &amp; Led">
+<meta name="twitter:description" content="The Anti-Vape Alliance is a student-founded, student-led nonprofit offering peer-led vaping prevention, free curriculum for grades 4–6 and resources for families.">
+<meta name="twitter:image" content="https://lindsey-brock.github.io/anti-vape-alliance-site/theme/assets/images/social-share.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NGO","name":"Anti-Vape Alliance","url":"https://lindsey-brock.github.io/anti-vape-alliance-site/","logo":"https://lindsey-brock.github.io/anti-vape-alliance-site/theme/assets/images/ava-logo.webp","description":"The Anti-Vape Alliance is a student-founded, student-led nonprofit offering peer-led vaping prevention, free curriculum for grades 4–6 and resources for families.","email":"info@antivapealliance.org"}</script>
+<style id='wp-img-auto-sizes-contain-inline-css'>
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 </style>
-</head>
-<body>
-<div class="top">A STUDENT-FOUNDED & STUDENT-LED NONPROFIT ORGANIZATION • BY STUDENTS, FOR STUDENTS</div>
-<div class="stripe" aria-hidden="true"></div>
-<nav><div class="navin">
-<a class="brand" href="#home"><img src="assets/ava-mark.webp" alt="AVA logo" width="95" height="44"><span><b>Anti-Vape</b> Alliance</span></a>
-<div class="links"><a href="#mission">Mission</a><a href="#programs">Programs</a><a href="#curriculum">Curriculum</a><a href="#resources">Resources</a><a href="#involved">Get Involved</a><a class="pledge" href="#pledge" onclick="openPledge(event)">Take the Pledge</a></div>
-</div></nav>
+<style id='wp-block-library-inline-css'>
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}.has-text-align-center{text-align:center}.has-text-align-left{text-align:left}.has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
 
-<section class="hero" id="home"><div class="hero-in">
-<div>
-<div class="badge">Student Founded • Student Led • Nonprofit</div>
-<h1>Students leading the conversation about <span>vaping.</span></h1>
-<p class="lead">The Anti-Vape Alliance (AVA) is a student-founded and student-led nonprofit organization empowering young people with the facts, confidence and peer support they need to make healthy choices about vaping and nicotine.</p>
-<div class="buttons"><a class="btn primary" href="#mission">Learn About AVA</a><a class="btn" href="#curriculum">Free Student Resources</a><a class="btn" href="#pledge" onclick="openPledge(event)">Take the Pledge</a></div>
-</div>
-<div class="hero-logo"><img src="assets/ava-logo.webp" alt="Anti Vaping Alliance logo: the letters AVA with a vape pen inside a prohibition sign" width="693" height="426"></div>
-</div></section>
+</style>
+<style id='wp-block-paragraph-inline-css'>
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+</style>
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #FFFFFF;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--ava-orange: #FE9910;--wp--preset--color--ava-amber: #FEB228;--wp--preset--color--ava-flame: #EA5606;--wp--preset--color--ava-brown: #58362B;--wp--preset--color--ava-espresso: #2E1B14;--wp--preset--color--ava-cream: #FFF6EC;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
 
-<div class="founder-wrap"><div class="card founder-card">
-<div><div class="big">BY STUDENTS.</div><div class="big">FOR STUDENTS.</div></div>
-<div>
-<h2>A movement created by young people.</h2>
-<p>AVA began with students who saw a need for honest, age-appropriate vaping education before kids reach middle school. Students help shape our programs, outreach, presentations and resources.</p>
-<p><strong>Our goal:</strong> give students a voice in prevention — and give younger students the tools to make informed choices.</p>
-</div>
-</div></div>
-
-<section id="mission"><div class="in">
-<div class="eyebrow">Our Mission</div><h2>Peer-led prevention starts with giving students a voice.</h2>
-<p class="sub">AVA brings high-school students together to educate and mentor younger students through classroom presentations, free curriculum, school clubs and community partnerships.</p>
-<div class="grid">
-<div class="card"><div class="num">01</div><h3>Student Founded</h3><p>AVA was created by students who wanted to address vaping education in a way that feels authentic and relevant to younger students.</p></div>
-<div class="card"><div class="num">02</div><h3>Student Led</h3><p>Students are at the center of our outreach, presentations, chapter development, advocacy and ideas for reaching the next generation.</p></div>
-<div class="card"><div class="num">03</div><h3>Nonprofit Mission</h3><p>Our focus is education and prevention — making useful resources available to students, teachers, parents and communities.</p></div>
-</div></div></section>
-
-<section class="student"><div class="in">
-<div class="eyebrow">The AVA Difference</div><h2>Peer-to-peer education can make prevention personal.</h2>
-<p class="quote">“We want younger students to hear about vaping from people they can relate to — students who understand what middle school is really like.”</p>
-<p>AVA's student-led approach is designed to complement educators, parents, school counselors and community health professionals — not replace them.</p>
-</div></section>
-
-<section id="programs"><div class="in">
-<div class="eyebrow">Programs</div><h2>Built by students. Designed to help schools.</h2>
-<div class="grid">
-<div class="card"><h3>Peer-Led Classroom Talks</h3><p>Age-appropriate presentations for elementary and middle-school students covering vaping, nicotine, peer pressure, decision-making and healthy alternatives.</p></div>
-<div class="card"><h3>School Chapters</h3><p>Students can build AVA clubs that connect high-school mentors with younger students and create ongoing prevention activities.</p></div>
-<div class="card"><h3>Community Education</h3><p>AVA works with PTAs, educators, families and community organizations to expand youth-centered vaping education.</p></div>
-</div></div></section>
-
-<section id="curriculum" class="tint"><div class="in">
-<div class="eyebrow">Free Curriculum</div><h2>Resources for Grades 4–6</h2>
-<p class="sub">Our starter Lesson Pack and Teacher Notes are designed to make classroom conversations about vaping age-appropriate, interactive and student-friendly.</p>
-<div class="grid">
-<div class="card"><h3>Lesson Pack</h3><p>Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.</p><a class="btn primary" href="files/AVA_Lesson_Pack_Grades_4-6_v1.0.pdf">Download PDF</a></div>
-<div class="card"><h3>Teacher Notes</h3><p>Facilitation guidance, discussion prompts and suggestions for presenting the material in a supportive classroom environment.</p><a class="btn" href="files/AVA_Teacher_Notes_Grades_4-6.pdf">Download Notes</a></div>
-<div class="card"><h3>Parent & Community</h3><p>Conversation resources to help adults support young people with prevention, awareness and healthy decision-making.</p><a class="btn" href="files/AVA_Parent_Handout.pdf">Parent Handout</a></div>
-</div></div></section>
-
-<section id="resources"><div class="in">
-<div class="eyebrow">Resources</div><h2>Reliable information and support</h2>
-<div class="resources">
-<div class="resource"><h3>For Students</h3><p>Youth-focused nicotine education and quitting resources.</p><a href="https://teen.smokefree.gov/" target="_blank" rel="noopener">Smokefree Teen</a> · <a href="https://truthinitiative.org/thisisquitting" target="_blank" rel="noopener">This is Quitting</a></div>
-<div class="resource"><h3>For Parents & Schools</h3><p>Evidence-based information and support from established public-health organizations.</p><a href="https://www.cdc.gov/tobacco/youth/index.htm" target="_blank" rel="noopener">CDC Youth & Tobacco</a></div>
-</div></div></section>
-
-<section id="involved" class="involved"><div class="in">
-<div class="eyebrow">Get Involved</div><h2>Help students lead.</h2>
-<p class="sub">Students, educators, parents and community partners can help AVA expand peer-led education and bring resources to more schools.</p>
-<div class="buttons"><a class="btn primary" href="#contact">Bring AVA to Your School</a><a class="btn" href="#contact">Start a Chapter</a><a class="btn" href="#contact">Support AVA</a></div>
-</div></section>
-
-<section id="contact"><div class="in">
-<div class="eyebrow">Contact</div><h2>Let's bring student-led prevention to your community.</h2>
-<div class="card contact-card"><p><strong>Anti-Vape Alliance</strong><br>Student-founded and student-led nonprofit organization</p><p><strong>Email:</strong> <a href="mailto:info@antivapealliance.org">info@antivapealliance.org</a></p><p>Interested in a school presentation, chapter, curriculum partnership or community collaboration? Get in touch.</p></div>
-</div></section>
-
-<footer><div class="in"><div class="fbrand"><img src="assets/ava-mark.webp" alt="" width="95" height="44"><div><strong>Anti-Vape Alliance</strong><br>Student Founded • Student Led • Nonprofit</div></div><div>© 2026 Anti-Vape Alliance</div></div></footer>
-
-<div class="modal" id="pledgeModal" role="dialog" aria-modal="true" aria-labelledby="pledgeTitle"><div class="modalbox">
-<button class="close" onclick="closePledge()" aria-label="Close">×</button>
-<img class="mlogo" src="assets/ava-logo.webp" alt="">
-<div class="eyebrow">Student Pledge</div><h2 id="pledgeTitle">Take the AVA Pledge</h2>
-<p>I pledge to protect my brain, heart and lungs. I choose healthy choices over vaping and will help create a school community where students feel informed, supported and confident to say no.</p>
-<form onsubmit="submitPledge(event)"><input required placeholder="First name" aria-label="First name"><input required placeholder="Last name" aria-label="Last name"><input type="email" placeholder="Email (optional)" aria-label="Email (optional)"><button class="btn primary" type="submit">Sign the Pledge</button></form>
-<p id="pledgeThanks">Thank you for standing with the Anti-Vape Alliance!</p>
-</div></div>
+<link rel='stylesheet' id='ava-style-css' href='theme/style.css' media='all' />
+<meta name="robots" content="noindex">
+<style>.ava-preview-pill{position:fixed;left:12px;bottom:12px;z-index:900;background:#2E1B14;color:#fff;font:700 12px/1.3 "Nunito Sans",Arial,sans-serif;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.2)}</style>
 <script>
-function openPledge(e){if(e)e.preventDefault();document.getElementById('pledgeModal').classList.add('show');history.replaceState(null,'','#pledge')}
-function closePledge(){document.getElementById('pledgeModal').classList.remove('show');history.replaceState(null,'',location.pathname+location.search)}
-function submitPledge(e){e.preventDefault();document.getElementById('pledgeThanks').style.display='block';e.target.querySelector('button').disabled=true}
-document.getElementById('pledgeModal').addEventListener('click',function(e){if(e.target===this)closePledge()});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closePledge()});
-if(location.hash==='#pledge')openPledge();
+document.addEventListener('submit',function(e){
+  var f=e.target.closest('form[data-ava-form]');if(!f)return;
+  e.preventDefault();e.stopImmediatePropagation();
+  var w=f.closest('.ava-form-wrap'),ok=w.querySelector('.ava-notice.success'),bad=w.querySelector('.ava-notice.error');
+  if(!f.checkValidity()){var i=f.querySelector(':invalid');bad.textContent=i?i.validationMessage:'Please fill in the required fields.';bad.hidden=false;if(i)i.focus();return;}
+  bad.hidden=true;ok.textContent=ok.textContent.replace(/ \(Preview.*$/,'')+' (Preview only: nothing was sent. On the WordPress site this is saved for the team.)';ok.hidden=false;f.remove();
+},true);
 </script>
-</body></html>
+</head>
+<body class="home blog wp-embed-responsive wp-theme-ava-alliance">
+<a class="skip-link screen-reader-text" href="#main">Skip to content</a>
+
+	<div class="ava-topbar">A student-founded &amp; student-led nonprofit organization • By students, for students</div>
+<div class="ava-stripe" aria-hidden="true"></div>
+
+<header class="ava-header">
+	<div class="navin">
+		<a class="ava-brand" href="./" rel="home">
+			<img class="" src="theme/assets/images/ava-mark.webp" width="266" height="123" alt="" decoding="async">			<span class="name"><b>Anti-Vape</b> Alliance</span>
+			<span class="screen-reader-text">(home)</span>
+		</a>
+
+		<nav class="ava-nav" id="site-navigation" aria-label="Main menu">
+			<ul id="primary-menu" class="menu"><li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15"><a href="#mission">Mission</a></li>
+<li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16"><a href="#programs">Programs</a></li>
+<li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17"><a href="#curriculum">Curriculum</a></li>
+<li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18"><a href="#resources">Resources</a></li>
+<li id="menu-item-19" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19"><a href="#involved">Get Involved</a></li>
+</ul>		</nav>
+
+		<a class="ava-cta" href="#pledge">Take the Pledge</a>
+		<button class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false">
+			<span class="screen-reader-text">Menu</span>
+			<svg class="i-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+			<svg class="i-close" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+		</button>
+	</div>
+</header>
+
+<main id="main" tabindex="-1">
+<section class="ava-hero" id="home">
+	<div class="hero-in">
+		<div>
+							<div class="ava-badge">Student Founded • Student Led • Nonprofit</div>
+						<h1>Students leading the conversation about <span>vaping.</span></h1>
+							<p class="lead">The Anti-Vape Alliance (AVA) is a student-founded and student-led nonprofit organization empowering young people with the facts, confidence and peer support they need to make healthy choices about vaping and nicotine.</p>
+						<div class="buttons"><a class="btn primary" href="#mission">Learn About AVA</a><a class="btn" href="#curriculum">Free Student Resources</a><a class="btn" href="#pledge">Take the Pledge</a></div>		</div>
+		<div class="hero-media"><img src="theme/assets/images/ava-logo.webp" width="693" height="426" alt="Anti Vaping Alliance logo: the letters AVA with a vape pen inside a prohibition sign" fetchpriority="high" decoding="async"></div>
+	</div>
+</section>
+<div class="founder-wrap">
+	<div class="card founder-card">
+		<div aria-hidden="true">
+			<div class="ava-big">BY STUDENTS.</div>
+			<div class="ava-big">FOR STUDENTS.</div>
+		</div>
+		<div>
+			<p class="screen-reader-text">BY STUDENTS. FOR STUDENTS.</p>
+							<h2>A movement created by young people.</h2>
+						<p>AVA began with students who saw a need for honest, age-appropriate vaping education before kids reach middle school. Students help shape our programs, outreach, presentations and resources.</p>
+<p><strong>Our goal:</strong> give students a voice in prevention — and give younger students the tools to make informed choices.</p>
+		</div>
+	</div>
+</div>
+<section class="ava-section" id="mission" aria-labelledby="mission-title">
+	<div class="in">
+		<div class="eyebrow">Our Mission</div><h2 id="mission-title">Peer-led prevention starts with giving students a voice.</h2><p class="sub">AVA brings high-school students together to educate and mentor younger students through classroom presentations, free curriculum, school clubs and community partnerships.</p>		<div class="grid">
+			<article class="card">
+							<div class="num" aria-hidden="true">01</div>
+						<h3>Student Founded</h3>
+			<div class="card-body"><p>AVA was created by students who wanted to address vaping education in a way that feels authentic and relevant to younger students.</p></div>
+					</article>
+			<article class="card">
+							<div class="num" aria-hidden="true">02</div>
+						<h3>Student Led</h3>
+			<div class="card-body"><p>Students are at the center of our outreach, presentations, chapter development, advocacy and ideas for reaching the next generation.</p></div>
+					</article>
+			<article class="card">
+							<div class="num" aria-hidden="true">03</div>
+						<h3>Nonprofit Mission</h3>
+			<div class="card-body"><p>Our focus is education and prevention — making useful resources available to students, teachers, parents and communities.</p></div>
+					</article>
+	</div>
+	</div>
+</section>
+<section class="ava-section ava-dark" id="difference" aria-labelledby="difference-title">
+	<div class="in">
+		<div class="eyebrow">The AVA Difference</div><h2 id="difference-title">Peer-to-peer education can make prevention personal.</h2>					<blockquote class="quote"><p>“We want younger students to hear about vaping from people they can relate to — students who understand what middle school is really like.”</p></blockquote>
+				<p>AVA&#039;s student-led approach is designed to complement educators, parents, school counselors and community health professionals — not replace them.</p>
+	</div>
+</section>
+<section class="ava-section" id="programs" aria-labelledby="programs-title">
+	<div class="in">
+		<div class="eyebrow">Programs</div><h2 id="programs-title">Built by students. Designed to help schools.</h2>		<div class="grid">
+			<article class="card">
+						<h3>Peer-Led Classroom Talks</h3>
+			<div class="card-body"><p>Age-appropriate presentations for elementary and middle-school students covering vaping, nicotine, peer pressure, decision-making and healthy alternatives.</p></div>
+					</article>
+			<article class="card">
+						<h3>School Chapters</h3>
+			<div class="card-body"><p>Students can build AVA clubs that connect high-school mentors with younger students and create ongoing prevention activities.</p></div>
+					</article>
+			<article class="card">
+						<h3>Community Education</h3>
+			<div class="card-body"><p>AVA works with PTAs, educators, families and community organizations to expand youth-centered vaping education.</p></div>
+					</article>
+	</div>
+	</div>
+</section>
+<section class="ava-section tint" id="curriculum" aria-labelledby="curriculum-title">
+	<div class="in">
+		<div class="eyebrow">Free Curriculum</div><h2 id="curriculum-title">Resources for Grades 4–6</h2><p class="sub">Our starter Lesson Pack and Teacher Notes are designed to make classroom conversations about vaping age-appropriate, interactive and student-friendly.</p>		<div class="grid">
+			<article class="card">
+						<h3>Lesson Pack</h3>
+			<div class="card-body"><p>Myth vs. fact, nicotine and addiction, peer-pressure scenarios, healthy choices and a student pledge activity.</p></div>
+			<a class="btn primary" href="files/AVA_Lesson_Pack_Grades_4-6_v1.0.pdf" download>Download PDF<span class="screen-reader-text"> – Lesson Pack</span></a>		</article>
+			<article class="card">
+						<h3>Teacher Notes</h3>
+			<div class="card-body"><p>Facilitation guidance, discussion prompts and suggestions for presenting the material in a supportive classroom environment.</p></div>
+			<a class="btn" href="files/AVA_Teacher_Notes_Grades_4-6.pdf" download>Download Notes<span class="screen-reader-text"> – Teacher Notes</span></a>		</article>
+			<article class="card">
+						<h3>Parent &amp; Community</h3>
+			<div class="card-body"><p>Conversation resources to help adults support young people with prevention, awareness and healthy decision-making.</p></div>
+			<a class="btn" href="files/AVA_Parent_Handout.pdf" download>Parent Handout<span class="screen-reader-text"> – Parent &amp; Community</span></a>		</article>
+	</div>
+	</div>
+</section>
+<section class="ava-section" id="resources" aria-labelledby="resources-title">
+	<div class="in">
+		<div class="eyebrow">Resources</div><h2 id="resources-title">Reliable information and support</h2>					<div class="resources">
+									<div class="resource">
+						<h3>For Students</h3>
+						<p>Youth-focused nicotine education and quitting resources.</p><p><a href="https://teen.smokefree.gov/" target="_blank" rel="noopener">Smokefree Teen</a> · <a href="https://truthinitiative.org/thisisquitting" target="_blank" rel="noopener">This is Quitting</a></p>					</div>
+									<div class="resource">
+						<h3>For Parents &amp; Schools</h3>
+						<p>Evidence-based information and support from established public-health organizations.</p><p><a href="https://www.cdc.gov/tobacco/youth/index.htm" target="_blank" rel="noopener">CDC Youth &amp; Tobacco</a></p>					</div>
+							</div>
+			</div>
+</section>
+<section class="ava-section ava-involved" id="involved" aria-labelledby="involved-title">
+	<div class="in">
+		<div class="eyebrow">Get Involved</div><h2 id="involved-title">Help students lead.</h2>					<p class="sub">Students, educators, parents and community partners can help AVA expand peer-led education and bring resources to more schools.</p>
+				<div class="buttons"><a class="btn primary" href="#contact">Bring AVA to Your School</a><a class="btn" href="#contact">Start a Chapter</a><a class="btn" href="#contact">Support AVA</a></div>	</div>
+</section>
+<section class="ava-section" id="contact" aria-labelledby="contact-title">
+	<div class="in">
+		<div class="eyebrow">Contact</div><h2 id="contact-title">Let&#039;s bring student-led prevention to your community.</h2>		<div class="contact-grid">
+			<div class="card contact-card">
+				<p><strong>Anti-Vape Alliance</strong><br>Student-founded and student-led nonprofit organization</p>
+									<p><strong>Email:</strong> <a href="mailto:i&#110;f&#111;&#064;a&#110;&#116;&#105;v&#097;pe&#097;&#108;&#108;i&#097;&#110;c&#101;&#046;&#111;r&#103;">&#105;n&#102;o&#064;&#097;&#110;ti&#118;&#097;&#112;&#101;&#097;&#108;&#108;ianc&#101;.&#111;rg</a></p>
+								<p>Interested in a school presentation, chapter, curriculum partnership or community collaboration? Get in touch.</p>
+			</div>
+							<div class="card">
+					<h3 class="screen-reader-text">Send us a message</h3>
+						<div class="ava-form-wrap">
+		<p class="ava-notice success" role="status" hidden>Thanks for reaching out! We&#039;ll get back to you soon.</p>
+		<p class="ava-notice error" role="alert" hidden></p>
+				<form class="ava-form" id="ava-contact-form" method="post" action="#" data-ava-form novalidate>
+			<input type="hidden" name="action" value="ava_submit">
+			<input type="hidden" name="ava_type" value="contact">
+			<input type="hidden" name="ava_ts" value="1794322842">
+			<input type="hidden" name="ava_sig" value="71148b5c9057728962fb5512695dc7a990473769f4afbf0e0832a6776eb8b276">
+			<input type="hidden" name="ava_return" value="/">
+			<div class="hp" aria-hidden="true">
+				<label for="ava-contact-website">Website</label>
+				<input type="text" id="ava-contact-website" name="ava_website" tabindex="-1" autocomplete="off">
+			</div>
+
+							<div class="row">
+					<div>
+						<label for="ava-contact-name">Name</label>
+						<input type="text" id="ava-contact-name" name="name" required maxlength="100" autocomplete="name">
+					</div>
+					<div>
+						<label for="ava-contact-email">Email</label>
+						<input type="email" id="ava-contact-email" name="email" required maxlength="120" autocomplete="email">
+					</div>
+				</div>
+				<label for="ava-contact-role">I am a…</label>
+				<select id="ava-contact-role" name="role">
+											<option value="student">Student</option>
+											<option value="parent">Parent or guardian</option>
+											<option value="educator">Teacher or school staff</option>
+											<option value="community">Community partner</option>
+											<option value="other">Other</option>
+									</select>
+				<label for="ava-contact-message">Message</label>
+				<textarea id="ava-contact-message" name="message" required maxlength="5000"></textarea>
+				<button type="submit">Send Message</button>
+					</form>
+			</div>
+					</div>
+					</div>
+	</div>
+</section>
+</main>
+
+<footer class="ava-footer">
+	<div class="in">
+		<div class="fbrand">
+			<img class="" src="theme/assets/images/ava-mark.webp" width="266" height="123" alt="" decoding="async">			<div>
+				<strong>Anti-Vape Alliance</strong><br>
+				Student Founded • Student Led • Nonprofit							</div>
+		</div>
+		<div>&copy; 2026 Anti-Vape Alliance</div>
+	</div>
+</footer>
+
+<div class="ava-modal" id="pledge-modal" role="dialog" aria-modal="true" aria-labelledby="pledge-title" hidden>
+	<div class="modalbox">
+		<button class="close" type="button" data-ava-close aria-label="Close">&times;</button>
+		<img src="theme/assets/images/ava-logo.webp" width="693" height="426" alt="" class="mlogo" loading="lazy" decoding="async">					<div class="eyebrow">Student Pledge</div>
+				<h2 id="pledge-title">Take the AVA Pledge</h2>
+		<p>I pledge to protect my brain, heart and lungs. I choose healthy choices over vaping and will help create a school community where students feel informed, supported and confident to say no.</p>
+			<div class="ava-form-wrap">
+		<p class="ava-notice success" role="status" hidden>Thank you for standing with the Anti-Vape Alliance!</p>
+		<p class="ava-notice error" role="alert" hidden></p>
+				<form class="ava-form" id="ava-pledge-form" method="post" action="#" data-ava-form novalidate>
+			<input type="hidden" name="action" value="ava_submit">
+			<input type="hidden" name="ava_type" value="pledge">
+			<input type="hidden" name="ava_ts" value="1794322842">
+			<input type="hidden" name="ava_sig" value="03256c8f75a5f3e319aa51eaaacc769cc3c95f31843315727c121f19481298ee">
+			<input type="hidden" name="ava_return" value="/">
+			<div class="hp" aria-hidden="true">
+				<label for="ava-pledge-website">Website</label>
+				<input type="text" id="ava-pledge-website" name="ava_website" tabindex="-1" autocomplete="off">
+			</div>
+
+											<div class="row">
+					<div>
+						<label for="ava-pledge-first">First name</label>
+						<input type="text" id="ava-pledge-first" name="first_name" required maxlength="60" autocomplete="given-name">
+					</div>
+										<div>
+						<label for="ava-pledge-last">Last name</label>
+						<input type="text" id="ava-pledge-last" name="last_name" required maxlength="60" autocomplete="family-name">
+					</div>
+									</div>
+									<label for="ava-pledge-email">Email <span class="opt">(optional)</span></label>
+					<input type="email" id="ava-pledge-email" name="email" maxlength="120" autocomplete="email">
+												<button type="submit">Sign the Pledge</button>
+
+					</form>
+			</div>
+		</div>
+</div>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/ava-alliance/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="ava-theme-js-extra">
+var AVA = {"ajaxUrl":"","errorMsg":"Sorry, something went wrong. Please try again."};
+//# sourceURL=ava-theme-js-extra
+</script>
+<script src="theme/assets/js/theme.js" id="ava-theme-js" defer data-wp-strategy="defer"></script>
+<div class="ava-preview-pill" aria-hidden="true">Design preview of the AVA WordPress theme</div>
+</body>
+</html>
