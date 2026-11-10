@@ -56,7 +56,7 @@ Nothing the team updates regularly is hard-coded:
 - The **"From the Blog"** strip under the Resources links shows the newest posts, 3 by default. A **Blog** page (`/blog/`) lists all of them.
 - **Writing a post:** *Posts → Add New*. Set a **Featured image**, which becomes the card photo; without one the card shows an orange AVA placeholder. Fill in the **Excerpt**, which is the card's summary, and pick a **Category** (Facts, Tips, For Families, …).
 - **Starter posts:** on first activation the theme creates three posts, all fact-based with no statistics. Please have AVA's team read them, then edit or replace them:
-  - *Myth vs. Fact: What's Really in a Vape?*
+  - *Myth vs. Fact: What's Really in a Vape?*, with an image
   - *5 Ways to Say No to Vaping (Without Making It Awkward)*, with a photo
   - *Talking With Your Child About Vaping: A Starter Guide for Families*
 - On a fresh install it also sets **Settings → Reading** to a static homepage ("Home") with "Blog" as the posts page, and removes WordPress's untouched sample "Hello world!" post.
