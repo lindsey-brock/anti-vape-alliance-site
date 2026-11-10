@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<section class="ava-section ava-dark" id="difference" aria-labelledby="difference-title">
+<section class="ava-section ava-panel ava-dark" id="difference" aria-labelledby="difference-title">
 	<div class="in">
 		<?php ava_section_head( 'difference', 'difference-title' ); ?>
 		<?php if ( ava_mod( 'difference_quote' ) ) : ?>

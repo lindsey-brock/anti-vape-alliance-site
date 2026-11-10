@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<div class="founder-wrap">
+<section class="ava-section ava-panel ava-founder" id="about" aria-label="<?php echo esc_attr( ava_mod( 'founder_title' ) ); ?>">
 	<div class="card founder-card">
 		<div aria-hidden="true">
 			<div class="ava-big"><?php echo esc_html( ava_mod( 'founder_line1' ) ); ?></div>
@@ -21,4 +21,4 @@ defined( 'ABSPATH' ) || exit;
 			<?php echo wp_kses_post( wpautop( ava_mod( 'founder_text' ) ) ); ?>
 		</div>
 	</div>
-</div>
+</section>

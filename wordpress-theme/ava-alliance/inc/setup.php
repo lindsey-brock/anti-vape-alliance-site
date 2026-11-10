@@ -113,6 +113,23 @@ function ava_title_separator() {
 	return '|';
 }
 
+add_filter( 'body_class', 'ava_body_classes' );
+/**
+ * Homepage scroll options for theme.js.
+ *
+ * @param array $classes Body classes.
+ * @return array
+ */
+function ava_body_classes( $classes ) {
+	if ( is_front_page() && ava_mod( 'stack_scroll' ) ) {
+		$classes[] = 'ava-stack';
+	}
+	if ( ava_mod( 'reveal_motion' ) ) {
+		$classes[] = 'ava-reveal';
+	}
+	return $classes;
+}
+
 add_filter( 'excerpt_length', 'ava_excerpt_length' );
 /**
  * Shorter excerpts for cards.

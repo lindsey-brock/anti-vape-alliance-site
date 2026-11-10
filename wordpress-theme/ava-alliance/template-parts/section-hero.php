@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<section class="ava-hero" id="home">
+<section class="ava-hero ava-panel" id="home">
 	<div class="hero-in">
 		<div>
 			<?php if ( ava_mod( 'hero_badge' ) ) : ?>

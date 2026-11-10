@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 $ava_has_form = 'none' !== ava_mod( 'contact_form' );
 $ava_email    = ava_mod( 'contact_email' );
 ?>
-<section class="ava-section" id="contact" aria-labelledby="contact-title">
+<section class="ava-section ava-last tint" id="contact" aria-labelledby="contact-title">
 	<div class="in">
 		<?php ava_section_head( 'contact', 'contact-title' ); ?>
 		<div class="contact-grid<?php echo $ava_has_form ? '' : ' single'; ?>">

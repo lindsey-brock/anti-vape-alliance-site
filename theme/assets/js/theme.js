@@ -141,4 +141,105 @@
 				});
 		});
 	});
+
+	/* ---------- Stacked sections + fade-in ---------- */
+	var root = document.documentElement;
+	var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	var header = document.querySelector('.ava-header');
+	var panels = Array.prototype.slice.call(document.querySelectorAll('.ava-panel, .ava-last'));
+	var stackOn = document.body.classList.contains('ava-stack') && !reduce && panels.length > 1 &&
+		window.CSS && CSS.supports && CSS.supports('position', 'sticky');
+	var flowTop = {};
+
+	function headerHeight() {
+		if (!header) { return 0; }
+		var top = parseFloat(getComputedStyle(header).top) || 0;
+		return header.offsetHeight + top;
+	}
+
+	// Sticky sections pin as soon as they reach the header. A section taller than
+	// the screen gets a negative offset so it scrolls through its own content
+	// first; and because pinned sections report their pinned position, each
+	// section's place in the page is rebuilt from the heights before it.
+	function layoutStack() {
+		var hdr = headerHeight();
+		var vh = window.innerHeight;
+		root.style.setProperty('--ava-hdr', hdr + 'px');
+		var main = document.getElementById('main');
+		var y = main ? main.getBoundingClientRect().top + window.pageYOffset : 0;
+		panels.forEach(function (el, i) {
+			el.style.zIndex = i + 1;
+			if (el.classList.contains('ava-panel')) {
+				el.style.top = Math.min(hdr, vh - el.offsetHeight) + 'px';
+			}
+			if (el.id) { flowTop[el.id] = y; }
+			y += el.offsetHeight;
+		});
+	}
+
+	function scrollToSection(id, smooth) {
+		if (flowTop[id] === undefined) { return false; }
+		window.scrollTo({ top: Math.max(0, flowTop[id] - headerHeight()), behavior: smooth ? 'smooth' : 'auto' });
+		return true;
+	}
+
+	if (stackOn) {
+		root.classList.add('ava-stack-on');
+		layoutStack();
+		var queued = false;
+		var relayout = function () {
+			if (queued) { return; }
+			queued = true;
+			requestAnimationFrame(function () { queued = false; layoutStack(); });
+		};
+		window.addEventListener('resize', relayout);
+		window.addEventListener('load', function () {
+			layoutStack();
+			var id = location.hash.slice(1);
+			if (id && id !== 'pledge') { scrollToSection(id, false); }
+		});
+		if (window.ResizeObserver) {
+			var ro = new ResizeObserver(relayout);
+			panels.forEach(function (el) { ro.observe(el); });
+		}
+		if (document.fonts && document.fonts.ready) { document.fonts.ready.then(relayout); }
+
+		// In-page links (#mission, #contact…) jump to the section's real position.
+		document.addEventListener('click', function (e) {
+			var a = e.target.closest('a[href*="#"]');
+			if (!a || e.defaultPrevented) { return; }
+			var u;
+			try { u = new URL(a.href, location.href); } catch (err) { return; }
+			if (u.origin !== location.origin || u.pathname !== location.pathname) { return; }
+			var id = u.hash.slice(1);
+			if (!id || id === 'pledge' || id === 'main') { return; }
+			if (scrollToSection(id, true)) {
+				e.preventDefault();
+				history.pushState(null, '', '#' + id);
+				var target = document.getElementById(id);
+				if (target) { target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: true }); }
+			}
+		});
+	}
+
+	if (document.body.classList.contains('ava-reveal') && !reduce && 'IntersectionObserver' in window) {
+		var items = document.querySelectorAll('.ava-section .eyebrow, .ava-section h2, .ava-section .sub, .ava-section .card, .ava-section .resource, .ava-section .quote, .ava-section .buttons');
+		if (items.length) {
+			root.classList.add('ava-motion');
+			var io = new IntersectionObserver(function (entries) {
+				entries.forEach(function (en) {
+					if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+				});
+			}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+			Array.prototype.forEach.call(items, function (el, i) {
+				el.classList.add('reveal');
+				// Stagger cards in the same row.
+				if (el.matches('.card, .resource')) {
+					var sibs = Array.prototype.indexOf.call(el.parentNode.children, el);
+					el.style.transitionDelay = (sibs % 3) * 90 + 'ms';
+				}
+				io.observe(el);
+			});
+		}
+	}
 })();

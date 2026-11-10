@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 $ava_resources = ava_items( 'ava_resource' );
 ?>
-<section class="ava-section" id="resources" aria-labelledby="resources-title">
+<section class="ava-section ava-panel" id="resources" aria-labelledby="resources-title">
 	<div class="in">
 		<?php ava_section_head( 'resources', 'resources-title' ); ?>
 		<?php if ( $ava_resources ) : ?>
