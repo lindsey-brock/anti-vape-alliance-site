@@ -177,6 +177,30 @@ function ava_menu_add_toggle( $output, $item, $depth, $args ) {
 }
 
 /**
+ * Download box for a post's handout (set in the post's "Handout download" box).
+ */
+function ava_post_handout() {
+	$file_id = (int) get_post_meta( get_the_ID(), '_ava_handout_id', true );
+	$url     = $file_id ? wp_get_attachment_url( $file_id ) : '';
+	if ( ! $url ) {
+		return;
+	}
+	$title = get_post_meta( get_the_ID(), '_ava_handout_title', true );
+	$text  = get_post_meta( get_the_ID(), '_ava_handout_text', true );
+	$label = get_post_meta( get_the_ID(), '_ava_handout_label', true );
+	?>
+	<aside class="post-handout" aria-label="<?php esc_attr_e( 'Printable handout', 'ava-alliance' ); ?>">
+		<span class="ph-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" focusable="false"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V8h4.5M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+		<div class="ph-txt">
+			<?php if ( $title ) : ?><strong><?php echo esc_html( $title ); ?></strong><?php endif; ?>
+			<?php if ( $text ) : ?><span><?php echo esc_html( $text ); ?></span><?php endif; ?>
+		</div>
+		<a class="btn primary" href="<?php echo esc_url( $url ); ?>" download><?php echo esc_html( $label ? $label : __( 'Download PDF', 'ava-alliance' ) ); ?></a>
+	</aside>
+	<?php
+}
+
+/**
  * Editor-only hint shown on the front end (never to visitors).
  *
  * @param string $message Message.

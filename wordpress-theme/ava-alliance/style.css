@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.9.1
+Version: 1.9.2
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -248,6 +248,13 @@ body.ava-modal-open{overflow:hidden}
 .entry-content table{border-collapse:collapse;width:100%}
 .entry-content td,.entry-content th{border:1px solid var(--ava-line);padding:10px}
 .post-list{max-width:1180px;margin:0 auto}
+.post-handout{display:flex;align-items:center;gap:18px;margin:36px 0 0;padding:22px 24px;background:var(--ava-cream);border:1px solid var(--ava-line);border-left:6px solid var(--ava-orange);border-radius:16px}
+.post-handout .ph-icon{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#fff;color:var(--ava-flame)}
+.post-handout .ph-txt{flex:1;min-width:0;line-height:1.45}
+.post-handout .ph-txt strong{display:block;font-family:var(--ava-head);font-weight:800;font-size:18px;color:var(--ava-brown);margin-bottom:2px}
+.post-handout .ph-txt span{font-size:16px;color:var(--ava-muted)}
+.entry-content .post-handout a.btn{flex:none;text-decoration:none;color:var(--ava-espresso)}
+@media (max-width:640px){.post-handout{flex-wrap:wrap;align-items:flex-start}.post-handout .ph-txt{flex-basis:calc(100% - 70px)}.post-handout .btn{width:100%;text-align:center}}
 .post-back{display:flex;gap:12px;flex-wrap:wrap;margin-top:40px;padding-top:28px;border-top:1px solid var(--ava-line)}
 .entry-content .post-back a{text-decoration:none;color:var(--ava-brown)}
 .entry-content .post-back a.primary{color:var(--ava-espresso)}

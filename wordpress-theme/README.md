@@ -59,6 +59,7 @@ Nothing the team updates regularly is hard-coded:
   - *Myth vs. Fact: What's Really in a Vape?*, with an image
   - *5 Ways to Say No to Vaping (Without Making It Awkward)*, with a photo
   - *Talking With Your Child About Vaping: A Starter Guide for Families*, with a photo
+- **Printable handout on a post:** in the post's **Handout download** box (below the editor), choose a PDF from the Media Library and set the heading, short description and button label. A download box then appears at the end of the post. *5 Ways to Say No* comes with *The Friendly No* worksheet and a **Practice Saying No (PDF)** button.
 - On a fresh install it also sets **Settings → Reading** to a static homepage ("Home") with "Blog" as the posts page, and removes WordPress's untouched sample "Hello world!" post.
 - Change the heading, the number of posts or the "See all posts" text, or hide the strip, under *Customize → AVA Site Content → Resources*.
 

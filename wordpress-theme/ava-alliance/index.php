@@ -36,6 +36,7 @@ if ( is_singular() ) :
 					<?php
 					the_content();
 					wp_link_pages();
+					ava_post_handout();
 					?>
 					<?php if ( 'post' === get_post_type() ) : ?>
 						<p class="post-back">

@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.9.2 =
+* Blog posts can have a printable handout: a "Handout download" box on the post edit screen adds a download box at the end of the post.
+* The "5 Ways to Say No" starter post comes with "The Friendly No" worksheet and a "Practice Saying No (PDF)" button (added once on earlier installs too).
 
 = 1.9.1 =
 * Teacher Notes and Parent & Community PDFs are included and attached to their curriculum cards (on earlier installs too, once, if the card has no file yet).

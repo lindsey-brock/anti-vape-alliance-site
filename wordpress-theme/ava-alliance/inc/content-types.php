@@ -153,6 +153,65 @@ function ava_curriculum_meta_box_html( $post ) {
 	<?php
 }
 
+add_action( 'add_meta_boxes_post', 'ava_handout_meta_box' );
+/**
+ * Blog posts: optional printable handout with a download button at the end.
+ */
+function ava_handout_meta_box() {
+	add_meta_box( 'ava_handout', __( 'Handout download (shown at the end of the post)', 'ava-alliance' ), 'ava_handout_meta_box_html', 'post', 'normal', 'default' );
+}
+
+/**
+ * Handout meta box markup.
+ *
+ * @param WP_Post $post Post.
+ */
+function ava_handout_meta_box_html( $post ) {
+	wp_nonce_field( 'ava_handout_save', 'ava_handout_nonce' );
+	$file_id = (int) get_post_meta( $post->ID, '_ava_handout_id', true );
+	$file    = $file_id ? get_attached_file( $file_id ) : '';
+	?>
+	<p><?php esc_html_e( 'Pick a PDF from the Media Library to show a download box at the end of this post. Leave empty for none.', 'ava-alliance' ); ?></p>
+	<p>
+		<input type="hidden" id="ava_file_id" name="ava_handout_id" value="<?php echo esc_attr( $file_id ); ?>">
+		<button type="button" class="button" id="ava_pick_file"><?php esc_html_e( 'Choose file from Media Library', 'ava-alliance' ); ?></button>
+		<button type="button" class="button-link-delete" id="ava_clear_file" <?php echo $file_id ? '' : 'hidden'; ?>><?php esc_html_e( 'Remove', 'ava-alliance' ); ?></button>
+		<strong id="ava_file_name" style="margin-left:8px"><?php echo $file ? esc_html( wp_basename( $file ) ) : ''; ?></strong>
+	</p>
+	<p>
+		<label for="ava_handout_title"><strong><?php esc_html_e( 'Heading', 'ava-alliance' ); ?></strong></label><br>
+		<input type="text" class="widefat" id="ava_handout_title" name="ava_handout_title" value="<?php echo esc_attr( get_post_meta( $post->ID, '_ava_handout_title', true ) ); ?>" placeholder="<?php esc_attr_e( 'e.g. Free printable worksheet', 'ava-alliance' ); ?>">
+	</p>
+	<p>
+		<label for="ava_handout_text"><strong><?php esc_html_e( 'Short description', 'ava-alliance' ); ?></strong></label><br>
+		<input type="text" class="widefat" id="ava_handout_text" name="ava_handout_text" value="<?php echo esc_attr( get_post_meta( $post->ID, '_ava_handout_text', true ) ); ?>">
+	</p>
+	<p>
+		<label for="ava_handout_label"><strong><?php esc_html_e( 'Button label', 'ava-alliance' ); ?></strong></label><br>
+		<input type="text" class="widefat" id="ava_handout_label" name="ava_handout_label" value="<?php echo esc_attr( get_post_meta( $post->ID, '_ava_handout_label', true ) ); ?>" placeholder="<?php esc_attr_e( 'Download PDF', 'ava-alliance' ); ?>">
+	</p>
+	<?php
+}
+
+add_action( 'save_post_post', 'ava_handout_save' );
+/**
+ * Save handout fields.
+ *
+ * @param int $post_id Post ID.
+ */
+function ava_handout_save( $post_id ) {
+	if ( ! isset( $_POST['ava_handout_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['ava_handout_nonce'] ), 'ava_handout_save' ) ) {
+		return;
+	}
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+	update_post_meta( $post_id, '_ava_handout_id', isset( $_POST['ava_handout_id'] ) ? absint( $_POST['ava_handout_id'] ) : 0 );
+	foreach ( array( 'title', 'text', 'label' ) as $key ) {
+		update_post_meta( $post_id, '_ava_handout_' . $key, isset( $_POST[ 'ava_handout_' . $key ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'ava_handout_' . $key ] ) ) : '' );
+	}
+}
+
 add_action( 'admin_enqueue_scripts', 'ava_curriculum_admin_js' );
 /**
  * Media picker for the download meta box.
@@ -161,7 +220,7 @@ add_action( 'admin_enqueue_scripts', 'ava_curriculum_admin_js' );
  */
 function ava_curriculum_admin_js( $hook ) {
 	$screen = get_current_screen();
-	if ( ! $screen || 'ava_curriculum' !== $screen->post_type || ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
+	if ( ! $screen || ! in_array( $screen->post_type, array( 'ava_curriculum', 'post' ), true ) || ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
 		return;
 	}
 	wp_enqueue_media();
