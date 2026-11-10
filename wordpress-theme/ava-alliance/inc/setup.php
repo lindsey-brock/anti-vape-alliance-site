@@ -124,6 +124,9 @@ function ava_body_classes( $classes ) {
 	if ( is_front_page() && ava_mod( 'stack_scroll' ) ) {
 		$classes[] = 'ava-stack';
 	}
+	if ( is_front_page() && ava_mod( 'difference_scrub' ) ) {
+		$classes[] = 'ava-has-scrub';
+	}
 	if ( ava_mod( 'reveal_motion' ) ) {
 		$classes[] = 'ava-reveal';
 	}

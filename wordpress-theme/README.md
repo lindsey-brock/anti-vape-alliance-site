@@ -47,7 +47,7 @@ Nothing the team updates regularly is hard-coded:
 - **Menus**: *Appearance → Menus*. Links like `#mission` jump to that homepage section from any page. Any link to `#pledge` opens the pledge pop-up.
 - **Logo and browser icon**: *Customize → Site Identity*.
 - **Hero background photo**: *Customize → AVA Site Content → Hero*. Choose any photo from the Media Library, set which side stays in view on phones, and make the dark overlay lighter or stronger if the text gets hard to read.
-- **Scrolling effects**: *Customize → AVA Site Content → Top Bar, Header & Scrolling* turns the stacked-section scroll and the fade-in animations on or off.
+- **Scrolling effects**: *Customize → AVA Site Content → Top Bar, Header & Scrolling* turns the stacked-section scroll and the fade-in animations on or off. The word-by-word quote effect is switched on or off under *The AVA Difference*.
 - **Extra pages** (for example *Parent & Community*): *Pages → Add New*, built with the normal block editor in the AVA colors and fonts.
 
 ## 5. Forms (pledge and contact)

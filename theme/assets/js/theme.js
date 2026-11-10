@@ -151,6 +151,54 @@
 		window.CSS && CSS.supports && CSS.supports('position', 'sticky');
 	var flowTop = {};
 
+	// Quote scrub: split the quote into words that brighten with scroll progress.
+	var scrubSection = document.querySelector('section.ava-scrub');
+	var scrubText = scrubSection && scrubSection.querySelector('[data-scrub]');
+	var scrubOn = !!(scrubText && document.body.classList.contains('ava-has-scrub') && !reduce &&
+		window.CSS && CSS.supports && CSS.supports('position', 'sticky'));
+	var scrubWords = [];
+	if (scrubOn) {
+		var words = scrubText.textContent.trim().split(/\s+/);
+		var full = scrubText.textContent.trim();
+		scrubText.textContent = '';
+		var sr = document.createElement('span');
+		sr.className = 'screen-reader-text';
+		sr.textContent = full;
+		scrubText.appendChild(sr);
+		words.forEach(function (w, i) {
+			var span = document.createElement('span');
+			span.className = 'scrub-word';
+			span.setAttribute('aria-hidden', 'true');
+			span.textContent = w;
+			scrubText.appendChild(span);
+			if (i < words.length - 1) { scrubText.appendChild(document.createTextNode(' ')); }
+			scrubWords.push(span);
+		});
+		root.classList.add('ava-scrub-on');
+		var stage = scrubSection.querySelector('.scrub-stage');
+		var scrubTick = false;
+		var updateScrub = function () {
+			scrubTick = false;
+			var r = scrubSection.getBoundingClientRect();
+			var hdr = header ? header.getBoundingClientRect().bottom : 0;
+			var lead = stage.offsetHeight * 0.5;
+			var run = Math.max(1, r.height - stage.offsetHeight);
+			var p = (hdr + lead - r.top) / (run + lead);
+			p = Math.min(1, Math.max(0, p / 0.85));
+			var n = scrubWords.length;
+			for (var i = 0; i < n; i++) {
+				var v = Math.min(1, Math.max(0, p * n - i));
+				scrubWords[i].style.opacity = (0.2 + 0.8 * v).toFixed(3);
+			}
+		};
+		var queueScrub = function () {
+			if (!scrubTick) { scrubTick = true; requestAnimationFrame(updateScrub); }
+		};
+		window.addEventListener('scroll', queueScrub, { passive: true });
+		window.addEventListener('resize', queueScrub);
+		updateScrub();
+	}
+
 	function headerHeight() {
 		if (!header) { return 0; }
 		var top = parseFloat(getComputedStyle(header).top) || 0;
@@ -173,6 +221,10 @@
 				el.style.top = Math.min(hdr, vh - el.offsetHeight) + 'px';
 			}
 			if (el.id) { flowTop[el.id] = y; }
+			// Sections inside a grouped card: position within the card.
+			Array.prototype.forEach.call(el.querySelectorAll('section[id]'), function (s) {
+				flowTop[s.id] = y + s.offsetTop;
+			});
 			y += el.offsetHeight;
 		});
 	}

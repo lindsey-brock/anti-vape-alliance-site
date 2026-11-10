@@ -2,7 +2,7 @@
 Theme Name: Anti-Vaping Alliance
 Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
 Author: Anti-Vaping Alliance
-Version: 1.2.0
+Version: 1.3.0
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -228,6 +228,22 @@ html.ava-stack-on .ava-last{position:relative}
 .ava-motion .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 .ava-motion .reveal.visible{opacity:1;transform:none}
 @media (max-width:900px){html.ava-stack-on .ava-panel:not(.ava-hero),html.ava-stack-on .ava-last{border-radius:24px 24px 0 0}}
+
+/* Grouped card (Mission + quote) */
+html.ava-stack-on .ava-group{display:block;background:var(--ava-cream)}
+.ava-group>.ava-section{box-shadow:none}
+html.ava-stack-on .ava-group>.ava-dark{border-radius:34px 34px 0 0}
+.ava-group>.ava-dark::after{display:none}
+
+/* Quote scrub: the dark block pins while the quote brightens */
+.scrub-word{opacity:.2;transition:opacity .12s linear}
+html.ava-scrub-on .ava-scrub{height:calc(100vh - var(--ava-hdr,0px) + var(--ava-scrub-run,110vh));padding:0}
+html.ava-scrub-on .scrub-stage{position:sticky;top:var(--ava-hdr,0px);height:calc(100vh - var(--ava-hdr,0px));display:flex;align-items:center;padding:40px 5%;overflow:hidden}
+@supports (height:100svh){
+  html.ava-scrub-on .ava-scrub{height:calc(100svh - var(--ava-hdr,0px) + var(--ava-scrub-run,110svh))}
+  html.ava-scrub-on .scrub-stage{height:calc(100svh - var(--ava-hdr,0px))}
+}
+html.ava-scrub-on .scrub-stage>.in{width:100%}
 
 /* ---------- Responsive ---------- */
 @media (max-width:900px){
