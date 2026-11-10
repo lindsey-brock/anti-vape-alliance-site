@@ -2,7 +2,7 @@
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.9.2
+Stable tag: 1.9.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
 Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
+
+= 1.9.3 =
+* The "Myth vs. Fact" starter post comes with "The Truth About Vaping" student worksheet (grades 6–8) and a "Get the Worksheet (PDF)" button (added once on earlier installs too).
 
 = 1.9.2 =
 * Blog posts can have a printable handout: a "Handout download" box on the post edit screen adds a download box at the end of the post.

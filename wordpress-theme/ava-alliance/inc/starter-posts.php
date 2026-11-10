@@ -41,6 +41,7 @@ function ava_starter_posts() {
 			'title'    => 'Myth vs. Fact: What’s Really in a Vape?',
 			'category' => 'Facts',
 			'image'    => array( 'myth-vs-fact.jpg', 'Hand-drawn diagram of vaping health risks' ),
+			'handout'  => ava_starter_handout( 'truth' ),
 			'excerpt'  => 'Vapes are often called “just water vapor.” Here’s what’s actually in that cloud, and why fruity flavors don’t make it safe.',
 			'content'  =>
 				ava_b_p( 'If you’ve heard someone say vaping is “just water vapor,” you’re not alone. It’s one of the most common myths we hear from students. Here are a few facts worth knowing.' ) .
@@ -58,7 +59,7 @@ function ava_starter_posts() {
 			'title'    => '5 Ways to Say No to Vaping (Without Making It Awkward)',
 			'category' => 'Tips',
 			'image'    => array( 'say-no-to-vaping.jpg', 'A young person crossing their arms to refuse a vape' ),
-			'handout'  => ava_friendly_no_handout(),
+			'handout'  => ava_starter_handout( 'friendly-no' ),
 			'excerpt'  => 'Saying no doesn’t have to be a big speech. Try one of these five strategies from our student lessons.',
 			'content'  =>
 				ava_b_p( 'There’s more than one way to say no. Pick the one that feels most like you, and practice it so it’s ready when you need it.' ) .
@@ -155,29 +156,45 @@ function ava_seed_blog() {
 	}
 
 	update_option( 'ava_seeded_blog', 1, false );
-	update_option( 'ava_handout_v1', 1, false );
+	update_option( 'ava_handouts_v2', 1, false );
 }
 
 /**
- * The "Friendly No" worksheet that goes with the 5 Ways to Say No post.
+ * Worksheets that go with the starter posts.
  *
+ * @param string $key friendly-no|truth, or empty for all (keyed by post slug).
  * @return array File, Media Library title, heading, text, button label.
  */
-function ava_friendly_no_handout() {
-	return array(
-		'file'  => 'AVA-The-Friendly-No-Worksheet.pdf',
-		'name'  => 'The Friendly No – Worksheet',
-		'title' => 'Practice it: “The Friendly No” worksheet',
-		'text'  => 'Six ways to turn down a vape and keep your friends, plus a page to practice. Print it or try it with a friend.',
-		'label' => 'Practice Saying No (PDF)',
+function ava_starter_handout( $key = '' ) {
+	$all = array(
+		'friendly-no' => array(
+			'post'  => '5-ways-to-say-no-to-vaping-without-making-it-awkward',
+			'file'  => 'AVA-The-Friendly-No-Worksheet.pdf',
+			'name'  => 'The Friendly No – Worksheet',
+			'title' => 'Practice it: “The Friendly No” worksheet',
+			'text'  => 'Six ways to turn down a vape and keep your friends, plus a page to practice. Print it or try it with a friend.',
+			'label' => 'Practice Saying No (PDF)',
+		),
+		'truth'       => array(
+			'post'  => 'myth-vs-fact-whats-really-in-a-vape',
+			'file'  => 'AVA-The-Truth-About-Vaping-Worksheet.pdf',
+			'name'  => 'The Truth About Vaping – Student Worksheet (Grades 6–8)',
+			'title' => 'Test yourself: “The Truth About Vaping” worksheet',
+			'text'  => 'Match what’s really inside a vape, decode a vape ad and design your own vape-free poster. For grades 6–8.',
+			'label' => 'Get the Worksheet (PDF)',
+		),
 	);
+	if ( '' === $key ) {
+		return $all;
+	}
+	return isset( $all[ $key ] ) ? $all[ $key ] : array();
 }
 
 /**
  * Import a bundled PDF and attach it to a post as its handout.
  *
  * @param int   $post_id Post ID.
- * @param array $handout From ava_friendly_no_handout().
+ * @param array   $handout From ava_starter_handout().
  */
 function ava_attach_handout( $post_id, $handout ) {
 	$file_id = ava_import_bundled_file( $handout['file'], $handout['name'] );
@@ -192,17 +209,19 @@ function ava_attach_handout( $post_id, $handout ) {
 
 add_action( 'admin_init', 'ava_upgrade_post_handout' );
 /**
- * Earlier installs: add the worksheet to the starter "5 Ways to Say No" post
- * once, if that post exists and has no handout yet.
+ * Earlier installs: add the worksheets to the starter posts once, if those
+ * posts exist and have no handout yet.
  */
 function ava_upgrade_post_handout() {
-	if ( get_option( 'ava_handout_v1' ) || ! current_user_can( 'upload_files' ) ) {
+	if ( get_option( 'ava_handouts_v2' ) || ! current_user_can( 'upload_files' ) ) {
 		return;
 	}
-	update_option( 'ava_handout_v1', 1, false );
-	$posts = get_posts( array( 'post_type' => 'post', 'post_status' => 'any', 'name' => '5-ways-to-say-no-to-vaping-without-making-it-awkward', 'numberposts' => 1 ) );
-	if ( $posts && ! get_post_meta( $posts[0]->ID, '_ava_handout_id', true ) ) {
-		ava_attach_handout( $posts[0]->ID, ava_friendly_no_handout() );
+	update_option( 'ava_handouts_v2', 1, false );
+	foreach ( ava_starter_handout() as $handout ) {
+		$posts = get_posts( array( 'post_type' => 'post', 'post_status' => 'any', 'name' => $handout['post'], 'numberposts' => 1 ) );
+		if ( $posts && ! get_post_meta( $posts[0]->ID, '_ava_handout_id', true ) ) {
+			ava_attach_handout( $posts[0]->ID, $handout );
+		}
 	}
 }
 add_action( 'after_switch_theme', 'ava_seed_blog', 20 );
