@@ -99,5 +99,5 @@ if out.exists():
     shutil.rmtree(out)
 out.mkdir()
 shutil.copy2(theme_src / "style.css", out / "style.css")
-shutil.copytree(theme_src / "assets", out / "assets", ignore=shutil.ignore_patterns("editor.css", "OFL-*"))
+shutil.copytree(theme_src / "assets", out / "assets", ignore=shutil.ignore_patterns("editor.css", "OFL-*", "files"))
 print("Preview written: index.html + theme/")
