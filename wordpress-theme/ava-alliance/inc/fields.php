@@ -44,7 +44,7 @@ function ava_fields() {
 		'hero'       => array(
 			'title'  => __( 'Hero (top of homepage)', 'ava-alliance' ),
 			'fields' => array(
-				'hero_badge'      => array( 'type' => 'text', 'label' => __( 'Small pill above the headline', 'ava-alliance' ), 'default' => 'A movement led by young people' ),
+				'hero_badge'      => array( 'type' => 'text', 'label' => __( 'Small pill above the headline', 'ava-alliance' ), 'default' => 'Join the Movement' ),
 				'hero_title'      => array( 'type' => 'text', 'label' => __( 'Headline', 'ava-alliance' ), 'default' => 'Students leading the conversation about' ),
 				'hero_highlight'  => array( 'type' => 'text', 'label' => __( 'Headline – highlighted ending (orange)', 'ava-alliance' ), 'default' => 'vaping.' ),
 				'hero_lead'       => array( 'type' => 'textarea', 'label' => __( 'Short intro (one or two sentences)', 'ava-alliance' ), 'default' => 'Honest, peer-led vaping education for students, schools and families.' ),
