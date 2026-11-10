@@ -99,7 +99,8 @@ function ava_fallback_icons() {
 	if ( has_site_icon() ) {
 		return;
 	}
-	printf( '<link rel="icon" type="image/png" href="%s">' . "\n", esc_url( AVA_URI . '/assets/images/favicon.png' ) );
+	printf( '<link rel="icon" type="image/png" sizes="64x64" href="%s">' . "\n", esc_url( AVA_URI . '/assets/images/favicon.png' ) );
+	printf( '<link rel="icon" type="image/png" sizes="192x192" href="%s">' . "\n", esc_url( AVA_URI . '/assets/images/favicon-192.png' ) );
 	printf( '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( AVA_URI . '/assets/images/apple-touch-icon.png' ) );
 	echo '<meta name="theme-color" content="#FE9910">' . "\n";
 }
