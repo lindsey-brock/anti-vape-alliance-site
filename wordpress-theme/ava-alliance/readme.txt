@@ -1,4 +1,4 @@
-=== Anti-Vape Alliance ===
+=== Anti-Vaping Alliance ===
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -6,7 +6,7 @@ Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Lightweight, accessible theme for the Anti-Vape Alliance, a student-founded and student-led nonprofit.
+Lightweight, accessible theme for the Anti-Vaping Alliance, a student-founded and student-led nonprofit.
 
 == Where to edit things ==
 
@@ -37,11 +37,13 @@ AIOSEO or The SEO Framework is active.
 == Credits ==
 
 Montserrat and Nunito Sans fonts: SIL Open Font License 1.1 (assets/fonts).
-Logo and images: (c) Anti-Vape Alliance.
+Logo and images: (c) Anti-Vaping Alliance.
 
 == Changelog ==
 
 = 1.1.0 =
+* Renamed to Anti-Vaping Alliance.
+* Hero is now a full-width photo with a dark gradient (photo, focus point and overlay strength editable in the Customizer) and shorter copy.
 * Stacked-section scrolling and fade-in animations on the homepage (can be switched off in Customize > AVA Site Content > Top Bar, Header & Scrolling).
 
 = 1.0.0 =

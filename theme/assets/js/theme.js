@@ -1,4 +1,4 @@
-/* Anti-Vape Alliance theme: mobile menu, pledge pop-up, AJAX forms. No dependencies. */
+/* Anti-Vaping Alliance theme: mobile menu, pledge pop-up, AJAX forms. No dependencies. */
 (function () {
 	'use strict';
 

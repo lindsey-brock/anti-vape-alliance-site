@@ -1,4 +1,4 @@
-# Anti-Vape Alliance — WordPress theme
+# Anti-Vaping Alliance — WordPress theme
 
 A complete, lightweight WordPress theme (`ava-alliance/`) that matches the approved AVA design. It is built for GoDaddy Managed WordPress and needs no page builder and no required plugins.
 
@@ -14,7 +14,7 @@ GitHub builds the zip automatically every time the theme changes:
 1. In GoDaddy, open the WordPress site and go to **WP Admin**.
 2. Go to **Appearance → Themes → Add New → Upload Theme**, choose `ava-alliance.zip`, then click **Install Now → Activate**.
 3. On first activation the theme creates the homepage cards, curriculum items, resource links and the main menu. It never overwrites content that already exists.
-4. Go to **Settings → General**: Site Title = `Anti-Vape Alliance`, Tagline = `Student Founded & Led`. The tagline is used in the homepage browser title.
+4. Go to **Settings → General**: Site Title = `Anti-Vaping Alliance`, Tagline = `Student Founded & Led`. The tagline is used in the homepage browser title.
 5. Go to **Settings → Permalinks** and choose **Post name**.
 
 ### Turn on HTTPS
@@ -45,7 +45,9 @@ Nothing the team updates regularly is hard-coded:
 - **Homepage text and buttons** (hero, "By students" band, mission intro, quote, Get Involved, contact details, pledge text), with live preview: *Appearance → Customize → AVA Site Content*. Each section can also be hidden there.
 - **Cards and lists**: *AVA Content → Mission Points / Programs / Curriculum / Resources*. Use the **Order** box to sort them, lowest number first.
 - **Menus**: *Appearance → Menus*. Links like `#mission` jump to that homepage section from any page. Any link to `#pledge` opens the pledge pop-up.
-- **Logo and browser icon**: *Customize → Site Identity*. **Hero image**: *Customize → AVA Site Content → Hero*. Both use the Media Library.
+- **Logo and browser icon**: *Customize → Site Identity*.
+- **Hero background photo**: *Customize → AVA Site Content → Hero*. Choose any photo from the Media Library, set which side stays in view on phones, and make the dark overlay lighter or stronger if the text gets hard to read.
+- **Scrolling effects**: *Customize → AVA Site Content → Top Bar, Header & Scrolling* turns the stacked-section scroll and the fade-in animations on or off.
 - **Extra pages** (for example *Parent & Community*): *Pages → Add New*, built with the normal block editor in the AVA colors and fonts.
 
 ## 5. Forms (pledge and contact)

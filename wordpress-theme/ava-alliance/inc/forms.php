@@ -503,7 +503,7 @@ add_action(
 	function () {
 		if ( function_exists( 'wp_add_privacy_policy_content' ) ) {
 			wp_add_privacy_policy_content(
-				__( 'Anti-Vape Alliance theme', 'ava-alliance' ),
+				__( 'Anti-Vaping Alliance theme', 'ava-alliance' ),
 				wp_kses_post( wpautop( __( 'When you sign the pledge we store the name you enter and, if you choose to give it, your email address. When you use the contact form we store your name, email address, role and message. This information is only visible to site administrators, is used only to respond to you or count pledges, and is never sold or shared. You can ask us to export or delete your information at any time.', 'ava-alliance' ) ) )
 			);
 		}

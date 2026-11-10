@@ -99,7 +99,7 @@ function ava_activation_notice() {
 	}
 	printf(
 		'<div class="notice notice-success is-dismissible"><p>%s <a href="%s">%s</a></p></div>',
-		esc_html__( 'The Anti-Vape Alliance theme is active and the homepage content has been set up.', 'ava-alliance' ),
+		esc_html__( 'The Anti-Vaping Alliance theme is active and the homepage content has been set up.', 'ava-alliance' ),
 		esc_url( admin_url( 'admin.php?page=ava-content' ) ),
 		esc_html__( 'See where to edit everything →', 'ava-alliance' )
 	);

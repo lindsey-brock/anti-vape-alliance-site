@@ -100,7 +100,7 @@ function ava_logo( $class = '', $decorative = true ) {
 }
 
 /**
- * Site name with the first word(s) highlighted, e.g. "<b>Anti-Vape</b> Alliance".
+ * Site name with the first word(s) highlighted, e.g. "<b>Anti-Vaping</b> Alliance".
  *
  * @return string Safe HTML.
  */
@@ -183,11 +183,38 @@ function ava_brand_image( $context = 'hero' ) {
 		echo wp_get_attachment_image( $id, 'large', false, $attrs );
 		return;
 	}
-	$alt = 'hero' === $context ? __( 'Anti Vaping Alliance logo: the letters AVA with a vape pen inside a prohibition sign', 'ava-alliance' ) : '';
+	$alt = 'hero' === $context ? __( 'Anti-Vaping Alliance logo: the letters AVA with a vape pen inside a prohibition sign', 'ava-alliance' ) : '';
 	printf(
 		'<img src="%s" width="693" height="426" alt="%s"%s>',
 		esc_url( AVA_URI . '/assets/images/ava-logo.webp' ),
 		esc_attr( $alt ),
 		'hero' === $context ? ' fetchpriority="high" decoding="async"' : ' class="mlogo" loading="lazy" decoding="async"'
+	);
+}
+
+/**
+ * Hero background photo: Customizer photo from the Media Library, else the
+ * bundled students photo. Responsive (srcset) and loaded first.
+ */
+function ava_hero_background() {
+	$id    = (int) ava_mod( 'hero_background' );
+	$attrs = array(
+		'class'         => 'hero-bg',
+		'alt'           => '',
+		'sizes'         => '100vw',
+		'loading'       => 'eager',
+		'fetchpriority' => 'high',
+		'decoding'      => 'async',
+	);
+	if ( $id && wp_attachment_is_image( $id ) ) {
+		echo wp_get_attachment_image( $id, 'full', false, $attrs );
+		return;
+	}
+	$base = AVA_URI . '/assets/images/hero-students-';
+	printf(
+		'<img class="hero-bg" src="%1$s" srcset="%2$s 800w, %1$s 1400w, %3$s 2000w" sizes="100vw" width="1400" height="933" alt="" fetchpriority="high" decoding="async">',
+		esc_url( $base . '1400.webp' ),
+		esc_url( $base . '800.webp' ),
+		esc_url( $base . '2000.webp' )
 	);
 }

@@ -1,8 +1,8 @@
 /*
-Theme Name: Anti-Vape Alliance
-Description: Lightweight, accessible theme for the Anti-Vape Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
-Author: Anti-Vape Alliance
-Version: 1.0.0
+Theme Name: Anti-Vaping Alliance
+Description: Lightweight, accessible theme for the Anti-Vaping Alliance (AVA), a student-founded and student-led nonprofit. Homepage sections are edited in Appearance > Customize, cards, curriculum and resources in the AVA Content menu, navigation in Appearance > Menus. Includes a secure built-in pledge and contact form (or use any form plugin shortcode), SEO and social sharing tags.
+Author: Anti-Vaping Alliance
+Version: 1.1.0
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -103,15 +103,22 @@ h1,h2,h3,h4{color:var(--ava-brown);line-height:1.15}
 .tint{background:var(--ava-cream)}
 .ava-editor-note{font-size:14px;background:#fff7d6;border:1px dashed #c9a400;border-radius:10px;padding:8px 12px;color:#5c4a00}
 
-/* Hero */
-.ava-hero{background:radial-gradient(circle at 85% 40%,#fff 0,#fff 22%,transparent 60%),linear-gradient(135deg,var(--ava-cream-2),var(--ava-cream) 55%,#fff);padding:72px 5% 80px}
-.hero-in{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
+/* Hero: photo background + dark brand gradient */
+.ava-hero{position:relative;overflow:hidden;background:var(--ava-espresso);color:#fff;min-height:min(820px,88vh);display:flex;flex-direction:column;justify-content:flex-end;padding:140px 5% 64px}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+.focus-left .hero-bg{object-position:20% 58%}
+.focus-right .hero-bg{object-position:80% 58%}
+.hero-overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(46,27,20,.10) 0%,rgba(46,27,20,.30) 38%,rgba(46,27,20,.82) 72%,rgba(31,18,12,.94) 100%),linear-gradient(90deg,rgba(31,18,12,.72) 0%,rgba(31,18,12,.30) 50%,rgba(31,18,12,0) 78%)}
+.overlay-light .hero-overlay{opacity:.8}
+.overlay-strong .hero-overlay{background:linear-gradient(180deg,rgba(46,27,20,.30) 0%,rgba(46,27,20,.55) 38%,rgba(31,18,12,.90) 70%,rgba(31,18,12,.97) 100%),linear-gradient(90deg,rgba(31,18,12,.80) 0%,rgba(31,18,12,.40) 55%,rgba(31,18,12,.10) 80%)}
+.hero-in{position:relative;z-index:1;max-width:1180px;width:100%;margin:0 auto}
 .ava-badge{display:inline-block;background:var(--ava-brown);color:#fff;border-radius:999px;padding:8px 15px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px}
-.ava-hero h1{font-size:clamp(40px,5.6vw,66px);line-height:1.04;margin:18px 0;letter-spacing:-1.5px;font-weight:900}
-.ava-hero h1 span{color:var(--ava-flame)}
-.lead{font-size:19px;color:#5B4335;max-width:640px}
-.hero-media{display:flex;justify-content:center}
-.hero-media img{width:min(100%,560px);filter:drop-shadow(0 18px 28px rgba(88,54,43,.18))}
+.ava-hero .ava-badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.ava-hero h1{font-size:clamp(38px,4.6vw,62px);line-height:1.04;margin:16px 0 12px;letter-spacing:-1.2px;font-weight:900;color:#fff;max-width:820px;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+.ava-hero h1 span{color:var(--ava-orange)}
+.lead{font-size:clamp(18px,1.6vw,21px);color:#F6EAE0;max-width:720px;margin:0}
+.ava-hero .btn:not(.primary){background:transparent;border-color:#fff;color:#fff}
+.ava-hero .btn:not(.primary):hover{background:rgba(255,255,255,.14)}
 
 /* "By students" band */
 .ava-founder{background:#fff}
@@ -217,6 +224,7 @@ body.ava-modal-open{overflow:hidden}
    motion. Without it the page is a normal scrolling page. */
 html.ava-stack-on .ava-panel{position:sticky;top:var(--ava-hdr,0px);min-height:calc(100vh - var(--ava-hdr,0px));display:flex;flex-direction:column;justify-content:center}
 @supports (height:100svh){html.ava-stack-on .ava-panel{min-height:calc(100svh - var(--ava-hdr,0px))}}
+html.ava-stack-on .ava-hero{justify-content:flex-end}
 html.ava-stack-on .ava-panel>.in,html.ava-stack-on .ava-panel>.hero-in,html.ava-stack-on .ava-panel>.founder-card{width:100%}
 html.ava-stack-on .ava-panel:not(.ava-hero),html.ava-stack-on .ava-last{border-radius:34px 34px 0 0;box-shadow:0 -18px 44px rgba(46,27,20,.16)}
 html.ava-stack-on .ava-dark,html.ava-stack-on .ava-last{box-shadow:0 -24px 52px rgba(46,27,20,.32)}
@@ -235,11 +243,12 @@ html.ava-stack-on .ava-last{position:relative}
   .ava-nav a{padding:14px 2px}
   .ava-nav .sub-menu{display:block;padding-left:16px}
   .ava-brand .name{display:none}
-  .hero-in,.resources,.founder-card,.contact-grid{grid-template-columns:1fr}
-  .hero-media{order:-1}
-  .hero-media img{width:min(100%,380px)}
+  .resources,.founder-card,.contact-grid{grid-template-columns:1fr}
   .grid,.post-list{grid-template-columns:1fr}
-  .ava-hero{padding:40px 5% 80px}
+  .ava-hero{padding:220px 5% 56px;min-height:min(760px,92vh)}
+  .hero-bg{object-position:50% 15%}
+  .focus-left .hero-bg{object-position:15% 15%}
+  .focus-right .hero-bg{object-position:85% 15%}
   .ava-section{padding:58px 5%}
   .founder-card{gap:16px}
   .ava-big{font-size:32px}

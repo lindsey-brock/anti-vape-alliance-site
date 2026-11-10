@@ -1,6 +1,6 @@
 <?php
 /**
- * Anti-Vape Alliance theme bootstrap.
+ * Anti-Vaping Alliance theme bootstrap.
  *
  * @package AVA_Alliance
  */

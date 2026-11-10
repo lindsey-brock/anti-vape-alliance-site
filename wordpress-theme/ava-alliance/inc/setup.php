@@ -105,7 +105,7 @@ function ava_fallback_icons() {
 
 add_filter( 'document_title_separator', 'ava_title_separator' );
 /**
- * "Anti-Vape Alliance | Student Founded & Led".
+ * "Anti-Vaping Alliance | Student Founded & Led".
  *
  * @return string
  */
