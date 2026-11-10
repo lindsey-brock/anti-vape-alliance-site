@@ -23,7 +23,7 @@ function ava_seed_content() {
 		'ava_point'      => array(
 			array( 'Student Founded', 'AVA was created by students who wanted to address vaping education in a way that feels authentic and relevant to younger students.' ),
 			array( 'Student Led', 'Students are at the center of our outreach, presentations, chapter development, advocacy and ideas for reaching the next generation.' ),
-			array( 'Nonprofit Mission', 'Our focus is education and prevention — making useful resources available to students, teachers, parents and communities.' ),
+			array( 'Education and Advocacy', 'Our focus is education and prevention — making useful resources available to students, teachers, parents and communities.' ),
 			// Photos for these cards are added by ava_seed_mission_images().
 		),
 		'ava_program'    => array(
@@ -126,7 +126,8 @@ function ava_mission_images() {
 	return array(
 		'Student Founded'   => array( 'student-founded.jpg', 'A student talks with classmates around a table covered in books' ),
 		'Student Led'       => array( 'student-led.jpg', 'A student points to a whiteboard while a group of classmates listens' ),
-		'Nonprofit Mission' => array( 'nonprofit-mission.jpg', 'A teacher high-fives a student in a classroom' ),
+		'Education and Advocacy' => array( 'nonprofit-mission.jpg', 'A teacher high-fives a student in a classroom' ),
+		'Nonprofit Mission'      => array( 'nonprofit-mission.jpg', 'A teacher high-fives a student in a classroom' ), // Earlier name of the third card.
 	);
 }
 
